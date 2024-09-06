@@ -1,0 +1,1 @@
+Grid Elements database service for managing and querying Grid Elements database
