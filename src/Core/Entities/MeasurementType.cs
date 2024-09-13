@@ -1,6 +1,6 @@
 ﻿namespace Core.Entities;
 
-public class ElementType: AuditableEntity
+public class MeasurementType : AuditableEntity
 {
     public required string Type { get; set; }
 }
