@@ -1,9 +1,9 @@
-﻿using Core.Entities;
+﻿namespace Core.Entities;
 
 public class Location : AuditableEntity
 {
     public required string Name { get; set; }
-    public string Alias { get; set; }
+    public string? Alias { get; set; }
 
     public int RegionId { get; set; }
 

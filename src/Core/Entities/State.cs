@@ -1,6 +1,9 @@
-﻿using Core.Entities;
+﻿namespace Core.Entities;
 
 public class State : AuditableEntity
 {
     public required string Name { get; set; }
+
+    public required Region Region { get; set; }
+    public int RegionId { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿using Core.Entities;
+﻿namespace Core.Entities;
 
 public class VoltageLevel : AuditableEntity
 {
