@@ -15,6 +15,8 @@ public class Element : AuditableEntity
 {
     public int ElementNameCache { get; set; }
 
+    public required string VoltLevelCache{ get; set; }
+
     public int SubstationId1 { get; set; }
     public required Substation Substation1 { get; set; }
 

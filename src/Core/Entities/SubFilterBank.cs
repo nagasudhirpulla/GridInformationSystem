@@ -14,9 +14,6 @@ public class SubFilterBank : AuditableEntity
 
     public required string SubFilterTag { get; set; }
 
-    public int VoltageLevelId { get; set; }
-    public required VoltageLevel VoltageLevel { get; set; }
-
     public double Mvar { get; set; }
 
     public bool IsSwitchable { get; set; }
