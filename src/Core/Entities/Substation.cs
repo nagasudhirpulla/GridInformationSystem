@@ -1,4 +1,5 @@
-﻿using Core.Enums;
+﻿using Core.Entities.Common;
+using Core.Enums;
 
 namespace Core.Entities;
 

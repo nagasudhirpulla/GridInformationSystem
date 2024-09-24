@@ -1,4 +1,6 @@
-﻿namespace Core.Entities;
+﻿using Core.Entities.Common;
+
+namespace Core.Entities;
 
 public class Location : AuditableEntity
 {
@@ -9,7 +11,7 @@ public class Location : AuditableEntity
     public required Region Region { get; set; }
     public int RegionId { get; set; }
 
-    public int StateId { get; set; }
 
     public required State State { get; set; }
+    public int StateId { get; set; }
 }

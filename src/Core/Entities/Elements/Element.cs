@@ -1,4 +1,6 @@
-﻿namespace Core.Entities.Elements;
+﻿using Core.Entities.Common;
+
+namespace Core.Entities.Elements;
 
 /*
 if the element type is not a line or transformer substationID2 should be null
