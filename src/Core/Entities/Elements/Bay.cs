@@ -1,4 +1,6 @@
-﻿namespace Core.Entities;
+﻿using Core.Enums;
+
+namespace Core.Entities.Elements;
 
 /*
 Element1 and Element2 should be present in the same substation
@@ -10,12 +12,15 @@ TODOS
 whether to fix element1 as bus for main bay
 spare bay column may be added
 */
-public class Bay : AuditableEntity
+public class Bay : Element
 {
     public required Element Element1 { get; set; }
     public int Element1Id { get; set; }
+
     public required Element Element2 { get; set; }
     public int Element2Id { get; set; }
-    public required string BayType { get; set; }
+
+    public required BayTypeEnum BayType { get; set; }
+
     public bool IsFuture { get; set; }
 }

@@ -1,16 +1,13 @@
-﻿namespace Core.Entities;
+﻿namespace Core.Entities.Elements;
 
 /*
  * FilterBankId, SubFilterTag combination is unique
  */
 
-public class SubFilterBank : AuditableEntity
+public class SubFilterBank : Element
 {
-    public int ElementId { get; set; }
-    public required Element Element { get; set; }
-
-    public int FilterBankId { get; set; }
     public required FilterBank FilterBank { get; set; }
+    public int FilterBankId { get; set; }
 
     public required string SubFilterTag { get; set; }
 

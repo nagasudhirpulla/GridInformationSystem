@@ -1,4 +1,6 @@
-﻿namespace Core.Entities;
+﻿using Core.Enums;
+
+namespace Core.Entities;
 
 public class Substation : AuditableEntity
 {
@@ -6,15 +8,15 @@ public class Substation : AuditableEntity
 
     public required string OwnerNamesCache { get; set; }
 
+    public required VoltageLevel VoltageLevel { get; set; }
     public int VoltageLevelId { get; set; }
 
-    public required VoltageLevel VoltageLevel { get; set; }
-
-    public int LocationId { get; set; }
     public required Location Location { get; set; }
+    public int LocationId { get; set; }
 
-    public required bool IsAc { get; set; } = true;
+    public bool IsAc { get; set; } = true;
 
     public double Latitude { get; set; }
+
     public double Longitude { get; set; }
 }
