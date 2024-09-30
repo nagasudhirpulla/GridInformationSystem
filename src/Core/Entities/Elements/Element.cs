@@ -37,4 +37,6 @@ public class Element : AuditableEntity
 
     public required Location Location { get; set; }
     public int LocationId { get; set; }
+
+    public bool IsImportantGridElement { get; set; } = false;
 }
