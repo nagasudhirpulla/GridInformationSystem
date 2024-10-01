@@ -4,5 +4,5 @@ namespace Core.Entities;
 
 public class VoltageLevel : AuditableEntity
 {
-    public required int Level { get; set; }
+    public int Level { get; set; }
 }

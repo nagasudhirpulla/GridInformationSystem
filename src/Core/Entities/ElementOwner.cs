@@ -5,9 +5,9 @@ namespace Core.Entities;
 
 public class ElementOwner : AuditableEntity
 {
-    public required Owner Owner { get; set; }
+    public Owner Owner { get; set; } = null!;
     public int OwnerId { get; set; }
 
-    public required Element Element { get; set; }
+    public Element Element { get; set; } = null!;
     public int ElementId { get; set; }
 }

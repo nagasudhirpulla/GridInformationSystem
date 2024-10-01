@@ -5,7 +5,7 @@
  */
 public class LineReactor : Element
 {
-    public required Line Line { get; set; }
+    public Line Line { get; set; } = null!;
     public int LineId { get; set; }
 
     public double MvarCapacity { get; set; }

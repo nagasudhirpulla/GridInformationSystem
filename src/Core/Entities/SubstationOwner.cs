@@ -4,9 +4,9 @@ namespace Core.Entities;
 
 public class SubstationOwner : AuditableEntity
 {
-    public required Owner Owner { get; set; }
+    public Owner Owner { get; set; } = null!;
     public int OwnerId { get; set; }
 
-    public required Substation Substation { get; set; }
+    public Substation Substation { get; set; } = null!;
     public int SubstationId { get; set; }
 }

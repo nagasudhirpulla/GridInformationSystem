@@ -6,7 +6,7 @@
 
 public class SubFilterBank : Element
 {
-    public required FilterBank FilterBank { get; set; }
+    public FilterBank FilterBank { get; set; } = null!;
     public int FilterBankId { get; set; }
 
     public required string SubFilterTag { get; set; }

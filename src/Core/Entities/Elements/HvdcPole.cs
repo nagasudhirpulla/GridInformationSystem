@@ -9,5 +9,5 @@ Substation should be HVDC substation only
 */
 public class HvdcPole : Element
 {
-    public required HvdcPoleTypeEnum PoleType { get; set; }
+    public HvdcPoleTypeEnum PoleType { get; set; } = null!;
 }

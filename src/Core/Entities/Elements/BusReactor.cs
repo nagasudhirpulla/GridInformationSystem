@@ -5,7 +5,7 @@
  */
 public class BusReactor : Element
 {
-    public required Bus Bus { get; set; }
+    public Bus Bus { get; set; } = null!;
     public int BusId { get; set; }
 
     public double MvarCapacity { get; set; }

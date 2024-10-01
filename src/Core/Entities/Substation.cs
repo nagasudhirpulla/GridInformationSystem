@@ -8,10 +8,12 @@ public class Substation : AuditableEntity
 
     public required string OwnerNamesCache { get; set; }
 
-    public required VoltageLevel VoltageLevel { get; set; }
+    public List<SubstationOwner> SubstationOwners { get; } = [];
+
+    public VoltageLevel VoltageLevel { get; set; } = null!;
     public int VoltageLevelId { get; set; }
 
-    public required Location Location { get; set; }
+    public Location Location { get; set; } = null!;
     public int LocationId { get; set; }
 
     public bool IsAc { get; set; } = true;

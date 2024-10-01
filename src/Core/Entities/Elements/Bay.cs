@@ -14,13 +14,13 @@ spare bay column may be added
 */
 public class Bay : Element
 {
-    public required Element Element1 { get; set; }
+    public Element Element1 { get; set; } = null!;
     public int Element1Id { get; set; }
 
-    public required Element Element2 { get; set; }
+    public Element Element2 { get; set; } = null!;
     public int Element2Id { get; set; }
 
-    public required BayTypeEnum BayType { get; set; }
+    public BayTypeEnum BayType { get; set; } = null!;
 
     public bool IsFuture { get; set; }
 }

@@ -19,13 +19,15 @@ public class Element : AuditableEntity
 
     public required string VoltLevelCache { get; set; }
 
-    public required Substation Substation1 { get; set; }
+    public Substation Substation1 { get; set; } = null!;
     public int SubstationId1 { get; set; }
 
     public Substation? Substation2 { get; set; }
     public int? SubstationId2 { get; set; }
 
     public required string OwnerNamesCache { get; set; }
+
+    public List<ElementOwner> ElementOwners { get; } = [];
 
     public required string ElementNumber { get; set; }
 
@@ -35,7 +37,7 @@ public class Element : AuditableEntity
 
     public DateTime CommercialOperationDate { get; set; }
 
-    public required Location Location { get; set; }
+    public Location Location { get; set; } = null!;
     public int LocationId { get; set; }
 
     public bool IsImportantGridElement { get; set; } = false;

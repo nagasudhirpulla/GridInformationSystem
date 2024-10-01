@@ -4,7 +4,7 @@ namespace Core.Entities.Elements;
 
 public class Transformer : Element
 {
-    public required TransformerTypeEnum TransformerType { get; set; }
+    public TransformerTypeEnum TransformerType { get; set; } = null!;
 
     public double MvaCapacity { get; set; }
 }
