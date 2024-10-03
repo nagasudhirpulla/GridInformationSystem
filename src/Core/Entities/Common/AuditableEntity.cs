@@ -2,13 +2,11 @@
 
 public class AuditableEntity : BaseEntity
 {
-    public ApplicationUser CreatedBy { get; set; } = null!;
-    public required string CreatedById { get; set; }
+    public string? CreatedBy { get; set; } = null!;
 
-    public DateTime Created { get; set; } = DateTime.Now;
+    public DateTimeOffset Created { get; set; }
 
-    public ApplicationUser LastModifiedBy { get; set; } = null!;
-    public required string LastModifiedById { get; set; }
+    public string? LastModifiedBy { get; set; } = null!;
 
-    public DateTime? LastModified { get; set; }
+    public DateTimeOffset LastModified { get; set; }
 }
