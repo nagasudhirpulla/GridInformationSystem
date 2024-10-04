@@ -36,6 +36,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
 
     public DbSet<SubstationOwner> SubstationOwners => Set<SubstationOwner>();
 
+    public DbSet<Element> Elements => Set<Element>();
     public DbSet<Bay> Bays => Set<Bay>();
 
     public DbSet<Bus> Buses => Set<Bus>();

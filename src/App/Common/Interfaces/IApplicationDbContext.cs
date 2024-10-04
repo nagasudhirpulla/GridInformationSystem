@@ -22,6 +22,7 @@ public interface IApplicationDbContext
     DbSet<SubstationOwner> SubstationOwners { get; }
 
     // Elements
+    DbSet<Element> Elements { get; }
     DbSet<Bay> Bays { get; }
     DbSet<Bus> Buses { get; }
     DbSet<BusReactor> BusReactors { get; }
