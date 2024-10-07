@@ -2,6 +2,7 @@
 using Core.Entities;
 using Core.Entities.Common;
 using Core.Entities.Elements;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
