@@ -1,7 +1,5 @@
 ﻿using App.Common.Interfaces;
 using Infra.Data;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using WebApp.Infrastructure;
 using WebApp.Services;
 namespace WebApp;

@@ -2,7 +2,7 @@
 using Core.Entities;
 using Core.Entities.Common;
 using Core.Entities.Elements;
-using Microsoft.AspNetCore.Builder;
+using Core.Enums;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
@@ -64,5 +64,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     {
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        builder.Entity<Bay>()
+            .Property(p => p.BayType)
+            .HasConversion(
+                p => p.Value,
+                p => BayTypeEnum.FromValue(p));
+        
     }
 }
