@@ -4,6 +4,7 @@ using Core.Constants;
 using Infra.Data;
 using Infra.Data.Interceptors;
 using Infra.Identity;
+using Infra.Identity.TokenProviders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -49,10 +50,32 @@ public static class DependencyInjection
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddApiEndpoints();
 #else
-        services
-            .AddDefaultIdentity<ApplicationUser>()
+        services.AddDefaultIdentity<ApplicationUser>(options =>
+        {
+            options.SignIn.RequireConfirmedAccount = false;
+            options.Password.RequireDigit = true;
+            options.Password.RequireLowercase = true;
+            options.Password.RequireNonAlphanumeric = true;
+            options.Password.RequireUppercase = false;
+            options.Password.RequiredLength = 4;
+            options.Password.RequiredUniqueChars = 2;
+            options.Tokens.EmailConfirmationTokenProvider = "emailconfirmation";
+        })
             .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddTokenProvider<EmailConfirmationTokenProvider<ApplicationUser>>("emailconfirmation");
+
+        // set email confirmation token lifespan to 3 days
+        services.Configure<EmailConfirmationTokenProviderOptions>(opt =>
+            opt.TokenLifespan = TimeSpan.FromDays(3));
+
+        //services.ConfigureApplicationCookie(options =>
+        //{
+        //    // configure login path for return urls
+        //    // https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity?view=aspnetcore-3.1&tabs=visual-studio
+        //    options.LoginPath = "/Identity/Account/Login";
+        //    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+        //});
 #endif
 
         services.AddSingleton(TimeProvider.System);

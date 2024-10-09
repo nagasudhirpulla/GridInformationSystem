@@ -1,6 +1,6 @@
 ﻿using Core.Constants;
 using Core.Entities;
-using Core.Entities.Common;
+using Infra.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +22,7 @@ public static class InitialiserExtensions
         await initialiser.SeedAsync();
     }
 }
+
 public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
 {
     public async Task InitialiseAsync()
@@ -61,7 +62,7 @@ public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitial
         }
 
         // Default users
-        var administrator = new ApplicationUser { UserName = "administrator@localhost", Email = "administrator@localhost", DisplayName = "Administrator" };
+        var administrator = new ApplicationUser { UserName = "administrator@localhost", Email = "administrator@localhost", DisplayName="Administrator" };
 
         if (userManager.Users.All(u => u.UserName != administrator.UserName))
         {
@@ -72,7 +73,7 @@ public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitial
             }
         }
 
-        // Seed data
+        // Default data
         if (!context.Regions.Any())
         {
             context.Regions.AddRange([
@@ -85,5 +86,6 @@ public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitial
 
             await context.SaveChangesAsync();
         }
+
     }
 }

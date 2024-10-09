@@ -1,18 +1,15 @@
 ﻿using App.Common.Interfaces;
 using Core.Entities;
-using Core.Entities.Common;
 using Core.Entities.Elements;
-using Core.Enums;
+using Infra.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace Infra.Data;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplicationDbContext
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options), IApplicationDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
-
     public DbSet<Fuel> Fuels => Set<Fuel>();
 
     public DbSet<GeneratingStation> GeneratingStations => Set<GeneratingStation>();
@@ -64,11 +61,5 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IApplica
     {
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        builder.Entity<Bay>()
-            .Property(p => p.BayType)
-            .HasConversion(
-                p => p.Value,
-                p => BayTypeEnum.FromValue(p));
-        
     }
 }
