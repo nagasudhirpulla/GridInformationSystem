@@ -1,6 +1,8 @@
-﻿using Core.Constants;
+﻿using App.Regions.Commands.CreateRegion;
+using Core.Constants;
 using Core.Entities;
 using Infra.Identity;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +25,7 @@ public static class InitialiserExtensions
     }
 }
 
-public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger, ApplicationDbContext context, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IMediator mediator)
 {
     public async Task InitialiseAsync()
     {
@@ -76,15 +78,21 @@ public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitial
         // Default data
         if (!context.Regions.Any())
         {
-            context.Regions.AddRange([
-                new Region { Name = "NR" },
-                new Region { Name = "ER" },
-                new Region { Name = "WR" },
-                new Region { Name = "SR" },
-                new Region { Name = "NER" }
-                ]);
+            _ = await mediator.Send(new CreateRegionCommand() { Name = "NR" });
+            _ = await mediator.Send(new CreateRegionCommand() { Name = "ER" });
+            _ = await mediator.Send(new CreateRegionCommand() { Name = "WR" });
+            _ = await mediator.Send(new CreateRegionCommand() { Name = "SR" });
+            _ = await mediator.Send(new CreateRegionCommand() { Name = "NER" });
 
-            await context.SaveChangesAsync();
+            //context.Regions.AddRange([
+            //    new Region { Name = "NR" },
+            //    new Region { Name = "ER" },
+            //    new Region { Name = "WR" },
+            //    new Region { Name = "SR" },
+            //    new Region { Name = "NER" }
+            //    ]);
+
+            //await context.SaveChangesAsync();
         }
 
     }

@@ -230,4 +230,6 @@ _Pvt_Extensions
 
 # FAKE - F# Make
 .fake/
-/src/WebApp/app.db
+*.db
+*.db-shm
+*.db-wal
