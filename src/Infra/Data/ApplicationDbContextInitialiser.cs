@@ -1,6 +1,5 @@
 ﻿using App.Regions.Commands.CreateRegion;
 using Core.Constants;
-using Core.Entities;
 using Infra.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Builder;

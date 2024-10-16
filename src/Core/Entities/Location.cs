@@ -8,8 +8,7 @@ public class Location : AuditableEntity
 
     public string? Alias { get; set; }
 
-    public Region Region { get; set; } = null!;
-    public int RegionId { get; set; }
+    public required string RegionCache { get; set; }
 
 
     public State State { get; set; } = null!;
