@@ -1,20 +1,20 @@
 using App.Common.Interfaces;
 using App.Common.Security;
-using App.Regions.Queries.GetRegions;
-using App.States.Commands.CreateState;
+using App.Locations.Commands.CreateLocation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using FluentValidation.AspNetCore;
+using App.States.Queries.GetStates;
 
-namespace WebApp.Pages.States;
+namespace WebApp.Pages.Locations;
 
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
 public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
 {
     [BindProperty]
-    public required CreateStateCommand NewState { get; set; }
+    public required CreateLocationCommand NewLocation { get; set; }
     public async Task OnGetAsync()
     {
         await InitSelectListsAsync();
@@ -22,13 +22,13 @@ public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
 
     private async Task InitSelectListsAsync()
     {
-        ViewData["RegionId"] = new SelectList(await mediator.Send(new GetRegionsQuery()), "Id", "Name");
+        ViewData["StateId"] = new SelectList(await mediator.Send(new GetStatesQuery()), "Id", "Name");
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        var validator = new CreateStateCommandValidator(context);
-        var validationResult = await validator.ValidateAsync(NewState);
+        var validator = new CreateLocationCommandValidator(context);
+        var validationResult = await validator.ValidateAsync(NewLocation);
 
         if (!validationResult.IsValid)
         {
@@ -38,10 +38,10 @@ public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
         }
 
 
-        var newStateId = await mediator.Send(NewState);
-        if (newStateId > 0)
+        var newLocationId = await mediator.Send(NewLocation);
+        if (newLocationId > 0)
         {
-            logger.LogInformation($"Created State with name {NewState.Name}");
+            logger.LogInformation($"Created Location with name {NewLocation.Name}");
             return RedirectToPage("./Index");
         }
 

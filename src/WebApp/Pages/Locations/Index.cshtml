@@ -1,6 +1,5 @@
 ﻿@page
-@model WebApp.Pages.States.IndexModel
-
+@model WebApp.Pages.Locations.IndexModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -17,26 +16,32 @@
                 Name
             </th>
             <th>
+                State
+            </th>
+            <th>
                 Region
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.States)
-    {
-        <tr>
+        @foreach (var item in Model.Locations)
+        {
+            <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Region.Name)
+                    @Html.DisplayFor(modelItem => item.State.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegionCache)
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                     <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
-    }
+        }
     </tbody>
 </table>

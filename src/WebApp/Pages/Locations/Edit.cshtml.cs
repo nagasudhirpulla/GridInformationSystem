@@ -1,37 +1,37 @@
 using App.Common.Interfaces;
 using App.Common.Security;
-using App.Regions.Queries.GetRegions;
-using App.States.Commands.UpdateState;
-using App.States.Queries.GetState;
+using App.Locations.Commands.UpdateLocation;
+using App.Locations.Queries.GetLocation;
+using App.States.Queries.GetStates;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace WebApp.Pages.States;
+namespace WebApp.Pages.Locations;
 
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
 public class EditModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
 {
     [BindProperty]
-    public required UpdateStateCommand State { get; set; }
+    public required UpdateLocationCommand Location { get; set; }
     public async Task OnGetAsync(int id)
     {
-        var state = await mediator.Send(new GetStateQuery() { Id = id });
-        State = new UpdateStateCommand() { Id = state.Id, RegionId = state.RegionId, Name = state.Name };
+        var location = await mediator.Send(new GetLocationQuery() { Id = id });
+        Location = new UpdateLocationCommand() { Id = location.Id, StateId = location.StateId, Name = location.Name, Alias = location.Alias };
         await InitSelectListsAsync();
     }
 
     private async Task InitSelectListsAsync()
     {
-        ViewData["RegionId"] = new SelectList(await mediator.Send(new GetRegionsQuery()), "Id", "Name");
+        ViewData["StateId"] = new SelectList(await mediator.Send(new GetStatesQuery()), "Id", "Name");
     }
 
     public async Task<IActionResult> OnPostAsync()
     {
-        var validator = new UpdateStateCommandValidator(context);
-        var validationResult = await validator.ValidateAsync(State);
+        var validator = new UpdateLocationCommandValidator(context);
+        var validationResult = await validator.ValidateAsync(Location);
 
         if (!validationResult.IsValid)
         {
@@ -40,8 +40,8 @@ public class EditModel(ILogger<CreateModel> logger, IMediator mediator, IApplica
             return Page();
         }
 
-        await mediator.Send(State);
-        logger.LogInformation($"Updated State name to {State.Name} and region id {State.RegionId}");
+        await mediator.Send(Location);
+        logger.LogInformation($"Updated Location name to {Location.Name} and state id {Location.StateId}");
         return RedirectToPage("./Index");
     }
 }
