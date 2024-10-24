@@ -1,30 +1,30 @@
 using App.Common.Interfaces;
 using App.Common.Security;
-using App.Regions.Commands.UpdateRegion;
-using App.Regions.Queries.GetRegion;
+using App.VoltageLevels.Commands.UpdateVoltageLevel;
+using App.VoltageLevels.Queries.GetVoltageLevel;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApp.Pages.Regions;
+namespace WebApp.Pages.VoltageLevels;
 
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
 public class EditModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
 {
     [BindProperty]
-    public required UpdateRegionCommand Region { get; set; }
+    public required UpdateVoltageLevelCommand VoltageLevel { get; set; }
     public async Task OnGetAsync(int id)
     {
-        var region = await mediator.Send(new GetRegionQuery() { Id = id });
-        Region = new UpdateRegionCommand() { Id = region.Id, Name = region.Name };
+        var voltLvl = await mediator.Send(new GetVoltageLevelQuery() { Id = id });
+        VoltageLevel = new UpdateVoltageLevelCommand() { Id = voltLvl.Id, Level = voltLvl.Level };
     }
 
 
     public async Task<IActionResult> OnPostAsync()
     {
-        var validator = new UpdateRegionCommandValidator(context);
-        var validationResult = await validator.ValidateAsync(Region);
+        var validator = new UpdateVoltageLevelCommandValidator(context);
+        var validationResult = await validator.ValidateAsync(VoltageLevel);
 
         if (!validationResult.IsValid)
         {
@@ -32,8 +32,8 @@ public class EditModel(ILogger<CreateModel> logger, IMediator mediator, IApplica
             return Page();
         }
 
-        await mediator.Send(Region);
-        logger.LogInformation($"Updated Region name to {Region.Name}");
+        await mediator.Send(VoltageLevel);
+        logger.LogInformation($"Updated VoltageLevel name to {VoltageLevel.Level}");
         return RedirectToPage("./Index");
     }
 }

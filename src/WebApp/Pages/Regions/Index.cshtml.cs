@@ -1,7 +1,6 @@
 using App.Regions.Queries.GetRegions;
 using Core.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebApp.Pages.Regions;
