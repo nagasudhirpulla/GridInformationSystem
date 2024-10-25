@@ -6,7 +6,9 @@ public class Substation : AuditableEntity
 {
     public required string NameCache { get; set; }
 
-    public required string OwnerNamesCache { get; set; }
+    public required string OwnerIdsCache { get; set; }
+
+    public required string RegionCache { get; set; }
 
     public List<SubstationOwner> SubstationOwners { get; } = [];
 
