@@ -10,6 +10,7 @@ combination of substationID1, substationID2, elementType, elementNumber is uniqu
 combination of substationID1, substationID2, elementNumber,busType is unique for bus element type
 
 TODOs
+add control area also - control area suggestion - if 765 kV Imp grid element - control area-NLDC, if <765 kV Imp grid element - control area-RLDC, else the state in with the substation belongs, interstate lines are important grid elements
 FSC
  */
 
