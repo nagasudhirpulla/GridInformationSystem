@@ -34,6 +34,7 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
         entity.Longitude = request.Longitude;
 
         // update location if required
+        bool nameChangeRequired = false;
         if (entity.LocationId != request.LocationId)
         {
             Location location = await context.Locations.FirstOrDefaultAsync(l => l.Id == request.LocationId, cancellationToken)
@@ -42,6 +43,7 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
                                                                                 }]);
             entity.LocationId = request.LocationId;
             entity.RegionCache = location.RegionCache;
+            nameChangeRequired = true;
         }
 
         bool? isElementsConnected = null;
@@ -64,6 +66,7 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
             }
 
             entity.VoltageLevelId = request.VoltageLevelId;
+            nameChangeRequired = true;
         }
 
         // update isAc if required
@@ -113,7 +116,7 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
         }
 
         // set new substation name if required
-        if ((request.VoltageLevelId != entity.VoltageLevelId) || (request.LocationId != entity.LocationId))
+        if (nameChangeRequired)
         {
             var newName = await SubstationUtils.DeriveSubstationName(request.VoltageLevelId, request.LocationId, context, cancellationToken);
             entity.NameCache = newName;
