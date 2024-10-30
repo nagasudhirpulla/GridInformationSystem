@@ -1,0 +1,46 @@
+﻿@page
+@model WebApp.Pages.Substations.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="./Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Owners</th>
+            <th>Region</th>
+            <th>Location</th>
+            <th>Voltage Level</th>
+            <th>AC_DC</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Substations)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameCache)
+                    @Html.DisplayFor(modelItem => item.OwnerNamesCache)
+                    @Html.DisplayFor(modelItem => item.RegionCache)
+                    @Html.DisplayFor(modelItem => item.Location.Name)
+                    @Html.DisplayFor(modelItem => item.IsAc ? "AC" : "DC")
+                    @Html.DisplayFor(modelItem => item.Latitude)
+                    @Html.DisplayFor(modelItem => item.Longitude)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

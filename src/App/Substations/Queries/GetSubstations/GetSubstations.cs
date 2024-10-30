@@ -14,7 +14,9 @@ public class GetSubstationsQueryHandler(IApplicationDbContext context) : IReques
     public async Task<List<Substation>> Handle(GetSubstationsQuery request, CancellationToken cancellationToken)
     {
         var substations = await context.Substations.AsNoTracking()
-                        .OrderBy(r => r.NameCache)
+            .Include(s => s.VoltageLevel)
+            .Include(s => s.Location)
+            .OrderBy(r => r.NameCache)
                         .ToListAsync(cancellationToken);
         return substations;
     }
