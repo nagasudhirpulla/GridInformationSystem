@@ -1,6 +1,5 @@
 ﻿using App.Common.Interfaces;
 using App.Owners.Utils;
-using App.Substations.Commands.CreateSubstation;
 using App.Substations.Utils;
 using Ardalis.GuardClauses;
 using Core.Entities;

@@ -2,7 +2,8 @@ using App.Common.Interfaces;
 using App.Common.Security;
 using App.Locations.Queries.GetLocations;
 using App.Owners.Queries.GetOwners;
-using App.Substations.Commands.CreateSubstation;
+using App.Substations.Commands.UpdateSubstation;
+using App.Substations.Queries.GetSubstation;
 using App.VoltageLevels.Queries.GetVoltageLevels;
 using Core.Entities;
 using FluentValidation.AspNetCore;
@@ -14,12 +15,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace WebApp.Pages.Substations;
 
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
-public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
+public class EditModel(ILogger<EditModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
 {
     [BindProperty]
-    public required CreateSubstationCommand NewSubstation { get; set; }
-    public async Task OnGetAsync()
+    public required UpdateSubstationCommand Substation { get; set; }
+    public async Task OnGetAsync(int id)
     {
+        var substation = await mediator.Send(new GetSubstationQuery() { Id = id });
+        Substation = new UpdateSubstationCommand()
+        {
+            Id = substation.Id,
+            VoltageLevelId = substation.VoltageLevelId,
+            IsAc = substation.IsAc,
+            LocationId = substation.LocationId,
+            Latitude = substation.Latitude,
+            Longitude = substation.Longitude,
+            OwnerIds = string.Join(',', substation.SubstationOwners.Select(x => x.OwnerId))
+        };
         await InitSelectListsAsync();
     }
 
@@ -33,8 +45,8 @@ public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
 
     public async Task<IActionResult> OnPostAsync()
     {
-        var validator = new CreateSubstationCommandValidator(context);
-        var validationResult = await validator.ValidateAsync(NewSubstation);
+        var validator = new UpdateSubstationCommandValidator(context);
+        var validationResult = await validator.ValidateAsync(Substation);
 
         if (!validationResult.IsValid)
         {
@@ -43,16 +55,8 @@ public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
             return Page();
         }
 
-
-        var newSubstationId = await mediator.Send(NewSubstation);
-        if (newSubstationId > 0)
-        {
-            logger.LogInformation($"Created Substation with substationId {newSubstationId}");
-            return RedirectToPage("./Index");
-        }
-
-        await InitSelectListsAsync();
-        // If we got this far, something failed, redisplay form
-        return Page();
+        await mediator.Send(Substation);
+        logger.LogInformation($"Updated Substation with {Substation.Id}");
+        return RedirectToPage("./Index");
     }
 }

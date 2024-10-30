@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace WebApp.Pages.VoltageLevels;
 
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
-public class EditModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
+public class EditModel(ILogger<EditModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
 {
     [BindProperty]
     public required UpdateVoltageLevelCommand VoltageLevel { get; set; }

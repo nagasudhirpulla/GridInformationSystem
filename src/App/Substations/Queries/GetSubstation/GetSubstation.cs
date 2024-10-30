@@ -17,6 +17,7 @@ public class GetSubstationQueryHandler(IApplicationDbContext context) : IRequest
     public async Task<Substation> Handle(GetSubstationQuery request, CancellationToken cancellationToken)
     {
         Substation substation = await context.Substations.AsNoTracking()
+                        .Include(x => x.SubstationOwners)
                         .FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken: cancellationToken) ?? throw new KeyNotFoundException();
         return substation;
     }

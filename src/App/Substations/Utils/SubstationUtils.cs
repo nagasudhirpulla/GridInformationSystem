@@ -1,7 +1,6 @@
 ﻿using App.Common.Interfaces;
 using Core.Entities;
 using FluentValidation.Results;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.Substations.Utils;

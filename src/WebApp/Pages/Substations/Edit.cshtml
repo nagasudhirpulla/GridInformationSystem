@@ -1,0 +1,59 @@
+﻿@page
+@model WebApp.Pages.Substations.EditModel
+@{
+    ViewData["Title"] = "Update Substation";
+}
+
+<div class="row justify-content-center align-items-center">
+    <div class="col col-md-4 col-lg-4 col-xl-3">
+        <h2>@ViewData["Title"]</h2>
+        <form method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="Substation.Id" type="hidden" />
+            <div class="mb-3">
+                <label class="form-label">Voltage Level</label>
+                <select asp-for="Substation.VoltageLevelId" class="form-control" asp-items="ViewBag.VoltageLevelId"></select>
+                <span asp-validation-for="Substation.VoltageLevelId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <select asp-for="Substation.LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
+                <span asp-validation-for="Substation.VoltageLevelId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Substation.IsAc" class="form-check-label"></label>
+                <input asp-for="Substation.IsAc" class="form-check-input" />
+                <span asp-validation-for="Substation.IsAc" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Substation.OwnerIds" class="form-label"></label>
+                <select multiple class="form-control multi-select" size="6" asp-items="ViewBag.OwnerId" onchange="setMultiSelValue(this)"></select>
+                @*TODO select options to be initiated*@
+                <input asp-for="Substation.OwnerIds" type="hidden" />
+                <span asp-validation-for="Substation.OwnerIds" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Substation.Latitude" class="form-label"></label>
+                <input asp-for="Substation.Latitude" class="form-control" />
+                <span asp-validation-for="Substation.Latitude" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Substation.Longitude" class="form-label"></label>
+                <input asp-for="Substation.Longitude" class="form-control" />
+                <span asp-validation-for="Substation.Longitude" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success mb-1">Create</button>
+        </form>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_MultiSelectPartial" />
+    <script>
+        var ownersMultiSelect = new vanillaSelectBox(".multi-select", { "maxHeight": 200, "search": true });
+    </script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

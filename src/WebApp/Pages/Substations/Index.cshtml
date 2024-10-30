@@ -29,11 +29,26 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.NameCache)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.OwnerNamesCache)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.RegionCache)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Location.Name)
-                    @Html.DisplayFor(modelItem => item.IsAc ? "AC" : "DC")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VoltageLevel.Level)
+                </td>
+                <td>
+                    @(item.IsAc ? "AC" : "DC")
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Latitude)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Longitude)
                 </td>
                 <td>

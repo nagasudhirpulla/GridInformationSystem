@@ -1,5 +1,7 @@
 ﻿using App.Common.Interfaces;
+using App.Substations.Utils;
 using Ardalis.GuardClauses;
+using FluentValidation.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,6 +18,14 @@ public class DeleteSubstationCommandHandler(IApplicationDbContext context) : IRe
             .SingleOrDefaultAsync(cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
+
+        bool isElementsConnected = await SubstationUtils.IsElementsConnected(request.Id, context, cancellationToken);
+        if (isElementsConnected)
+        {
+            throw new Common.Exceptions.ValidationException([new ValidationFailure() {
+                                                                                    ErrorMessage = "Can't delete substation when there are connected elements"
+                                                                                }]);
+        }
 
         context.Substations.Remove(entity);
 

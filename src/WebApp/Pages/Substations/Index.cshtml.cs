@@ -1,7 +1,6 @@
 using App.Substations.Queries.GetSubstations;
 using Core.Entities;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebApp.Pages.Substations;
