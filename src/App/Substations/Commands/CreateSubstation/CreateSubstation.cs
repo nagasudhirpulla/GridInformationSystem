@@ -1,4 +1,5 @@
-﻿using App.Common.Interfaces;
+﻿using App.Common.Behaviours;
+using App.Common.Interfaces;
 using App.Owners.Utils;
 using App.Substations.Utils;
 using Core.Entities;
@@ -8,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.Substations.Commands.CreateSubstation;
 
+[Transactional(IsolationLevel = System.Data.IsolationLevel.ReadCommitted)]
 public record CreateSubstationCommand : IRequest<int>
 {
     public required string OwnerIds { get; init; }

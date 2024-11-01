@@ -1,6 +1,8 @@
 ﻿using Core.Entities;
 using Core.Entities.Elements;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
+using System.Data;
 
 namespace App.Common.Interfaces;
 
@@ -10,7 +12,7 @@ public interface IApplicationDbContext
     DbSet<GeneratingStation> GeneratingStations { get; }
     DbSet<GeneratingStationClassification> GeneratingStationClassifications { get; }
     DbSet<GeneratingStationType> GeneratingStationTypes { get; }
-    DbSet<Location> Locations{ get; }
+    DbSet<Location> Locations { get; }
     DbSet<Owner> Owners { get; }
     DbSet<Region> Regions { get; }
     DbSet<State> States { get; }
@@ -35,4 +37,9 @@ public interface IApplicationDbContext
     DbSet<SubFilterBank> SubFilterBanks { get; }
     DbSet<Transformer> Transformers { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+    IDbContextTransaction? GetCurrentTransaction();
+    bool HasActiveTransaction { get; }
+    Task<IDbContextTransaction?> BeginTransactionAsync(IsolationLevel isolationLevel);
+    Task CommitTransactionAsync(IDbContextTransaction? transaction);
+    void RollbackTransaction();
 }
