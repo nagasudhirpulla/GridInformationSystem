@@ -3,6 +3,7 @@ using App.Common.Security;
 using App.Regions.Queries.GetRegions;
 using App.States.Commands.UpdateState;
 using App.States.Queries.GetState;
+using Core.Entities;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ public class EditModel(ILogger<CreateModel> logger, IMediator mediator, IApplica
 
     private async Task InitSelectListsAsync()
     {
-        ViewData["RegionId"] = new SelectList(await mediator.Send(new GetRegionsQuery()), "Id", "Name");
+        ViewData["RegionId"] = new SelectList(await mediator.Send(new GetRegionsQuery()), nameof(Region.Id), nameof(Region.Name));
     }
 
     public async Task<IActionResult> OnPostAsync()

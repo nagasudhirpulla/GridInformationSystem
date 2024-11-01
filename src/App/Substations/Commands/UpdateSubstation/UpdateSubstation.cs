@@ -34,8 +34,25 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
         entity.Longitude = request.Longitude;
 
         // update location if required
-        bool nameChangeRequired = false;
-        if (entity.LocationId != request.LocationId)
+        bool? isElementsConnected = null;
+        bool isLocationChangeRequested = entity.LocationId != request.LocationId;
+        bool isVoltageChangeRequested = entity.VoltageLevelId != request.VoltageLevelId;
+        bool isAcChangeRequested = entity.IsAc != request.IsAc;
+        bool isNameChangeRequired = isVoltageChangeRequested|isAcChangeRequested;
+
+        if (isLocationChangeRequested || isVoltageChangeRequested || isAcChangeRequested)
+        {
+            isElementsConnected ??= await SubstationUtils.IsElementsConnected(request.Id, context, cancellationToken);
+
+            if (isElementsConnected == true)
+            {
+                throw new Common.Exceptions.ValidationException([new ValidationFailure() {
+                                                                                    ErrorMessage = "Can't change substation voltage level or location or AC DC when there are connected elements"
+                                                                                }]);
+            }
+        }
+
+        if (isLocationChangeRequested)
         {
             Location location = await context.Locations.FirstOrDefaultAsync(l => l.Id == request.LocationId, cancellationToken)
                                 ?? throw new Common.Exceptions.ValidationException([new ValidationFailure() {
@@ -43,51 +60,29 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
                                                                                 }]);
             entity.LocationId = request.LocationId;
             entity.RegionCache = location.RegionCache;
-            nameChangeRequired = true;
         }
 
-        bool? isElementsConnected = null;
 
         // update voltage level if required
-        if (entity.VoltageLevelId != request.VoltageLevelId)
+        if (isVoltageChangeRequested)
         {
             VoltageLevel voltageLevel = await context.VoltageLevels.FirstOrDefaultAsync(l => l.Id == request.VoltageLevelId, cancellationToken)
                                 ?? throw new Common.Exceptions.ValidationException([new ValidationFailure() {
                                                                                     ErrorMessage = "Voltage level Id is not present in database"
                                                                                 }]);
-
-            isElementsConnected ??= await SubstationUtils.IsElementsConnected(request.Id, context, cancellationToken);
-
-            if (isElementsConnected == true)
-            {
-                throw new Common.Exceptions.ValidationException([new ValidationFailure() {
-                                                                                    ErrorMessage = "Can't change substation voltage level when there are connected elements"
-                                                                                }]);
-            }
-
             entity.VoltageLevelId = request.VoltageLevelId;
-            nameChangeRequired = true;
         }
 
         // update isAc if required
-        if (entity.IsAc != request.IsAc)
+        if (isAcChangeRequested)
         {
-            isElementsConnected ??= await SubstationUtils.IsElementsConnected(request.Id, context, cancellationToken);
-
-            if (isElementsConnected == true)
-            {
-                throw new Common.Exceptions.ValidationException([new ValidationFailure() {
-                                                                                    ErrorMessage = "Can't change substation AC DC of when there are connected elements"
-                                                                                }]);
-            }
-
             entity.IsAc = request.IsAc;
         }
 
         // update ownerIds if required
         var existingSubstationOwnerRecords = await context.SubstationOwners.Where(s => s.SubstationId == request.Id).ToListAsync(cancellationToken: cancellationToken);
         var existingOwnerIds = existingSubstationOwnerRecords.Select(o => o.OwnerId).ToList();
-        var newOwnerIds = request.OwnerIds.Split(',').Select(o => int.Parse(o)).ToList();
+        var newOwnerIds = request.OwnerIds.Split(',').Select(int.Parse).ToList();
 
         var ownerIdsToAdd = newOwnerIds.Where(o => !existingOwnerIds.Contains(o)).ToList();
         var ownerIdsToDelete = existingOwnerIds.Where(o => !newOwnerIds.Contains(o)).ToList();
@@ -116,7 +111,7 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
         }
 
         // set new substation name if required
-        if (nameChangeRequired)
+        if (isNameChangeRequired)
         {
             var newName = await SubstationUtils.DeriveSubstationName(request.VoltageLevelId, request.LocationId, context, cancellationToken);
             entity.NameCache = newName;

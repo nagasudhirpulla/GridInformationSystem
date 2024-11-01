@@ -28,8 +28,8 @@ public class CreateSubstationCommandValidator : AbstractValidator<CreateSubstati
     }
     public async Task<bool> BeUniqueLocationVoltage(CreateSubstationCommand cmd, CancellationToken cancellationToken)
     {
-        return await _context.Substations
-            .AllAsync(l => (l.LocationId != cmd.LocationId) && (l.VoltageLevelId == cmd.VoltageLevelId), cancellationToken);
+        return !await _context.Substations
+            .AnyAsync(l => (l.LocationId == cmd.LocationId) && (l.VoltageLevelId == cmd.VoltageLevelId), cancellationToken);
     }
 
     public static bool BeValidOwnerIds(string oIds)

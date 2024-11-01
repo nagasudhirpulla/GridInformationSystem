@@ -29,7 +29,6 @@
             <div class="mb-3">
                 <label asp-for="Substation.OwnerIds" class="form-label"></label>
                 <select multiple class="form-control multi-select" size="6" asp-items="ViewBag.OwnerId" onchange="setMultiSelValue(this)"></select>
-                @*TODO select options to be initiated*@
                 <input asp-for="Substation.OwnerIds" type="hidden" />
                 <span asp-validation-for="Substation.OwnerIds" class="text-danger"></span>
             </div>

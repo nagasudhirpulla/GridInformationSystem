@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using FluentValidation.AspNetCore;
 using App.States.Queries.GetStates;
+using Core.Entities;
 
 namespace WebApp.Pages.Locations;
 
@@ -22,7 +23,7 @@ public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
 
     private async Task InitSelectListsAsync()
     {
-        ViewData["StateId"] = new SelectList(await mediator.Send(new GetStatesQuery()), "Id", "Name");
+        ViewData["StateId"] = new SelectList(await mediator.Send(new GetStatesQuery()), nameof(State.Id), nameof(State.Name));
     }
 
     public async Task<IActionResult> OnPostAsync()
