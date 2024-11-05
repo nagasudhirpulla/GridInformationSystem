@@ -1,4 +1,5 @@
-﻿using App.Common.Interfaces;
+﻿using App.Common.Behaviours;
+using App.Common.Interfaces;
 using App.Owners.Utils;
 using App.Substations.Utils;
 using Ardalis.GuardClauses;
@@ -9,6 +10,8 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.Substations.Commands.UpdateSubstation;
+
+[Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
 public record UpdateSubstationCommand : IRequest
 {
     public int Id { get; init; }
@@ -24,7 +27,6 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
 {
     public async Task Handle(UpdateSubstationCommand request, CancellationToken cancellationToken)
     {
-        // TODO use transactions
         var entity = await context.Substations
             .FindAsync([request.Id], cancellationToken);
 
@@ -38,7 +40,7 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
         bool isLocationChangeRequested = entity.LocationId != request.LocationId;
         bool isVoltageChangeRequested = entity.VoltageLevelId != request.VoltageLevelId;
         bool isAcChangeRequested = entity.IsAc != request.IsAc;
-        bool isNameChangeRequired = isVoltageChangeRequested|isAcChangeRequested;
+        bool isNameChangeRequired = isVoltageChangeRequested | isAcChangeRequested;
 
         if (isLocationChangeRequested || isVoltageChangeRequested || isAcChangeRequested)
         {

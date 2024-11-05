@@ -1,4 +1,5 @@
-﻿using App.Common.Interfaces;
+﻿using App.Common.Behaviours;
+using App.Common.Interfaces;
 using App.Substations.Utils;
 using Ardalis.GuardClauses;
 using FluentValidation.Results;
@@ -7,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.Substations.Commands.DeleteSubstation;
 
+[Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
 public record DeleteSubstationCommand(int Id) : IRequest;
 
 public class DeleteSubstationCommandHandler(IApplicationDbContext context) : IRequestHandler<DeleteSubstationCommand>

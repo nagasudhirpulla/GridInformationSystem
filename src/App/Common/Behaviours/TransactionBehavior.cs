@@ -1,5 +1,4 @@
 ﻿using App.Common.Interfaces;
-using App.Common.Security;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System.Data;
@@ -45,6 +44,6 @@ public class TransactionBehavior<TRequest, TResponse>(IApplicationDbContext dbCo
 [AttributeUsage(AttributeTargets.Class)]
 public class TransactionalAttribute : Attribute
 {
-    public IsolationLevel IsolationLevel { get; set; } = IsolationLevel.ReadCommitted;
+    public IsolationLevel IsolationLevel { get; set; } = IsolationLevel.Serializable;
 
 }

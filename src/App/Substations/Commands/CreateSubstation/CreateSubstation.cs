@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace App.Substations.Commands.CreateSubstation;
 
-[Transactional(IsolationLevel = System.Data.IsolationLevel.ReadCommitted)]
+[Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
 public record CreateSubstationCommand : IRequest<int>
 {
     public required string OwnerIds { get; init; }
@@ -25,7 +25,6 @@ public class CreateSubstationCommandHandler(IApplicationDbContext context) : IRe
 {
     public async Task<int> Handle(CreateSubstationCommand request, CancellationToken cancellationToken)
     {
-        // TODO use transactions
         Location location = await context.Locations.FirstOrDefaultAsync(l => l.Id == request.LocationId, cancellationToken)
                             ?? throw new Common.Exceptions.ValidationException([new ValidationFailure() {
                                                                                     ErrorMessage = "Location Id is not present in database"
@@ -36,17 +35,9 @@ public class CreateSubstationCommandHandler(IApplicationDbContext context) : IRe
                                                                                 }]);
         string substationName = SubstationUtils.DeriveSubstationName(voltLvl.Level, location.Name);
 
-        List<Owner> owners = [];
-        foreach (string ownerId in request.OwnerIds.Split(","))
-        {
-            Owner owner = await context.Owners.FirstOrDefaultAsync(o => o.Id == Int32.Parse(ownerId), cancellationToken: cancellationToken)
-                                ?? throw new Common.Exceptions.ValidationException([new ValidationFailure() {
-                                                                                    ErrorMessage = "Owner Id is not present in database"
-                                                                               }]);
-            owners.Add(owner);
-        }
+        List<Owner> owners = await OwnerUtils.GetOwnersFromIdsAsync(request.OwnerIds, context, cancellationToken);
 
-        var ownersCache = OwnerUtils.DeriveOwnersCache(owners);
+        string ownersCache = OwnerUtils.DeriveOwnersCache(owners);
 
         var entity = new Substation()
         {

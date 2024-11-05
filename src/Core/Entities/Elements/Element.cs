@@ -16,7 +16,7 @@ FSC
 
 public class Element : AuditableEntity
 {
-    public int ElementNameCache { get; set; }
+    public required string ElementNameCache { get; set; }
 
     public required string VoltLevelCache { get; set; }
 
@@ -36,7 +36,7 @@ public class Element : AuditableEntity
 
     public DateTime CommissioningDate { get; set; }
 
-    public DateTime DeCommissioningDate { get; set; }
+    public DateTime? DeCommissioningDate { get; set; }
 
     public DateTime CommercialOperationDate { get; set; }
 

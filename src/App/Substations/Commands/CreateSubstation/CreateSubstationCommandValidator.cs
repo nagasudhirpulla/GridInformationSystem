@@ -1,4 +1,5 @@
 ﻿using App.Common.Interfaces;
+using App.Owners.Utils;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,7 +22,7 @@ public class CreateSubstationCommandValidator : AbstractValidator<CreateSubstati
                 .WithErrorCode("Unique");
 
         RuleFor(v => v.OwnerIds)
-            .Must(BeValidOwnerIds)
+            .Must(OwnerUtils.BeValidOwnerIds)
                 .WithMessage("invalid owner Ids provided")
                 .WithErrorCode("Unique");
 
@@ -30,23 +31,5 @@ public class CreateSubstationCommandValidator : AbstractValidator<CreateSubstati
     {
         return !await _context.Substations
             .AnyAsync(l => (l.LocationId == cmd.LocationId) && (l.VoltageLevelId == cmd.VoltageLevelId), cancellationToken);
-    }
-
-    public static bool BeValidOwnerIds(string oIds)
-    {
-        return oIds.Split(',').Any(oId =>
-        {
-            int ownerId = -1;
-            try
-            {
-                ownerId = Int32.Parse(oId);
-            }
-            catch (FormatException)
-            {
-
-                return false;
-            }
-            return true;
-        });
     }
 }
