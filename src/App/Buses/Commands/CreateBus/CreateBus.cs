@@ -35,8 +35,8 @@ public class CreateBusCommandHandler(IApplicationDbContext context) : IRequestHa
                                                                                     ErrorMessage = "Substation Id is not present in database"
                                                                                 }]);
 
-        // derive element name
-        string name = $"{substation.NameCache} Bus-{request.ElementNumber}";
+        // derive element name - TODO move to Bus Utils
+        string name = $"{substation.NameCache} {request.BusType.Name} Bus-{request.ElementNumber}";
 
         // derive voltage level, region from substation
         string voltLvl = substation.VoltageLevel.Level;
