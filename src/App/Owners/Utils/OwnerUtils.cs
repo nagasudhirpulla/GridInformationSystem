@@ -60,4 +60,33 @@ public static class OwnerUtils
         }
         await context.SaveChangesAsync(cancellationToken);
     }
+
+    public static async Task<int> UpdateElementOwnersAsync(int elementId, IEnumerable<int> newOwnerIds, IApplicationDbContext context, CancellationToken cancellationToken)
+    {
+        var existingElementOwnerRecords = await context.ElementOwners.Where(s => s.ElementId == elementId).ToListAsync(cancellationToken: cancellationToken);
+        var existingOwnerIds = existingElementOwnerRecords.Select(o => o.OwnerId).ToList();
+
+        var ownerIdsToAdd = newOwnerIds.Where(o => !existingOwnerIds.Contains(o)).ToList();
+        var ownerIdsToDelete = existingOwnerIds.Where(o => !newOwnerIds.Contains(o)).ToList();
+        var numOwnerChanges = ownerIdsToAdd.Count + ownerIdsToDelete.Count
+        if (numOwnerChanges > 0)
+        {
+            foreach (var ownerId in ownerIdsToAdd)
+            {
+                context.ElementOwners.Add(new ElementOwner
+                {
+                    ElementId = elementId,
+                    OwnerId = ownerId
+                });
+            }
+
+            foreach (ElementOwner elementOwner in existingElementOwnerRecords.Where(so => ownerIdsToDelete.Contains(so.OwnerId)))
+            {
+
+                context.ElementOwners.Remove(elementOwner);
+            }
+
+        }
+        return numOwnerChanges;
+    }
 }
