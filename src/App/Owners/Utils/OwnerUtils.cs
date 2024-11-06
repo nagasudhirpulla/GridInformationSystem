@@ -1,14 +1,13 @@
 ﻿using App.Common.Interfaces;
 using Core.Entities;
 using FluentValidation.Results;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Threading;
 
 namespace App.Owners.Utils;
 
 public static class OwnerUtils
 {
+    // TODO create file for each function
     public static string DeriveOwnersCache(IList<Owner> owners)
     {
         string ownersCache = String.Join("", owners.Select(o => o.Name + ";"));

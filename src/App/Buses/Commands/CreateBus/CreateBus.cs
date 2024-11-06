@@ -1,7 +1,6 @@
 ﻿using App.Common.Behaviours;
 using App.Common.Interfaces;
 using App.Owners.Utils;
-using Ardalis.GuardClauses;
 using Core.Entities;
 using Core.Entities.Elements;
 using Core.Enums;
@@ -35,8 +34,8 @@ public class CreateBusCommandHandler(IApplicationDbContext context) : IRequestHa
                                                                                     ErrorMessage = "Substation Id is not present in database"
                                                                                 }]);
 
-        // derive element name - TODO move to Bus Utils
-        string name = $"{substation.NameCache} {request.BusType.Name} Bus-{request.ElementNumber}";
+        // derive element name 
+        string name = Utils.DeriveBusName.Execute(substation.NameCache, request.BusType, request.ElementNumber);
 
         // derive voltage level, region from substation
         string voltLvl = substation.VoltageLevel.Level;
