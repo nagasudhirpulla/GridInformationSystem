@@ -1,8 +1,7 @@
 Grid Elements database service for managing and querying Grid Elements database
 
 ## TODOs
-* Encapsulate commands in transactions
-* remove cascade deletes whereever possible
+* remove cascade deletes whereever possible (buses)
 * Define control area and attach it to element
 * Model MSC, MSR, TCSC, STATCOM instead of compensator
 * Model SVC, FSC
