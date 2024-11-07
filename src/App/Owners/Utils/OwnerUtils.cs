@@ -68,7 +68,7 @@ public static class OwnerUtils
 
         var ownerIdsToAdd = newOwnerIds.Where(o => !existingOwnerIds.Contains(o)).ToList();
         var ownerIdsToDelete = existingOwnerIds.Where(o => !newOwnerIds.Contains(o)).ToList();
-        var numOwnerChanges = ownerIdsToAdd.Count + ownerIdsToDelete.Count
+        var numOwnerChanges = ownerIdsToAdd.Count + ownerIdsToDelete.Count;
         if (numOwnerChanges > 0)
         {
             foreach (var ownerId in ownerIdsToAdd)
