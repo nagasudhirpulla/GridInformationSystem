@@ -40,7 +40,7 @@ public class CreateBusCommandValidator : AbstractValidator<CreateBusCommand>
     public async Task<bool> BeUniqueBusInSubstation(CreateBusCommand cmd, CancellationToken cancellationToken)
     {
         bool sameBusExists = await _context.Buses
-            .AnyAsync(l => (l.SubstationId1 == cmd.SubstationId) && (l.BusType == cmd.BusType) && (l.ElementNumber == cmd.ElementNumber), cancellationToken);
+            .AnyAsync(l => (l.Substation1Id == cmd.SubstationId) && (l.BusType == cmd.BusType) && (l.ElementNumber == cmd.ElementNumber), cancellationToken);
         return !sameBusExists;
     }
 }

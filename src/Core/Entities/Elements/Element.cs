@@ -23,10 +23,10 @@ public class Element : AuditableEntity
     public required string RegionCache { get; set; }
 
     public Substation Substation1 { get; set; } = null!;
-    public int SubstationId1 { get; set; }
+    public int Substation1Id { get; set; }
 
     public Substation? Substation2 { get; set; }
-    public int? SubstationId2 { get; set; }
+    public int? Substation2Id { get; set; }
 
     public required string OwnerNamesCache { get; set; }
 

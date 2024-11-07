@@ -1,4 +1,5 @@
 ﻿using App.Common.Interfaces;
+using Ardalis.SmartEnum.ModelBinding;
 using Infra.Data;
 using WebApp.Infrastructure;
 using WebApp.Services;
@@ -19,7 +20,11 @@ public static class DependencyInjection
 
         services.AddExceptionHandler<CustomExceptionHandler>();
 
-        services.AddRazorPages();
+        services.AddRazorPages()
+            .AddMvcOptions(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new SmartEnumBinderProvider());
+            });
 
         // Customise default API behaviour
         //        services.Configure<ApiBehaviorOptions>(options =>

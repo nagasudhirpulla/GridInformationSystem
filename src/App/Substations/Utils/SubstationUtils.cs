@@ -26,7 +26,7 @@ public static class SubstationUtils
 
     public static async Task<bool> IsElementsConnected(int substationId, IApplicationDbContext context, CancellationToken cancellationToken)
     {
-        bool isElementsConnected = await context.Elements.AnyAsync(e => (e.SubstationId1 == substationId) || (e.SubstationId2 == substationId), cancellationToken);
+        bool isElementsConnected = await context.Elements.AnyAsync(e => (e.Substation1Id == substationId) || (e.Substation2Id == substationId), cancellationToken);
         return isElementsConnected;
     }
 }
