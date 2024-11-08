@@ -18,4 +18,3 @@ public record CreateLineCommand : IRequest<int>
     public required string ConductorType { get; set; }
     public bool IsAutoReclosurePresent { get; set; }
 }
-
