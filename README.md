@@ -1,6 +1,7 @@
 Grid Elements database service for managing and querying Grid Elements database
 
 ## TODOs
+* Use select2 for searchable dropdowns - https://select2.org/getting-started/installation
 * remove cascade deletes whereever possible (buses)
 * Define control area and attach it to element
 * Model MSC, MSR, TCSC, STATCOM instead of compensator

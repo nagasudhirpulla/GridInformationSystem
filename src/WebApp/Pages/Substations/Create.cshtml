@@ -27,7 +27,7 @@
             </div>
             <div class="mb-3">
                 <label asp-for="NewSubstation.OwnerIds" class="form-label"></label>
-                <select multiple class="form-control multi-select" size="6" asp-items="ViewBag.OwnerId" onchange="setMultiSelValue(this)"></select>
+                <select multiple class="form-control select2" asp-items="ViewBag.OwnerId" onchange="setMultiSelectVals(this)"></select>
                 <input asp-for="NewSubstation.OwnerIds" type="hidden" />
                 <span asp-validation-for="NewSubstation.OwnerIds" class="text-danger"></span>
             </div>
@@ -49,9 +49,6 @@
 </div>
 
 @section Scripts {
-    <partial name="_MultiSelectPartial" />
-    <script>
-        var ownersMultiSelect = new vanillaSelectBox(".multi-select", { "maxHeight": 200, "search": true });
-    </script>
+    <partial name="_Select2Partial" />
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

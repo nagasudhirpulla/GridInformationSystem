@@ -14,12 +14,12 @@
             <input asp-for="Bus.Id" type="hidden" />
             <div class="mb-3">
                 <label class="form-label">Substation</label>
-                <select asp-for="Bus.SubstationId" class="form-control" asp-items="ViewBag.SubstationId"></select>
+                <select asp-for="Bus.SubstationId" class="form-control select2" asp-items="ViewBag.SubstationId"></select>
                 <span asp-validation-for="Bus.SubstationId" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="Bus.OwnerIds" class="form-label"></label>
-                <select multiple class="form-control multi-select" size="6" asp-items="ViewBag.OwnerId" onchange="setMultiSelValue(this)"></select>
+                <select multiple class="form-control select2" asp-items="ViewBag.OwnerId" onchange="setMultiSelectVals(this)"></select>
                 <input asp-for="Bus.OwnerIds" type="hidden" />
                 <span asp-validation-for="Bus.OwnerIds" class="text-danger"></span>
             </div>
@@ -66,9 +66,6 @@
 </div>
 
 @section Scripts {
-    <partial name="_MultiSelectPartial" />
-    <script>
-        var ownersMultiSelect = new vanillaSelectBox(".multi-select", { "maxHeight": 200, "search": true });
-    </script>
+    <partial name="_Select2Partial" />
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

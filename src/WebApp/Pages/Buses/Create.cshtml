@@ -13,12 +13,12 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="mb-3">
                 <label class="form-label">Substation</label>
-                <select asp-for="NewBus.SubstationId" class="form-control searchable-select" asp-items="ViewBag.SubstationId"></select>
+                <select asp-for="NewBus.SubstationId" class="form-control select2" asp-items="ViewBag.SubstationId"></select>
                 <span asp-validation-for="NewBus.SubstationId" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label asp-for="NewBus.OwnerIds" class="form-label"></label>
-                <select multiple class="form-control multi-select" size="6" asp-items="ViewBag.OwnerId" onchange="setMultiSelValue(this)"></select>
+                <select multiple class="form-control select2" asp-items="ViewBag.OwnerId" onchange="setMultiSelectVals(this)"></select>
                 <input asp-for="NewBus.OwnerIds" type="hidden" />
                 <span asp-validation-for="NewBus.OwnerIds" class="text-danger"></span>
             </div>
@@ -65,10 +65,6 @@
 </div>
 
 @section Scripts {
-    <partial name="_MultiSelectPartial" />
-    <script>
-        var ownersMultiSelect = new vanillaSelectBox(".multi-select", { "maxHeight": 200, "search": true });
-        var substationsSelect = new vanillaSelectBox(".searchable-select", { "maxHeight": 200, "search": true });
-    </script>
+    <partial name="_Select2Partial" />
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }
