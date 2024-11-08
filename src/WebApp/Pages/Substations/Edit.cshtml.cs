@@ -40,7 +40,6 @@ public class EditModel(ILogger<EditModel> logger, IMediator mediator, IApplicati
         ViewData["LocationId"] = new SelectList(await mediator.Send(new GetLocationsQuery()), nameof(Location.Id), nameof(Location.Name));
         ViewData["VoltageLevelId"] = new SelectList(await mediator.Send(new GetVoltageLevelsQuery()), nameof(VoltageLevel.Id), nameof(VoltageLevel.Level));
         ViewData["OwnerId"] = new MultiSelectList(await mediator.Send(new GetOwnersQuery()), nameof(Owner.Id), nameof(Owner.Name),Substation.OwnerIds.Split(','));
-
     }
 
     public async Task<IActionResult> OnPostAsync()

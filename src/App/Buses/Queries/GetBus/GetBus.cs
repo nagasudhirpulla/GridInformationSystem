@@ -17,6 +17,7 @@ public class GetBusQueryHandler(IApplicationDbContext context) : IRequestHandler
     public async Task<Bus> Handle(GetBusQuery request, CancellationToken cancellationToken)
     {
         Bus bus = await context.Buses.AsNoTracking()
+                        .Include(e => e.ElementOwners)
                         .FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken: cancellationToken) ?? throw new KeyNotFoundException();
         return bus;
     }

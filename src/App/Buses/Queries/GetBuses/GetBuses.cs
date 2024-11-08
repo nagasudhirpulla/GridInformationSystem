@@ -14,6 +14,7 @@ public class GetBusesQueryHandler(IApplicationDbContext context) : IRequestHandl
     public async Task<List<Bus>> Handle(GetBusesQuery request, CancellationToken cancellationToken)
     {
         var buses = await context.Buses.AsNoTracking()
+                        .Include(e => e.Substation1)
                         .OrderBy(r => r.ElementNameCache)
                         .ToListAsync(cancellationToken);
         return buses;

@@ -1,0 +1,74 @@
+﻿@page
+@using Core.Enums
+@model WebApp.Pages.Buses.EditModel
+@{
+    ViewData["Title"] = "Update Bus";
+}
+
+<div class="row justify-content-center align-items-center">
+    <div class="col col-md-4 col-lg-4 col-xl-3">
+        <h2>@ViewData["Title"]</h2>
+        <form method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="Bus.Id" type="hidden" />
+            <div class="mb-3">
+                <label class="form-label">Substation</label>
+                <select asp-for="Bus.SubstationId" class="form-control" asp-items="ViewBag.SubstationId"></select>
+                <span asp-validation-for="Bus.SubstationId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Bus.OwnerIds" class="form-label"></label>
+                <select multiple class="form-control multi-select" size="6" asp-items="ViewBag.OwnerId" onchange="setMultiSelValue(this)"></select>
+                <input asp-for="Bus.OwnerIds" type="hidden" />
+                <span asp-validation-for="Bus.OwnerIds" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Bus.ElementNumber" class="form-label"></label>
+                <input asp-for="Bus.ElementNumber" class="form-control" />
+                <span asp-validation-for="Bus.ElementNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Bus.BusType" class="form-label"></label>
+                <select asp-for="Bus.BusType" class="form-control">
+                    @foreach (var item in BusTypeEnum.List)
+                    {
+                        <option value="@item.Name" selected="@(item.Name == Model.Bus?.BusType.Name)">@item.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Bus.BusType" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Bus.IsImportantGridElement" class="form-check-label"></label>
+                <input asp-for="Bus.IsImportantGridElement" class="form-check-input" />
+                <span asp-validation-for="Bus.IsImportantGridElement" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Bus.CommissioningDate" class="form-label"></label>
+                <input type="date" asp-for="Bus.CommissioningDate" class="form-control" />
+                <span asp-validation-for="Bus.CommissioningDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Bus.CommercialOperationDate" class="form-label"></label>
+                <input type="date" asp-for="Bus.CommercialOperationDate" class="form-control" />
+                <span asp-validation-for="Bus.CommercialOperationDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Bus.DeCommissioningDate" class="form-label"></label>
+                <input type="date" asp-for="Bus.DeCommissioningDate" class="form-control" />
+                <span asp-validation-for="Bus.DeCommissioningDate" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success mb-1">Update</button>
+        </form>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_MultiSelectPartial" />
+    <script>
+        var ownersMultiSelect = new vanillaSelectBox(".multi-select", { "maxHeight": 200, "search": true });
+    </script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

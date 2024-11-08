@@ -1,4 +1,3 @@
-using App.Common.Interfaces;
 using App.Common.Security;
 using App.Substations.Commands.DeleteSubstation;
 using App.Substations.Queries.GetSubstation;
@@ -10,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace WebApp.Pages.Substations;
 
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
-public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
+public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator) : PageModel
 {
     public required Substation Substation { get; set; }
 
