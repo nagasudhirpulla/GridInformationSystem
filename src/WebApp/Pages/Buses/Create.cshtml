@@ -13,7 +13,7 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="mb-3">
                 <label class="form-label">Substation</label>
-                <select asp-for="NewBus.SubstationId" class="form-control" asp-items="ViewBag.SubstationId"></select>
+                <select asp-for="NewBus.SubstationId" class="form-control searchable-select" asp-items="ViewBag.SubstationId"></select>
                 <span asp-validation-for="NewBus.SubstationId" class="text-danger"></span>
             </div>
             <div class="mb-3">
@@ -68,6 +68,7 @@
     <partial name="_MultiSelectPartial" />
     <script>
         var ownersMultiSelect = new vanillaSelectBox(".multi-select", { "maxHeight": 200, "search": true });
+        var substationsSelect = new vanillaSelectBox(".searchable-select", { "maxHeight": 200, "search": true });
     </script>
     @await Html.PartialAsync("_ValidationScriptsPartial")
 }

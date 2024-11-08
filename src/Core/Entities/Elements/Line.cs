@@ -1,7 +1,7 @@
 ﻿namespace Core.Entities.Elements;
 
 /*
-combination of FromBus, ToBus and CircuitNo is unique
+combination of FromBus, ToBus and Element number is unique
 Bus1 and Bus2 should belong to AC Substation and both the substations should be different with the same voltage level
 */
 public class Line : Element
