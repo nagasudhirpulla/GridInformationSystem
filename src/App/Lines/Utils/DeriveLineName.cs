@@ -2,7 +2,6 @@
 using Core.Entities.Elements;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace App.Lines.Utils;
 

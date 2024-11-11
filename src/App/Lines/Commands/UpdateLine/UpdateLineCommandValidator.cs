@@ -4,13 +4,13 @@ using Core.Entities.Elements;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
-namespace App.Lines.Commands.CreateLine;
+namespace App.Lines.Commands.UpdateLine;
 
-public class CreateLineCommandValidator : AbstractValidator<CreateLineCommand>
+public class UpdateLineCommandValidator : AbstractValidator<UpdateLineCommand>
 {
     private readonly IApplicationDbContext _context;
 
-    public CreateLineCommandValidator(IApplicationDbContext context)
+    public UpdateLineCommandValidator(IApplicationDbContext context)
     {
         _context = context;
 
@@ -68,11 +68,12 @@ public class CreateLineCommandValidator : AbstractValidator<CreateLineCommand>
                 .WithErrorCode("Invalid");
     }
 
-    public async Task<bool> BeUniqueLinesBetweenSubstations(CreateLineCommand cmd, CancellationToken cancellationToken)
+    public async Task<bool> BeUniqueLinesBetweenSubstations(UpdateLineCommand cmd, CancellationToken cancellationToken)
     {
         // combination of FromBus, ToBus and Element number is unique
+        // todo use any to simplify bus1 bus2 comparision
         bool sameBusExists = await _context.Lines
-            .AnyAsync(l => ((l.Bus1Id.Equals(cmd.Bus1Id) && l.Bus2Id.Equals(cmd.Bus2Id)) || (l.Bus2Id.Equals(cmd.Bus1Id) && l.Bus1Id.Equals(cmd.Bus2Id))) && (l.ElementNumber == cmd.ElementNumber), cancellationToken);
+            .AnyAsync(l => (l.Id != cmd.Id) && ((l.Bus1Id.Equals(cmd.Bus1Id) && l.Bus2Id.Equals(cmd.Bus2Id)) || (l.Bus2Id.Equals(cmd.Bus1Id) && l.Bus1Id.Equals(cmd.Bus2Id))) && (l.ElementNumber == cmd.ElementNumber), cancellationToken);
         return !sameBusExists;
     }
 
@@ -81,7 +82,7 @@ public class CreateLineCommandValidator : AbstractValidator<CreateLineCommand>
         return await Buses.Utils.IsAnAcBus.ExecuteAsync(busId, _context, cancellationToken);
     }
 
-    public async Task<bool> BeSameVoltageLevelBuses(CreateLineCommand cmd, CancellationToken cancellationToken)
+    public async Task<bool> BeSameVoltageLevelBuses(UpdateLineCommand cmd, CancellationToken cancellationToken)
     {
         // bus1 and bus2 should have same voltage levels
         Bus bus1 = await _context.Buses.AsNoTracking()

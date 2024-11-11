@@ -40,6 +40,5 @@ public class Element : AuditableEntity
 
     public DateTime CommercialOperationDate { get; set; }
 
-
     public bool IsImportantGridElement { get; set; } = false;
 }

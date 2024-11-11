@@ -11,7 +11,7 @@ using Ardalis.GuardClauses;
 namespace App.Buses.Commands.UpdateBus;
 
 [Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
-public record UpdateBusCommand : IRequest<int>
+public record UpdateBusCommand : IRequest
 {
     public int Id { get; set; }
     public int SubstationId { get; set; }
@@ -24,9 +24,9 @@ public record UpdateBusCommand : IRequest<int>
     public BusTypeEnum BusType { get; set; } = null!;
 }
 
-public class UpdateBusCommandHandler(IApplicationDbContext context) : IRequestHandler<UpdateBusCommand, int>
+public class UpdateBusCommandHandler(IApplicationDbContext context) : IRequestHandler<UpdateBusCommand>
 {
-    public async Task<int> Handle(UpdateBusCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateBusCommand request, CancellationToken cancellationToken)
     {
         var entity = await context.Buses
             .FindAsync([request.Id], cancellationToken);
@@ -71,7 +71,5 @@ public class UpdateBusCommandHandler(IApplicationDbContext context) : IRequestHa
         entity.IsImportantGridElement = request.IsImportantGridElement;
 
         await context.SaveChangesAsync(cancellationToken);
-
-        return entity.Id;
     }
 }
