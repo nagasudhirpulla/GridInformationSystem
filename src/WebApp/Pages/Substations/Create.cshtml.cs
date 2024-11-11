@@ -27,7 +27,7 @@ public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
     {
         ViewData["LocationId"] = new SelectList(await mediator.Send(new GetLocationsQuery()), nameof(Location.Id), nameof(Location.Name));
         ViewData["VoltageLevelId"] = new SelectList(await mediator.Send(new GetVoltageLevelsQuery()), nameof(VoltageLevel.Id), nameof(VoltageLevel.Level));
-        ViewData["OwnerId"] = new SelectList(await mediator.Send(new GetOwnersQuery()), nameof(Owner.Id), nameof(Owner.Name));
+        ViewData["OwnerId"] = new MultiSelectList(await mediator.Send(new GetOwnersQuery()), nameof(Owner.Id), nameof(Owner.Name), NewSubstation?.OwnerIds.Split(','));
 
     }
 
