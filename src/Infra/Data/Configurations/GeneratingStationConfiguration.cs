@@ -9,5 +9,20 @@ public class GeneratingStationConfiguration : IEntityTypeConfiguration<Generatin
     public void Configure(EntityTypeBuilder<GeneratingStation> builder)
     {
         builder.HasIndex(u => u.Name).IsUnique();
+
+        builder
+            .HasOne(o => o.Fuel)
+            .WithMany()
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder
+            .HasOne(o => o.GeneratingStationType)
+            .WithMany()
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder
+            .HasOne(o => o.GeneratingStationClassification)
+            .WithMany()
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

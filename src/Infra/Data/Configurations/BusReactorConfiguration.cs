@@ -1,17 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using Core.Entities;
+using Core.Entities.Elements;
 
 namespace Infra.Data.Configurations;
 
-public class StateConfiguration : IEntityTypeConfiguration<State>
+public class BusReactorConfiguration : IEntityTypeConfiguration<BusReactor>
 {
-    public void Configure(EntityTypeBuilder<State> builder)
+    public void Configure(EntityTypeBuilder<BusReactor> builder)
     {
-        builder.HasIndex(u => u.Name).IsUnique();
-
         builder
-            .HasOne(o => o.Region)
+            .HasOne(o => o.Bus)
             .WithMany()
             .OnDelete(DeleteBehavior.Restrict);
     }

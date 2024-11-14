@@ -31,9 +31,9 @@
                 <label asp-for="NewBus.BusType" class="form-label"></label>
                 <select asp-for="NewBus.BusType" class="form-control">
                     @foreach (var item in BusTypeEnum.List)
-                    {
-                        <option value="@item.Name" selected="@(item.Name == Model.NewBus?.BusType.Name)">@item.Name</option>
-                    }
+                {
+                    <option value="@item.Name" selected="@(item.Name == Model.NewBus?.BusType.Name)">@item.Name</option>
+                }
                 </select>
                 <span asp-validation-for="NewBus.BusType" class="text-danger"></span>
             </div>

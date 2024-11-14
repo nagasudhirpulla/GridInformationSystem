@@ -1,6 +1,5 @@
 using App.Lines.Commands.UpdateLine;
 using App.Owners.Queries.GetOwners;
-using App.Substations.Queries.GetSubstations;
 using Core.Entities.Elements;
 using Core.Entities;
 using Microsoft.AspNetCore.Mvc;

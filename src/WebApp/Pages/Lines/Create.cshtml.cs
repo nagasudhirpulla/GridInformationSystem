@@ -1,7 +1,6 @@
 using App.Common.Interfaces;
 using App.Common.Security;
 using App.Owners.Queries.GetOwners;
-using App.Substations.Queries.GetSubstations;
 using Core.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

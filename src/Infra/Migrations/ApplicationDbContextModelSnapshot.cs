@@ -7,1210 +7,1219 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Infra.Migrations
+namespace Infra.Migrations;
+
+[DbContext(typeof(ApplicationDbContext))]
+partial class ApplicationDbContextModelSnapshot : ModelSnapshot
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
+        modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
-            modelBuilder.Entity("Core.Entities.ElementOwner", b =>
-                {
-                    b.Property<int>("ElementId")
-                        .HasColumnType("INTEGER");
+        modelBuilder.Entity("Core.Entities.ElementOwner", b =>
+            {
+                b.Property<int>("ElementId")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("INTEGER");
+                b.Property<int>("OwnerId")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
+                b.Property<int>("Id")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("ElementId", "OwnerId");
+                b.HasKey("ElementId", "OwnerId");
 
-                    b.HasIndex("OwnerId");
+                b.HasIndex("OwnerId");
 
-                    b.ToTable("ElementOwners");
-                });
+                b.ToTable("ElementOwners");
+            });
 
-            modelBuilder.Entity("Core.Entities.Elements.Element", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+        modelBuilder.Entity("Core.Entities.Elements.Element", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("CommercialOperationDate")
-                        .HasColumnType("TEXT");
+                b.Property<DateTime>("CommercialOperationDate")
+                    .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CommissioningDate")
-                        .HasColumnType("TEXT");
+                b.Property<DateTime>("CommissioningDate")
+                    .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<DateTime?>("DeCommissioningDate")
-                        .HasColumnType("TEXT");
+                b.Property<DateTime?>("DeCommissioningDate")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("TEXT");
+                b.Property<string>("Discriminator")
+                    .IsRequired()
+                    .HasMaxLength(21)
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("ElementNameCache")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("ElementNameCache")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("ElementNumber")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("ElementNumber")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsImportantGridElement")
-                        .HasColumnType("INTEGER");
+                b.Property<bool>("IsImportantGridElement")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("OwnerNamesCache")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("OwnerNamesCache")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("RegionCache")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("RegionCache")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.Property<int>("Substation1Id")
-                        .HasColumnType("INTEGER");
+                b.Property<int>("Substation1Id")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<int?>("Substation2Id")
-                        .HasColumnType("INTEGER");
+                b.Property<int?>("Substation2Id")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<string>("VoltLevelCache")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("VoltLevelCache")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("ElementNameCache")
-                        .IsUnique();
+                b.HasIndex("ElementNameCache")
+                    .IsUnique();
 
-                    b.HasIndex("Substation1Id");
+                b.HasIndex("Substation1Id");
 
-                    b.HasIndex("Substation2Id");
+                b.HasIndex("Substation2Id");
 
-                    b.ToTable("Elements");
+                b.ToTable("Elements");
 
-                    b.HasDiscriminator().HasValue("Element");
+                b.HasDiscriminator().HasValue("Element");
 
-                    b.UseTphMappingStrategy();
-                });
+                b.UseTphMappingStrategy();
+            });
 
-            modelBuilder.Entity("Core.Entities.Fuel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+        modelBuilder.Entity("Core.Entities.Fuel", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("FuelName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("FuelName")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.HasIndex("FuelName")
-                        .IsUnique();
+                b.HasIndex("FuelName")
+                    .IsUnique();
 
-                    b.ToTable("Fuels");
-                });
+                b.ToTable("Fuels");
+            });
 
-            modelBuilder.Entity("Core.Entities.GeneratingStationClassification", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+        modelBuilder.Entity("Core.Entities.GeneratingStationClassification", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.Property<string>("Classification")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("Classification")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.HasKey("Id");
 
-                    b.ToTable("GeneratingStationClassifications");
-                });
+                b.HasIndex("Classification")
+                    .IsUnique();
 
-            modelBuilder.Entity("Core.Entities.GeneratingStationType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                b.ToTable("GeneratingStationClassifications");
+            });
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Core.Entities.GeneratingStationType", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.Property<string>("StationType")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("GeneratingStationTypes");
-                });
+                b.HasKey("Id");
 
-            modelBuilder.Entity("Core.Entities.Location", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                b.HasIndex("StationType")
+                    .IsUnique();
 
-                    b.Property<string>("Alias")
-                        .HasColumnType("TEXT");
+                b.ToTable("GeneratingStationTypes");
+            });
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Core.Entities.Location", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("Alias")
+                    .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("RegionCache")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<int>("StateId")
-                        .HasColumnType("INTEGER");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.Property<string>("RegionCache")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                b.Property<int>("StateId")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("StateId");
+                b.HasKey("Id");
 
-                    b.ToTable("Locations");
-                });
+                b.HasIndex("Name")
+                    .IsUnique();
 
-            modelBuilder.Entity("Core.Entities.Owner", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                b.HasIndex("StateId");
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+                b.ToTable("Locations");
+            });
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Core.Entities.Owner", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("Owners");
-                });
+                b.HasKey("Id");
 
-            modelBuilder.Entity("Core.Entities.Region", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                b.HasIndex("Name")
+                    .IsUnique();
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+                b.ToTable("Owners");
+            });
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Core.Entities.Region", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("Regions");
-                });
+                b.HasKey("Id");
 
-            modelBuilder.Entity("Core.Entities.State", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                b.HasIndex("Name")
+                    .IsUnique();
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+                b.ToTable("Regions");
+            });
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Core.Entities.State", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.Property<int>("RegionId")
-                        .HasColumnType("INTEGER");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                b.Property<int>("RegionId")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("RegionId");
+                b.HasKey("Id");
 
-                    b.ToTable("States");
-                });
+                b.HasIndex("Name")
+                    .IsUnique();
 
-            modelBuilder.Entity("Core.Entities.Substation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                b.HasIndex("RegionId");
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+                b.ToTable("States");
+            });
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Core.Entities.Substation", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsAc")
-                        .HasColumnType("INTEGER");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+                b.Property<string>("Discriminator")
+                    .IsRequired()
+                    .HasMaxLength(21)
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<bool>("IsAc")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<double>("Latitude")
-                        .HasColumnType("REAL");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.Property<int>("LocationId")
-                        .HasColumnType("INTEGER");
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-                    b.Property<double>("Longitude")
-                        .HasColumnType("REAL");
+                b.Property<double>("Latitude")
+                    .HasColumnType("REAL");
 
-                    b.Property<string>("NameCache")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<int>("LocationId")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<string>("OwnerNamesCache")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<double>("Longitude")
+                    .HasColumnType("REAL");
 
-                    b.Property<string>("RegionCache")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("NameCache")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.Property<int>("VoltageLevelId")
-                        .HasColumnType("INTEGER");
+                b.Property<string>("OwnerNamesCache")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.Property<string>("RegionCache")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("LocationId");
+                b.Property<int>("VoltageLevelId")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("VoltageLevelId");
+                b.HasKey("Id");
 
-                    b.ToTable("Substations");
+                b.HasIndex("LocationId");
 
-                    b.HasDiscriminator().HasValue("Substation");
+                b.HasIndex("NameCache")
+                    .IsUnique();
 
-                    b.UseTphMappingStrategy();
-                });
+                b.HasIndex("VoltageLevelId");
 
-            modelBuilder.Entity("Core.Entities.SubstationOwner", b =>
-                {
-                    b.Property<int>("SubstationId")
-                        .HasColumnType("INTEGER");
+                b.ToTable("Substations");
 
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("INTEGER");
+                b.HasDiscriminator().HasValue("Substation");
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+                b.UseTphMappingStrategy();
+            });
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Core.Entities.SubstationOwner", b =>
+            {
+                b.Property<int>("SubstationId")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<int>("Id")
-                        .HasColumnType("INTEGER");
+                b.Property<int>("OwnerId")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("SubstationId", "OwnerId");
+                b.Property<int>("Id")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("OwnerId");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("SubstationOwners");
-                });
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-            modelBuilder.Entity("Core.Entities.VoltageLevel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                b.HasKey("SubstationId", "OwnerId");
 
-                    b.Property<DateTimeOffset>("Created")
-                        .HasColumnType("TEXT");
+                b.HasIndex("OwnerId");
 
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("TEXT");
+                b.ToTable("SubstationOwners");
+            });
 
-                    b.Property<DateTimeOffset>("LastModified")
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Core.Entities.VoltageLevel", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.Property<string>("LastModifiedBy")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset>("Created")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("Level")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<string>("CreatedBy")
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.Property<DateTimeOffset>("LastModified")
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("Level")
-                        .IsUnique();
+                b.Property<string>("LastModifiedBy")
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("VoltageLevels");
-                });
+                b.Property<string>("Level")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-            modelBuilder.Entity("Infra.Identity.ApplicationUser", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                b.HasKey("Id");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("INTEGER");
+                b.HasIndex("Level")
+                    .IsUnique();
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
+                b.ToTable("VoltageLevels");
+            });
 
-                    b.Property<string>("DisplayName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Infra.Identity.ApplicationUser", b =>
+            {
+                b.Property<string>("Id")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                b.Property<int>("AccessFailedCount")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("INTEGER");
+                b.Property<string>("ConcurrencyStamp")
+                    .IsConcurrencyToken()
+                    .HasColumnType("TEXT");
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("INTEGER");
+                b.Property<string>("DisplayName")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("TEXT");
+                b.Property<string>("Email")
+                    .HasMaxLength(256)
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                b.Property<bool>("EmailConfirmed")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<string>("NormalizedUserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                b.Property<bool>("LockoutEnabled")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("TEXT");
+                b.Property<DateTimeOffset?>("LockoutEnd")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT");
+                b.Property<string>("NormalizedEmail")
+                    .HasMaxLength(256)
+                    .HasColumnType("TEXT");
 
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("INTEGER");
+                b.Property<string>("NormalizedUserName")
+                    .HasMaxLength(256)
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("TEXT");
+                b.Property<string>("PasswordHash")
+                    .HasColumnType("TEXT");
 
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("INTEGER");
+                b.Property<string>("PhoneNumber")
+                    .HasColumnType("TEXT");
 
-                    b.Property<string>("UserName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                b.Property<bool>("PhoneNumberConfirmed")
+                    .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                b.Property<string>("SecurityStamp")
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasDatabaseName("EmailIndex");
+                b.Property<bool>("TwoFactorEnabled")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasDatabaseName("UserNameIndex");
+                b.Property<string>("UserName")
+                    .HasMaxLength(256)
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("AspNetUsers", (string)null);
-                });
+                b.HasKey("Id");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
+                b.HasIndex("NormalizedEmail")
+                    .HasDatabaseName("EmailIndex");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("TEXT");
+                b.HasIndex("NormalizedUserName")
+                    .IsUnique()
+                    .HasDatabaseName("UserNameIndex");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+                b.ToTable("AspNetUsers", (string)null);
+            });
 
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            {
+                b.Property<string>("Id")
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                b.Property<string>("ConcurrencyStamp")
+                    .IsConcurrencyToken()
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex");
+                b.Property<string>("Name")
+                    .HasMaxLength(256)
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("AspNetRoles", (string)null);
-                });
+                b.Property<string>("NormalizedName")
+                    .HasMaxLength(256)
+                    .HasColumnType("TEXT");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                b.HasKey("Id");
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("TEXT");
+                b.HasIndex("NormalizedName")
+                    .IsUnique()
+                    .HasDatabaseName("RoleNameIndex");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("TEXT");
+                b.ToTable("AspNetRoles", (string)null);
+            });
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                b.Property<string>("ClaimType")
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("RoleId");
+                b.Property<string>("ClaimValue")
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
-                });
+                b.Property<string>("RoleId")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
+                b.HasKey("Id");
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("TEXT");
+                b.HasIndex("RoleId");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("TEXT");
+                b.ToTable("AspNetRoleClaims", (string)null);
+            });
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                b.Property<string>("ClaimType")
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("UserId");
+                b.Property<string>("ClaimValue")
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
-                });
+                b.Property<string>("UserId")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("TEXT");
+                b.HasKey("Id");
 
-                    b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("TEXT");
+                b.HasIndex("UserId");
 
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("TEXT");
+                b.ToTable("AspNetUserClaims", (string)null);
+            });
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            {
+                b.Property<string>("LoginProvider")
+                    .HasMaxLength(128)
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("LoginProvider", "ProviderKey");
+                b.Property<string>("ProviderKey")
+                    .HasMaxLength(128)
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("UserId");
+                b.Property<string>("ProviderDisplayName")
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
-                });
+                b.Property<string>("UserId")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
+                b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("TEXT");
+                b.HasIndex("UserId");
 
-                    b.HasKey("UserId", "RoleId");
+                b.ToTable("AspNetUserLogins", (string)null);
+            });
 
-                    b.HasIndex("RoleId");
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            {
+                b.Property<string>("UserId")
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
+                b.Property<string>("RoleId")
+                    .HasColumnType("TEXT");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("TEXT");
+                b.HasKey("UserId", "RoleId");
 
-                    b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("TEXT");
+                b.HasIndex("RoleId");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("TEXT");
+                b.ToTable("AspNetUserRoles", (string)null);
+            });
 
-                    b.Property<string>("Value")
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            {
+                b.Property<string>("UserId")
+                    .HasColumnType("TEXT");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+                b.Property<string>("LoginProvider")
+                    .HasMaxLength(128)
+                    .HasColumnType("TEXT");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
-                });
+                b.Property<string>("Name")
+                    .HasMaxLength(128)
+                    .HasColumnType("TEXT");
 
-            modelBuilder.Entity("Core.Entities.Elements.Bay", b =>
-                {
-                    b.HasBaseType("Core.Entities.Elements.Element");
+                b.Property<string>("Value")
+                    .HasColumnType("TEXT");
 
-                    b.Property<int>("BayType")
-                        .HasColumnType("INTEGER");
+                b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.Property<int>("Element1Id")
-                        .HasColumnType("INTEGER");
+                b.ToTable("AspNetUserTokens", (string)null);
+            });
 
-                    b.Property<int>("Element2Id")
-                        .HasColumnType("INTEGER");
+        modelBuilder.Entity("Core.Entities.Elements.Bay", b =>
+            {
+                b.HasBaseType("Core.Entities.Elements.Element");
 
-                    b.Property<bool>("IsFuture")
-                        .HasColumnType("INTEGER");
+                b.Property<int>("BayType")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("Element1Id");
+                b.Property<int>("Element1Id")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("Element2Id");
+                b.Property<int>("Element2Id")
+                    .HasColumnType("INTEGER");
 
-                    b.HasDiscriminator().HasValue("Bay");
-                });
+                b.Property<bool>("IsFuture")
+                    .HasColumnType("INTEGER");
 
-            modelBuilder.Entity("Core.Entities.Elements.Bus", b =>
-                {
-                    b.HasBaseType("Core.Entities.Elements.Element");
+                b.HasIndex("Element1Id");
 
-                    b.Property<int>("BusType")
-                        .HasColumnType("INTEGER");
+                b.HasIndex("Element2Id");
 
-                    b.HasDiscriminator().HasValue("Bus");
-                });
+                b.HasDiscriminator().HasValue("Bay");
+            });
 
-            modelBuilder.Entity("Core.Entities.Elements.BusReactor", b =>
-                {
-                    b.HasBaseType("Core.Entities.Elements.Element");
+        modelBuilder.Entity("Core.Entities.Elements.Bus", b =>
+            {
+                b.HasBaseType("Core.Entities.Elements.Element");
 
-                    b.Property<int>("BusId")
-                        .HasColumnType("INTEGER");
+                b.Property<int>("BusType")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<double>("MvarCapacity")
-                        .HasColumnType("REAL");
+                b.HasDiscriminator().HasValue("Bus");
+            });
 
-                    b.HasIndex("BusId");
+        modelBuilder.Entity("Core.Entities.Elements.BusReactor", b =>
+            {
+                b.HasBaseType("Core.Entities.Elements.Element");
 
-                    b.HasDiscriminator().HasValue("BusReactor");
-                });
+                b.Property<int>("BusId")
+                    .HasColumnType("INTEGER");
 
-            modelBuilder.Entity("Core.Entities.Elements.FilterBank", b =>
-                {
-                    b.HasBaseType("Core.Entities.Elements.Element");
+                b.Property<double>("MvarCapacity")
+                    .HasColumnType("REAL");
 
-                    b.Property<bool>("IsSwitchable")
-                        .HasColumnType("INTEGER");
+                b.HasIndex("BusId");
 
-                    b.Property<double>("Mvar")
-                        .HasColumnType("REAL");
+                b.HasDiscriminator().HasValue("BusReactor");
+            });
 
-                    b.HasDiscriminator().HasValue("FilterBank");
-                });
+        modelBuilder.Entity("Core.Entities.Elements.FilterBank", b =>
+            {
+                b.HasBaseType("Core.Entities.Elements.Element");
 
-            modelBuilder.Entity("Core.Entities.Elements.GeneratingUnit", b =>
-                {
-                    b.HasBaseType("Core.Entities.Elements.Element");
+                b.Property<bool>("IsSwitchable")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<double>("GeneratingVoltage")
-                        .HasColumnType("REAL");
+                b.Property<double>("Mvar")
+                    .HasColumnType("REAL");
 
-                    b.Property<double>("InstalledCapacity")
-                        .HasColumnType("REAL");
+                b.HasDiscriminator().HasValue("FilterBank");
+            });
 
-                    b.HasDiscriminator().HasValue("GeneratingUnit");
-                });
+        modelBuilder.Entity("Core.Entities.Elements.GeneratingUnit", b =>
+            {
+                b.HasBaseType("Core.Entities.Elements.Element");
 
-            modelBuilder.Entity("Core.Entities.Elements.HvdcLine", b =>
-                {
-                    b.HasBaseType("Core.Entities.Elements.Element");
+                b.Property<double>("GeneratingVoltage")
+                    .HasColumnType("REAL");
 
-                    b.Property<int>("Bus1Id")
-                        .HasColumnType("INTEGER");
+                b.Property<double>("InstalledCapacity")
+                    .HasColumnType("REAL");
 
-                    b.Property<int>("Bus2Id")
-                        .HasColumnType("INTEGER");
+                b.HasDiscriminator().HasValue("GeneratingUnit");
+            });
 
-                    b.Property<string>("ConductorType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Core.Entities.Elements.HvdcLine", b =>
+            {
+                b.HasBaseType("Core.Entities.Elements.Element");
 
-                    b.Property<bool>("IsSpsPresent")
-                        .HasColumnType("INTEGER");
+                b.Property<int>("Bus1Id")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<double>("Length")
-                        .HasColumnType("REAL");
+                b.Property<int>("Bus2Id")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("Bus1Id");
+                b.Property<string>("ConductorType")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("Bus2Id");
+                b.Property<bool>("IsSpsPresent")
+                    .HasColumnType("INTEGER");
 
-                    b.HasDiscriminator().HasValue("HvdcLine");
-                });
+                b.Property<double>("Length")
+                    .HasColumnType("REAL");
 
-            modelBuilder.Entity("Core.Entities.Elements.HvdcPole", b =>
-                {
-                    b.HasBaseType("Core.Entities.Elements.Element");
+                b.HasIndex("Bus1Id");
 
-                    b.Property<int>("PoleType")
-                        .HasColumnType("INTEGER");
+                b.HasIndex("Bus2Id");
 
-                    b.HasDiscriminator().HasValue("HvdcPole");
-                });
+                b.HasDiscriminator().HasValue("HvdcLine");
+            });
 
-            modelBuilder.Entity("Core.Entities.Elements.Line", b =>
-                {
-                    b.HasBaseType("Core.Entities.Elements.Element");
+        modelBuilder.Entity("Core.Entities.Elements.HvdcPole", b =>
+            {
+                b.HasBaseType("Core.Entities.Elements.Element");
 
-                    b.Property<int>("Bus1Id")
-                        .HasColumnType("INTEGER");
+                b.Property<int>("PoleType")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<int>("Bus2Id")
-                        .HasColumnType("INTEGER");
+                b.HasDiscriminator().HasValue("HvdcPole");
+            });
 
-                    b.Property<string>("ConductorType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+        modelBuilder.Entity("Core.Entities.Elements.Line", b =>
+            {
+                b.HasBaseType("Core.Entities.Elements.Element");
 
-                    b.Property<bool>("IsAutoReclosurePresent")
-                        .HasColumnType("INTEGER");
+                b.Property<int>("Bus1Id")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<double>("Length")
-                        .HasColumnType("REAL");
+                b.Property<int>("Bus2Id")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("Bus1Id");
+                b.Property<string>("ConductorType")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("Bus2Id");
+                b.Property<bool>("IsAutoReclosurePresent")
+                    .HasColumnType("INTEGER");
 
-                    b.ToTable("Elements", t =>
-                        {
-                            t.Property("Bus1Id")
-                                .HasColumnName("Line_Bus1Id");
+                b.Property<double>("Length")
+                    .HasColumnType("REAL");
 
-                            t.Property("Bus2Id")
-                                .HasColumnName("Line_Bus2Id");
+                b.HasIndex("Bus1Id");
 
-                            t.Property("ConductorType")
-                                .HasColumnName("Line_ConductorType");
+                b.HasIndex("Bus2Id");
 
-                            t.Property("Length")
-                                .HasColumnName("Line_Length");
-                        });
+                b.ToTable("Elements", t =>
+                    {
+                        t.Property("Bus1Id")
+                            .HasColumnName("Line_Bus1Id");
 
-                    b.HasDiscriminator().HasValue("Line");
-                });
+                        t.Property("Bus2Id")
+                            .HasColumnName("Line_Bus2Id");
 
-            modelBuilder.Entity("Core.Entities.Elements.LineReactor", b =>
-                {
-                    b.HasBaseType("Core.Entities.Elements.Element");
+                        t.Property("ConductorType")
+                            .HasColumnName("Line_ConductorType");
 
-                    b.Property<bool>("IsConvertible")
-                        .HasColumnType("INTEGER");
+                        t.Property("Length")
+                            .HasColumnName("Line_Length");
+                    });
 
-                    b.Property<bool>("IsSwitchable")
-                        .HasColumnType("INTEGER");
+                b.HasDiscriminator().HasValue("Line");
+            });
 
-                    b.Property<int>("LineId")
-                        .HasColumnType("INTEGER");
+        modelBuilder.Entity("Core.Entities.Elements.LineReactor", b =>
+            {
+                b.HasBaseType("Core.Entities.Elements.Element");
 
-                    b.Property<double>("MvarCapacity")
-                        .HasColumnType("REAL");
+                b.Property<bool>("IsConvertible")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("LineId");
+                b.Property<bool>("IsSwitchable")
+                    .HasColumnType("INTEGER");
 
-                    b.ToTable("Elements", t =>
-                        {
-                            t.Property("IsSwitchable")
-                                .HasColumnName("LineReactor_IsSwitchable");
+                b.Property<int>("LineId")
+                    .HasColumnType("INTEGER");
 
-                            t.Property("MvarCapacity")
-                                .HasColumnName("LineReactor_MvarCapacity");
-                        });
+                b.Property<double>("MvarCapacity")
+                    .HasColumnType("REAL");
 
-                    b.HasDiscriminator().HasValue("LineReactor");
-                });
+                b.HasIndex("LineId");
 
-            modelBuilder.Entity("Core.Entities.Elements.SubFilterBank", b =>
-                {
-                    b.HasBaseType("Core.Entities.Elements.Element");
+                b.ToTable("Elements", t =>
+                    {
+                        t.Property("IsSwitchable")
+                            .HasColumnName("LineReactor_IsSwitchable");
 
-                    b.Property<int>("FilterBankId")
-                        .HasColumnType("INTEGER");
+                        t.Property("MvarCapacity")
+                            .HasColumnName("LineReactor_MvarCapacity");
+                    });
 
-                    b.Property<bool>("IsSwitchable")
-                        .HasColumnType("INTEGER");
+                b.HasDiscriminator().HasValue("LineReactor");
+            });
 
-                    b.Property<double>("Mvar")
-                        .HasColumnType("REAL");
+        modelBuilder.Entity("Core.Entities.Elements.SubFilterBank", b =>
+            {
+                b.HasBaseType("Core.Entities.Elements.Element");
 
-                    b.Property<string>("SubFilterTag")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<int>("FilterBankId")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("FilterBankId");
+                b.Property<bool>("IsSwitchable")
+                    .HasColumnType("INTEGER");
 
-                    b.ToTable("Elements", t =>
-                        {
-                            t.Property("IsSwitchable")
-                                .HasColumnName("SubFilterBank_IsSwitchable");
+                b.Property<double>("Mvar")
+                    .HasColumnType("REAL");
 
-                            t.Property("Mvar")
-                                .HasColumnName("SubFilterBank_Mvar");
-                        });
+                b.Property<string>("SubFilterTag")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.HasDiscriminator().HasValue("SubFilterBank");
-                });
+                b.HasIndex("FilterBankId");
 
-            modelBuilder.Entity("Core.Entities.Elements.Transformer", b =>
-                {
-                    b.HasBaseType("Core.Entities.Elements.Element");
+                b.ToTable("Elements", t =>
+                    {
+                        t.Property("IsSwitchable")
+                            .HasColumnName("SubFilterBank_IsSwitchable");
 
-                    b.Property<double>("MvaCapacity")
-                        .HasColumnType("REAL");
+                        t.Property("Mvar")
+                            .HasColumnName("SubFilterBank_Mvar");
+                    });
 
-                    b.Property<int>("TransformerType")
-                        .HasColumnType("INTEGER");
+                b.HasDiscriminator().HasValue("SubFilterBank");
+            });
 
-                    b.HasDiscriminator().HasValue("Transformer");
-                });
+        modelBuilder.Entity("Core.Entities.Elements.Transformer", b =>
+            {
+                b.HasBaseType("Core.Entities.Elements.Element");
 
-            modelBuilder.Entity("Core.Entities.GeneratingStation", b =>
-                {
-                    b.HasBaseType("Core.Entities.Substation");
+                b.Property<double>("MvaCapacity")
+                    .HasColumnType("REAL");
 
-                    b.Property<int>("FuelId")
-                        .HasColumnType("INTEGER");
+                b.Property<int>("TransformerType")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<int>("GeneratingStationClassificationId")
-                        .HasColumnType("INTEGER");
+                b.HasDiscriminator().HasValue("Transformer");
+            });
 
-                    b.Property<int>("GeneratingStationTypeId")
-                        .HasColumnType("INTEGER");
+        modelBuilder.Entity("Core.Entities.GeneratingStation", b =>
+            {
+                b.HasBaseType("Core.Entities.Substation");
 
-                    b.Property<double>("Installedcapacity")
-                        .HasColumnType("REAL");
+                b.Property<int>("FuelId")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<double>("MVAcapacity")
-                        .HasColumnType("REAL");
+                b.Property<int>("GeneratingStationClassificationId")
+                    .HasColumnType("INTEGER");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                b.Property<int>("GeneratingStationTypeId")
+                    .HasColumnType("INTEGER");
 
-                    b.HasIndex("FuelId");
+                b.Property<double>("Installedcapacity")
+                    .HasColumnType("REAL");
 
-                    b.HasIndex("GeneratingStationClassificationId");
+                b.Property<double>("MVAcapacity")
+                    .HasColumnType("REAL");
 
-                    b.HasIndex("GeneratingStationTypeId");
+                b.Property<string>("Name")
+                    .IsRequired()
+                    .HasColumnType("TEXT");
 
-                    b.HasIndex("Name")
-                        .IsUnique();
+                b.HasIndex("FuelId");
 
-                    b.HasDiscriminator().HasValue("GeneratingStation");
-                });
+                b.HasIndex("GeneratingStationClassificationId");
 
-            modelBuilder.Entity("Core.Entities.ElementOwner", b =>
-                {
-                    b.HasOne("Core.Entities.Elements.Element", "Element")
-                        .WithMany("ElementOwners")
-                        .HasForeignKey("ElementId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasIndex("GeneratingStationTypeId");
 
-                    b.HasOne("Core.Entities.Owner", "Owner")
-                        .WithMany("ElementOwners")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasIndex("Name")
+                    .IsUnique();
 
-                    b.Navigation("Element");
+                b.HasDiscriminator().HasValue("GeneratingStation");
+            });
 
-                    b.Navigation("Owner");
-                });
+        modelBuilder.Entity("Core.Entities.ElementOwner", b =>
+            {
+                b.HasOne("Core.Entities.Elements.Element", "Element")
+                    .WithMany("ElementOwners")
+                    .HasForeignKey("ElementId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-            modelBuilder.Entity("Core.Entities.Elements.Element", b =>
-                {
-                    b.HasOne("Core.Entities.Substation", "Substation1")
-                        .WithMany()
-                        .HasForeignKey("Substation1Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("Core.Entities.Owner", "Owner")
+                    .WithMany("ElementOwners")
+                    .HasForeignKey("OwnerId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("Core.Entities.Substation", "Substation2")
-                        .WithMany()
-                        .HasForeignKey("Substation2Id");
+                b.Navigation("Element");
 
-                    b.Navigation("Substation1");
+                b.Navigation("Owner");
+            });
 
-                    b.Navigation("Substation2");
-                });
+        modelBuilder.Entity("Core.Entities.Elements.Element", b =>
+            {
+                b.HasOne("Core.Entities.Substation", "Substation1")
+                    .WithMany()
+                    .HasForeignKey("Substation1Id")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-            modelBuilder.Entity("Core.Entities.Location", b =>
-                {
-                    b.HasOne("Core.Entities.State", "State")
-                        .WithMany()
-                        .HasForeignKey("StateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("Core.Entities.Substation", "Substation2")
+                    .WithMany()
+                    .HasForeignKey("Substation2Id")
+                    .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("State");
-                });
+                b.Navigation("Substation1");
 
-            modelBuilder.Entity("Core.Entities.State", b =>
-                {
-                    b.HasOne("Core.Entities.Region", "Region")
-                        .WithMany()
-                        .HasForeignKey("RegionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Navigation("Substation2");
+            });
 
-                    b.Navigation("Region");
-                });
+        modelBuilder.Entity("Core.Entities.Location", b =>
+            {
+                b.HasOne("Core.Entities.State", "State")
+                    .WithMany()
+                    .HasForeignKey("StateId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-            modelBuilder.Entity("Core.Entities.Substation", b =>
-                {
-                    b.HasOne("Core.Entities.Location", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Navigation("State");
+            });
 
-                    b.HasOne("Core.Entities.VoltageLevel", "VoltageLevel")
-                        .WithMany()
-                        .HasForeignKey("VoltageLevelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+        modelBuilder.Entity("Core.Entities.State", b =>
+            {
+                b.HasOne("Core.Entities.Region", "Region")
+                    .WithMany()
+                    .HasForeignKey("RegionId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.Navigation("Location");
+                b.Navigation("Region");
+            });
 
-                    b.Navigation("VoltageLevel");
-                });
+        modelBuilder.Entity("Core.Entities.Substation", b =>
+            {
+                b.HasOne("Core.Entities.Location", "Location")
+                    .WithMany()
+                    .HasForeignKey("LocationId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-            modelBuilder.Entity("Core.Entities.SubstationOwner", b =>
-                {
-                    b.HasOne("Core.Entities.Owner", "Owner")
-                        .WithMany("SubstationOwners")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("Core.Entities.VoltageLevel", "VoltageLevel")
+                    .WithMany()
+                    .HasForeignKey("VoltageLevelId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.HasOne("Core.Entities.Substation", "Substation")
-                        .WithMany("SubstationOwners")
-                        .HasForeignKey("SubstationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Navigation("Location");
 
-                    b.Navigation("Owner");
+                b.Navigation("VoltageLevel");
+            });
 
-                    b.Navigation("Substation");
-                });
+        modelBuilder.Entity("Core.Entities.SubstationOwner", b =>
+            {
+                b.HasOne("Core.Entities.Owner", "Owner")
+                    .WithMany("SubstationOwners")
+                    .HasForeignKey("OwnerId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.HasOne("Core.Entities.Substation", "Substation")
+                    .WithMany("SubstationOwners")
+                    .HasForeignKey("SubstationId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("Infra.Identity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.Navigation("Owner");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("Infra.Identity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+                b.Navigation("Substation");
+            });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            {
+                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    .WithMany()
+                    .HasForeignKey("RoleId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
-                    b.HasOne("Infra.Identity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            {
+                b.HasOne("Infra.Identity.ApplicationUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("Infra.Identity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            {
+                b.HasOne("Infra.Identity.ApplicationUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
-            modelBuilder.Entity("Core.Entities.Elements.Bay", b =>
-                {
-                    b.HasOne("Core.Entities.Elements.Element", "Element1")
-                        .WithMany()
-                        .HasForeignKey("Element1Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            {
+                b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    .WithMany()
+                    .HasForeignKey("RoleId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
 
-                    b.HasOne("Core.Entities.Elements.Element", "Element2")
-                        .WithMany()
-                        .HasForeignKey("Element2Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("Infra.Identity.ApplicationUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
-                    b.Navigation("Element1");
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            {
+                b.HasOne("Infra.Identity.ApplicationUser", null)
+                    .WithMany()
+                    .HasForeignKey("UserId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+            });
 
-                    b.Navigation("Element2");
-                });
+        modelBuilder.Entity("Core.Entities.Elements.Bay", b =>
+            {
+                b.HasOne("Core.Entities.Elements.Element", "Element1")
+                    .WithMany()
+                    .HasForeignKey("Element1Id")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-            modelBuilder.Entity("Core.Entities.Elements.BusReactor", b =>
-                {
-                    b.HasOne("Core.Entities.Elements.Bus", "Bus")
-                        .WithMany()
-                        .HasForeignKey("BusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("Core.Entities.Elements.Element", "Element2")
+                    .WithMany()
+                    .HasForeignKey("Element2Id")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.Navigation("Bus");
-                });
+                b.Navigation("Element1");
 
-            modelBuilder.Entity("Core.Entities.Elements.HvdcLine", b =>
-                {
-                    b.HasOne("Core.Entities.Elements.Bus", "Bus1")
-                        .WithMany()
-                        .HasForeignKey("Bus1Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Navigation("Element2");
+            });
 
-                    b.HasOne("Core.Entities.Elements.Bus", "Bus2")
-                        .WithMany()
-                        .HasForeignKey("Bus2Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+        modelBuilder.Entity("Core.Entities.Elements.BusReactor", b =>
+            {
+                b.HasOne("Core.Entities.Elements.Bus", "Bus")
+                    .WithMany()
+                    .HasForeignKey("BusId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.Navigation("Bus1");
+                b.Navigation("Bus");
+            });
 
-                    b.Navigation("Bus2");
-                });
+        modelBuilder.Entity("Core.Entities.Elements.HvdcLine", b =>
+            {
+                b.HasOne("Core.Entities.Elements.Bus", "Bus1")
+                    .WithMany()
+                    .HasForeignKey("Bus1Id")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-            modelBuilder.Entity("Core.Entities.Elements.Line", b =>
-                {
-                    b.HasOne("Core.Entities.Elements.Bus", "Bus1")
-                        .WithMany()
-                        .HasForeignKey("Bus1Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("Core.Entities.Elements.Bus", "Bus2")
+                    .WithMany()
+                    .HasForeignKey("Bus2Id")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.HasOne("Core.Entities.Elements.Bus", "Bus2")
-                        .WithMany()
-                        .HasForeignKey("Bus2Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Navigation("Bus1");
 
-                    b.Navigation("Bus1");
+                b.Navigation("Bus2");
+            });
 
-                    b.Navigation("Bus2");
-                });
+        modelBuilder.Entity("Core.Entities.Elements.Line", b =>
+            {
+                b.HasOne("Core.Entities.Elements.Bus", "Bus1")
+                    .WithMany()
+                    .HasForeignKey("Bus1Id")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-            modelBuilder.Entity("Core.Entities.Elements.LineReactor", b =>
-                {
-                    b.HasOne("Core.Entities.Elements.Line", "Line")
-                        .WithMany()
-                        .HasForeignKey("LineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.HasOne("Core.Entities.Elements.Bus", "Bus2")
+                    .WithMany()
+                    .HasForeignKey("Bus2Id")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.Navigation("Line");
-                });
+                b.Navigation("Bus1");
 
-            modelBuilder.Entity("Core.Entities.Elements.SubFilterBank", b =>
-                {
-                    b.HasOne("Core.Entities.Elements.FilterBank", "FilterBank")
-                        .WithMany()
-                        .HasForeignKey("FilterBankId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Navigation("Bus2");
+            });
 
-                    b.Navigation("FilterBank");
-                });
+        modelBuilder.Entity("Core.Entities.Elements.LineReactor", b =>
+            {
+                b.HasOne("Core.Entities.Elements.Line", "Line")
+                    .WithMany()
+                    .HasForeignKey("LineId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-            modelBuilder.Entity("Core.Entities.GeneratingStation", b =>
-                {
-                    b.HasOne("Core.Entities.Fuel", "Fuel")
-                        .WithMany()
-                        .HasForeignKey("FuelId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Navigation("Line");
+            });
 
-                    b.HasOne("Core.Entities.GeneratingStationClassification", "GeneratingStationClassification")
-                        .WithMany()
-                        .HasForeignKey("GeneratingStationClassificationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+        modelBuilder.Entity("Core.Entities.Elements.SubFilterBank", b =>
+            {
+                b.HasOne("Core.Entities.Elements.FilterBank", "FilterBank")
+                    .WithMany()
+                    .HasForeignKey("FilterBankId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.HasOne("Core.Entities.GeneratingStationType", "GeneratingStationType")
-                        .WithMany()
-                        .HasForeignKey("GeneratingStationTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                b.Navigation("FilterBank");
+            });
 
-                    b.Navigation("Fuel");
+        modelBuilder.Entity("Core.Entities.GeneratingStation", b =>
+            {
+                b.HasOne("Core.Entities.Fuel", "Fuel")
+                    .WithMany()
+                    .HasForeignKey("FuelId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.Navigation("GeneratingStationClassification");
+                b.HasOne("Core.Entities.GeneratingStationClassification", "GeneratingStationClassification")
+                    .WithMany()
+                    .HasForeignKey("GeneratingStationClassificationId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-                    b.Navigation("GeneratingStationType");
-                });
+                b.HasOne("Core.Entities.GeneratingStationType", "GeneratingStationType")
+                    .WithMany()
+                    .HasForeignKey("GeneratingStationTypeId")
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .IsRequired();
 
-            modelBuilder.Entity("Core.Entities.Elements.Element", b =>
-                {
-                    b.Navigation("ElementOwners");
-                });
+                b.Navigation("Fuel");
 
-            modelBuilder.Entity("Core.Entities.Owner", b =>
-                {
-                    b.Navigation("ElementOwners");
+                b.Navigation("GeneratingStationClassification");
 
-                    b.Navigation("SubstationOwners");
-                });
+                b.Navigation("GeneratingStationType");
+            });
 
-            modelBuilder.Entity("Core.Entities.Substation", b =>
-                {
-                    b.Navigation("SubstationOwners");
-                });
+        modelBuilder.Entity("Core.Entities.Elements.Element", b =>
+            {
+                b.Navigation("ElementOwners");
+            });
+
+        modelBuilder.Entity("Core.Entities.Owner", b =>
+            {
+                b.Navigation("ElementOwners");
+
+                b.Navigation("SubstationOwners");
+            });
+
+        modelBuilder.Entity("Core.Entities.Substation", b =>
+            {
+                b.Navigation("SubstationOwners");
+            });
 #pragma warning restore 612, 618
-        }
     }
 }

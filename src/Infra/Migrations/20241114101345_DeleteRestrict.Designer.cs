@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations;
 
 [DbContext(typeof(ApplicationDbContext))]
-[Migration("20241105123533_elementColumnsCorrection")]
-partial class elementColumnsCorrection
+[Migration("20241114101345_DeleteRestrict")]
+partial class DeleteRestrict
 {
     /// <inheritdoc />
     protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,12 +107,6 @@ partial class elementColumnsCorrection
                 b.Property<int?>("Substation2Id")
                     .HasColumnType("INTEGER");
 
-                b.Property<int>("SubstationId1")
-                    .HasColumnType("INTEGER");
-
-                b.Property<int?>("SubstationId2")
-                    .HasColumnType("INTEGER");
-
                 b.Property<string>("VoltLevelCache")
                     .IsRequired()
                     .HasColumnType("TEXT");
@@ -187,6 +181,9 @@ partial class elementColumnsCorrection
 
                 b.HasKey("Id");
 
+                b.HasIndex("Classification")
+                    .IsUnique();
+
                 b.ToTable("GeneratingStationClassifications");
             });
 
@@ -213,6 +210,9 @@ partial class elementColumnsCorrection
                     .HasColumnType("TEXT");
 
                 b.HasKey("Id");
+
+                b.HasIndex("StationType")
+                    .IsUnique();
 
                 b.ToTable("GeneratingStationTypes");
             });
@@ -407,6 +407,9 @@ partial class elementColumnsCorrection
                 b.HasKey("Id");
 
                 b.HasIndex("LocationId");
+
+                b.HasIndex("NameCache")
+                    .IsUnique();
 
                 b.HasIndex("VoltageLevelId");
 
@@ -963,12 +966,13 @@ partial class elementColumnsCorrection
                 b.HasOne("Core.Entities.Substation", "Substation1")
                     .WithMany()
                     .HasForeignKey("Substation1Id")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.HasOne("Core.Entities.Substation", "Substation2")
                     .WithMany()
-                    .HasForeignKey("Substation2Id");
+                    .HasForeignKey("Substation2Id")
+                    .OnDelete(DeleteBehavior.Restrict);
 
                 b.Navigation("Substation1");
 
@@ -980,7 +984,7 @@ partial class elementColumnsCorrection
                 b.HasOne("Core.Entities.State", "State")
                     .WithMany()
                     .HasForeignKey("StateId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.Navigation("State");
@@ -991,7 +995,7 @@ partial class elementColumnsCorrection
                 b.HasOne("Core.Entities.Region", "Region")
                     .WithMany()
                     .HasForeignKey("RegionId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.Navigation("Region");
@@ -1002,13 +1006,13 @@ partial class elementColumnsCorrection
                 b.HasOne("Core.Entities.Location", "Location")
                     .WithMany()
                     .HasForeignKey("LocationId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.HasOne("Core.Entities.VoltageLevel", "VoltageLevel")
                     .WithMany()
                     .HasForeignKey("VoltageLevelId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.Navigation("Location");
@@ -1091,13 +1095,13 @@ partial class elementColumnsCorrection
                 b.HasOne("Core.Entities.Elements.Element", "Element1")
                     .WithMany()
                     .HasForeignKey("Element1Id")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.HasOne("Core.Entities.Elements.Element", "Element2")
                     .WithMany()
                     .HasForeignKey("Element2Id")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.Navigation("Element1");
@@ -1110,7 +1114,7 @@ partial class elementColumnsCorrection
                 b.HasOne("Core.Entities.Elements.Bus", "Bus")
                     .WithMany()
                     .HasForeignKey("BusId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.Navigation("Bus");
@@ -1121,13 +1125,13 @@ partial class elementColumnsCorrection
                 b.HasOne("Core.Entities.Elements.Bus", "Bus1")
                     .WithMany()
                     .HasForeignKey("Bus1Id")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.HasOne("Core.Entities.Elements.Bus", "Bus2")
                     .WithMany()
                     .HasForeignKey("Bus2Id")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.Navigation("Bus1");
@@ -1140,13 +1144,13 @@ partial class elementColumnsCorrection
                 b.HasOne("Core.Entities.Elements.Bus", "Bus1")
                     .WithMany()
                     .HasForeignKey("Bus1Id")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.HasOne("Core.Entities.Elements.Bus", "Bus2")
                     .WithMany()
                     .HasForeignKey("Bus2Id")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.Navigation("Bus1");
@@ -1159,7 +1163,7 @@ partial class elementColumnsCorrection
                 b.HasOne("Core.Entities.Elements.Line", "Line")
                     .WithMany()
                     .HasForeignKey("LineId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.Navigation("Line");
@@ -1170,7 +1174,7 @@ partial class elementColumnsCorrection
                 b.HasOne("Core.Entities.Elements.FilterBank", "FilterBank")
                     .WithMany()
                     .HasForeignKey("FilterBankId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.Navigation("FilterBank");
@@ -1181,19 +1185,19 @@ partial class elementColumnsCorrection
                 b.HasOne("Core.Entities.Fuel", "Fuel")
                     .WithMany()
                     .HasForeignKey("FuelId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.HasOne("Core.Entities.GeneratingStationClassification", "GeneratingStationClassification")
                     .WithMany()
                     .HasForeignKey("GeneratingStationClassificationId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.HasOne("Core.Entities.GeneratingStationType", "GeneratingStationType")
                     .WithMany()
                     .HasForeignKey("GeneratingStationTypeId")
-                    .OnDelete(DeleteBehavior.Cascade)
+                    .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
                 b.Navigation("Fuel");

@@ -20,8 +20,8 @@
     </thead>
     <tbody>
         @foreach (var item in Model.Owners)
-        {
-            <tr>
+    {
+        <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -30,6 +30,6 @@
                     <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
-        }
+    }
     </tbody>
 </table>

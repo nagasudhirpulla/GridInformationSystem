@@ -1,17 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using Core.Entities;
+using Core.Entities.Elements;
 
 namespace Infra.Data.Configurations;
 
-public class StateConfiguration : IEntityTypeConfiguration<State>
+public class SubFilterBankConfiguration : IEntityTypeConfiguration<SubFilterBank>
 {
-    public void Configure(EntityTypeBuilder<State> builder)
+    public void Configure(EntityTypeBuilder<SubFilterBank> builder)
     {
-        builder.HasIndex(u => u.Name).IsUnique();
-
         builder
-            .HasOne(o => o.Region)
+            .HasOne(o => o.FilterBank)
             .WithMany()
             .OnDelete(DeleteBehavior.Restrict);
     }
