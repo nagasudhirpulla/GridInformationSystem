@@ -50,7 +50,7 @@ public class CreateBusCommandHandler(IApplicationDbContext context) : IRequestHa
         {
             BusType = request.BusType,
             ElementNameCache = name,
-            VoltLevelCache = voltLvl,
+            VoltageLevelCache = voltLvl,
             RegionCache = region,
             Substation1Id = request.SubstationId,
             OwnerNamesCache = ownersNames,

@@ -61,7 +61,7 @@ public class UpdateBusCommandHandler(IApplicationDbContext context) : IRequestHa
 
         entity.BusType = request.BusType;
         entity.ElementNameCache = name;
-        entity.VoltLevelCache = voltLvl;
+        entity.VoltageLevelCache = voltLvl;
         entity.RegionCache = region;
         entity.Substation1Id = request.SubstationId;
         entity.ElementNumber = request.ElementNumber;

@@ -1,5 +1,6 @@
 ﻿using App.Common.Interfaces;
 using Ardalis.GuardClauses;
+using Core.Entities.Elements;
 using MediatR;
 
 namespace App.VoltageLevels.Commands.UpdateVoltageLevel;
@@ -20,8 +21,13 @@ public class UpdateVoltageLevelCommandHandler(IApplicationDbContext context) : I
 
         Guard.Against.NotFound(request.Id, entity);
 
+        string existingName = entity.Level;
+
         entity.Level = request.Level;
 
         await context.SaveChangesAsync(cancellationToken);
+
+        // update voltage level cache column in all tables
+        await context.ReplaceSubstringInColumn(existingName, request.Level, nameof(Element.VoltageLevelCache), cancellationToken);
     }
 }

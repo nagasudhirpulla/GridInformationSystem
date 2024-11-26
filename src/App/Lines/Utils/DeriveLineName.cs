@@ -21,7 +21,7 @@ public static class DeriveLineName
                 .ThenInclude(s => s.Location).FirstOrDefaultAsync(e => e.Id == bus2Id, cancellationToken: cancellationToken) ?? throw new Common.Exceptions.ValidationException([new ValidationFailure() {
                                                                                     ErrorMessage = "Substation Id is not present in database"
                                                                                 }]);
-        string voltLvl = bus1.VoltLevelCache;
+        string voltLvl = bus1.VoltageLevelCache;
         string location1 = bus1.Substation1.Location.Name;
         string location2 = bus2.Substation1.Location.Name;
         string lineName = $"{voltLvl}-{location1}-{location2}-{elementNumber}";

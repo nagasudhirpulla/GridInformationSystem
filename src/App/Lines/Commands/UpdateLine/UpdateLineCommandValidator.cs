@@ -89,8 +89,8 @@ public class UpdateLineCommandValidator : AbstractValidator<UpdateLineCommand>
                         .FirstOrDefaultAsync(s => s.Id == cmd.Bus1Id, cancellationToken: cancellationToken) ?? throw new KeyNotFoundException();
         Bus bus2 = await _context.Buses.AsNoTracking()
                         .FirstOrDefaultAsync(s => s.Id == cmd.Bus2Id, cancellationToken: cancellationToken) ?? throw new KeyNotFoundException();
-        //bus1.VoltLevelCache
-        bool isVoltLvlSame = bus1.VoltLevelCache == bus2.VoltLevelCache;
+        //bus1.VoltageLevelCache
+        bool isVoltLvlSame = bus1.VoltageLevelCache == bus2.VoltageLevelCache;
         return isVoltLvlSame;
     }
 }

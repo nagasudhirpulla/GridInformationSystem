@@ -121,4 +121,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             }
         }
     }
+
+    public async Task ReplaceSubstringInColumn(string oldValue, string newValue, string colName, CancellationToken cancellationToken)
+    {
+        await ReplaceColumnSubstring.ExecuteAsync(this, oldValue, newValue, colName, cancellationToken);
+    }
 }

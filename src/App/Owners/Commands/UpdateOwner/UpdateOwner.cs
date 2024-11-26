@@ -1,4 +1,5 @@
 ﻿using App.Common.Interfaces;
+using App.Owners.Utils;
 using Ardalis.GuardClauses;
 using MediatR;
 
@@ -20,8 +21,13 @@ public class UpdateOwnerCommandHandler(IApplicationDbContext context) : IRequest
 
         Guard.Against.NotFound(request.Id, entity);
 
+        string exisitingOwnerName = entity.Name;
+
         entity.Name = request.Name;
 
         await context.SaveChangesAsync(cancellationToken);
+
+        // update owner name in cache columns of all tables
+        await UpdateCacheOnOwnerRename.ExecuteAsync(exisitingOwnerName, request.Name, context, cancellationToken);
     }
 }

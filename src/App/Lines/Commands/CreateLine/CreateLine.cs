@@ -51,7 +51,7 @@ public class CreateLineCommandHandler(IApplicationDbContext context) : IRequestH
         var entity = new Line()
         {
             ElementNameCache = lineName,
-            VoltLevelCache = voltLevel,
+            VoltageLevelCache = voltLevel,
             RegionCache = region,
             Substation1Id = bus1.Substation1Id,
             Substation2Id = bus2.Substation1Id,

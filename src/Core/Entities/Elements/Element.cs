@@ -18,7 +18,7 @@ public class Element : AuditableEntity
 {
     public required string ElementNameCache { get; set; }
 
-    public required string VoltLevelCache { get; set; }
+    public required string VoltageLevelCache { get; set; }
 
     public required string RegionCache { get; set; }
 

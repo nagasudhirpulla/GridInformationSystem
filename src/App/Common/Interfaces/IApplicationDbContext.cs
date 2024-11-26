@@ -42,4 +42,5 @@ public interface IApplicationDbContext
     Task<IDbContextTransaction?> BeginTransactionAsync(IsolationLevel isolationLevel);
     Task CommitTransactionAsync(IDbContextTransaction? transaction);
     void RollbackTransaction();
+    Task ReplaceSubstringInColumn(string oldValue, string newValue, string colName, CancellationToken cancellationToken);
 }

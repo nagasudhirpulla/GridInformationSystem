@@ -63,7 +63,7 @@ public class UpdateLineCommandHandler(IApplicationDbContext context) : IRequestH
 
         // insert bus to db
         entity.ElementNameCache = lineName;
-        entity.VoltLevelCache = voltLevel;
+        entity.VoltageLevelCache = voltLevel;
         entity.RegionCache = region;
         entity.Substation1Id = bus1.Substation1Id;
         entity.Substation2Id = bus2.Substation1Id;

@@ -1,5 +1,6 @@
 ﻿using App.Common.Interfaces;
 using Ardalis.GuardClauses;
+using Core.Entities;
 using MediatR;
 
 namespace App.Regions.Commands.UpdateRegion;
@@ -20,8 +21,13 @@ public class UpdateRegionCommandHandler(IApplicationDbContext context) : IReques
 
         Guard.Against.NotFound(request.Id, entity);
 
+        var existingRegionName = entity.Name;
+
         entity.Name = request.Name;
 
         await context.SaveChangesAsync(cancellationToken);
+
+        // update region name in cache column of all tables
+        await context.ReplaceSubstringInColumn(existingRegionName, request.Name, nameof(Location.RegionCache), cancellationToken);
     }
 }
