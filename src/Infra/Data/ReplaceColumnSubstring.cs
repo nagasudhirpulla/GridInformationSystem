@@ -50,7 +50,7 @@ public static class ReplaceColumnSubstring
                         .MakeGenericMethod(clrType);
 
                     // Invoke the generic update method
-                    await (Task)updateMethod.Invoke(null, new[] { dbSet, oldValue, newValue, colName, cancellationToken });
+                    await (Task)updateMethod.Invoke(null, [dbSet, oldValue, newValue, colName, cancellationToken]);
                 }
                 catch (Exception ex)
                 {
@@ -81,8 +81,7 @@ public static class ReplaceColumnSubstring
 
         foreach (var entity in entities)
         {
-            var currentValue = (string)property.GetValue(entity);
-            if (currentValue != null)
+            if (property.GetValue(entity) is string currentValue)
             {
                 property.SetValue(entity, currentValue.Replace(oldValue, newValue));
             }

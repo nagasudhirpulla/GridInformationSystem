@@ -1,10 +1,12 @@
-﻿using App.Common.Interfaces;
+﻿using App.Common.Behaviours;
+using App.Common.Interfaces;
 using App.Owners.Utils;
 using Ardalis.GuardClauses;
 using MediatR;
 
 namespace App.Owners.Commands.UpdateOwner;
 
+[Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
 public record UpdateOwnerCommand : IRequest
 {
     public int Id { get; init; }

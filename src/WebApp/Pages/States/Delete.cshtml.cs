@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace WebApp.Pages.States;
 
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
-public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
+public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator) : PageModel
 {
     public required State State { get; set; }
 
@@ -26,7 +26,7 @@ public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
     public async Task<IActionResult> OnPostAsync()
     {
         await mediator.Send(DelStateCmd);
-        logger.LogInformation($"Deleted State with id {DelStateCmd.Id}");
+        logger.LogInformation("Deleted State with id {Id}", DelStateCmd.Id);
         return RedirectToPage("./Index");
     }
 

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace WebApp.Pages.Regions;
 
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
-public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
+public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator) : PageModel
 {
     public required Region Region { get; set; }
 
@@ -26,7 +26,7 @@ public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
     public async Task<IActionResult> OnPostAsync()
     {
         await mediator.Send(DelRegionCmd);
-        logger.LogInformation($"Deleted Region with id {DelRegionCmd.Id}");
+        logger.LogInformation("Deleted Region with id {Id}", DelRegionCmd.Id);
         return RedirectToPage("./Index");
     }
 

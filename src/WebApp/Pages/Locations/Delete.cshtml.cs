@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace WebApp.Pages.Locations;
 
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
-public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
+public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator) : PageModel
 {
     public required Location Location { get; set; }
 
@@ -26,7 +26,7 @@ public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
     public async Task<IActionResult> OnPostAsync()
     {
         await mediator.Send(DelLocationCmd);
-        logger.LogInformation($"Deleted Location with id {DelLocationCmd.Id}");
+        logger.LogInformation("Deleted Location with id {Id}", DelLocationCmd.Id);
         return RedirectToPage("./Index");
     }
 

@@ -8,7 +8,6 @@ Grid Elements database service for managing and querying Grid Elements database
 * whitelisted characters in names implementation during create and update commands
 * lat long value object implementation
 * lat long to be made optional
-* handling ownernames cache when owner is updated or deleted
 
 ## References
 * Clean architecture - https://github.com/jasontaylordev/CleanArchitecture/blob/a713468e27deb655eeb96b340318274eeccc5c3f/src/Infrastructure/Data/ApplicationDbContext.cs

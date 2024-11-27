@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace WebApp.Pages.VoltageLevels;
 
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
-public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
+public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator) : PageModel
 {
     public required VoltageLevel VoltageLevel { get; set; }
 
@@ -26,7 +26,7 @@ public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
     public async Task<IActionResult> OnPostAsync()
     {
         await mediator.Send(DelVoltageLevelCmd);
-        logger.LogInformation($"Deleted VoltageLevel with id {DelVoltageLevelCmd.Id}");
+        logger.LogInformation("Deleted VoltageLevel with id {Id}", DelVoltageLevelCmd.Id);
         return RedirectToPage("./Index");
     }
 

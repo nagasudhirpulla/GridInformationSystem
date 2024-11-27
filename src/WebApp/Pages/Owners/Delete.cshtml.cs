@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace WebApp.Pages.Owners;
 
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
-public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
+public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator) : PageModel
 {
     public required Owner Owner { get; set; }
 
@@ -26,7 +26,7 @@ public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
     public async Task<IActionResult> OnPostAsync()
     {
         await mediator.Send(DelOwnerCmd);
-        logger.LogInformation($"Deleted Owner with id {DelOwnerCmd.Id}");
+        logger.LogInformation("Deleted Owner with id {Id}", DelOwnerCmd.Id);
         return RedirectToPage("./Index");
     }
 

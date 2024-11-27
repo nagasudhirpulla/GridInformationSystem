@@ -1,10 +1,12 @@
-﻿using App.Common.Interfaces;
+﻿using App.Common.Behaviours;
+using App.Common.Interfaces;
 using Ardalis.GuardClauses;
 using Core.Entities;
 using MediatR;
 
 namespace App.Regions.Commands.UpdateRegion;
 
+[Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
 public record UpdateRegionCommand : IRequest
 {
     public int Id { get; init; }
