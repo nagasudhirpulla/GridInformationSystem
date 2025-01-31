@@ -1,5 +1,54 @@
 Grid Elements database service for managing and querying Grid Elements database
 
+## Status
+### Defined Element Entities
+* Element
+* Bay
+* Bus 
+* BusReactor
+* FilterBank 
+* GeneratingUnit 
+* HvdcLine 
+* HvdcPole 
+* Line 
+* LineReactor 
+* SubFilterBank 
+* Transformer
+
+
+### Pending Element Entities to be defined
+* SVC
+* FSC
+* Compensator
+
+### Implemented General Entities
+* ElementOwner
+* Fuel
+* GeneratingStation
+* GeneratingStationClassification
+* GeneratingStationType
+* Location
+* Owner
+* Region
+* State
+* Substation
+* SubstationOwner
+* VoltageLevel
+
+### Implemented Entity Management UIs
+* Buses
+* Lines
+* Locations
+* Owners
+* Regions
+* Shared
+* States
+* Substations
+* VoltageLevels
+
+### Pending Entity Management UIs
+* TODO
+
 ## TODOs
 * restict substations changes in lines when there are connected elements like line reactors
 * Define control area and attach it to element
