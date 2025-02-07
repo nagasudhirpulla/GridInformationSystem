@@ -41,13 +41,20 @@ Grid Elements database service for managing and querying Grid Elements database
 * Locations
 * Owners
 * Regions
-* Shared
 * States
 * Substations
 * VoltageLevels
 
 ### Pending Entity Management UIs
-* TODO
+* Bay
+* Bus Reactor
+* Transformer
+* Generating Unit
+* LineReactor
+* HvdcLine
+* HvdcPole
+* Filter Bank
+* SubFilterBank
 
 ## TODOs
 * restict substations changes in lines when there are connected elements like line reactors
