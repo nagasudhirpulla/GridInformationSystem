@@ -20,6 +20,8 @@ public class Element : AuditableEntity
 
     public required string VoltageLevelCache { get; set; }
 
+    public string? Discriminator { get; set; }
+
     public required string RegionCache { get; set; }
 
     public Substation Substation1 { get; set; } = null!;

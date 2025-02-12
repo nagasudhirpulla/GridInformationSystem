@@ -15,7 +15,7 @@ namespace Infra.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
             modelBuilder.Entity("Core.Entities.ElementOwner", b =>
                 {
@@ -44,7 +44,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("ElementOwners");
+                    b.ToTable("ElementOwners", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Elements.Element", b =>
@@ -117,7 +117,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("Substation2Id");
 
-                    b.ToTable("Elements");
+                    b.ToTable("Elements", (string)null);
 
                     b.HasDiscriminator().HasValue("Element");
 
@@ -151,7 +151,7 @@ namespace Infra.Migrations
                     b.HasIndex("FuelName")
                         .IsUnique();
 
-                    b.ToTable("Fuels");
+                    b.ToTable("Fuels", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.GeneratingStationClassification", b =>
@@ -181,7 +181,7 @@ namespace Infra.Migrations
                     b.HasIndex("Classification")
                         .IsUnique();
 
-                    b.ToTable("GeneratingStationClassifications");
+                    b.ToTable("GeneratingStationClassifications", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.GeneratingStationType", b =>
@@ -211,7 +211,7 @@ namespace Infra.Migrations
                     b.HasIndex("StationType")
                         .IsUnique();
 
-                    b.ToTable("GeneratingStationTypes");
+                    b.ToTable("GeneratingStationTypes", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Location", b =>
@@ -253,7 +253,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("StateId");
 
-                    b.ToTable("Locations");
+                    b.ToTable("Locations", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Owner", b =>
@@ -283,7 +283,7 @@ namespace Infra.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Owners");
+                    b.ToTable("Owners", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Region", b =>
@@ -313,7 +313,7 @@ namespace Infra.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Regions");
+                    b.ToTable("Regions", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.State", b =>
@@ -348,7 +348,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("RegionId");
 
-                    b.ToTable("States");
+                    b.ToTable("States", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.Substation", b =>
@@ -410,7 +410,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("VoltageLevelId");
 
-                    b.ToTable("Substations");
+                    b.ToTable("Substations", (string)null);
 
                     b.HasDiscriminator().HasValue("Substation");
 
@@ -444,7 +444,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("SubstationOwners");
+                    b.ToTable("SubstationOwners", (string)null);
                 });
 
             modelBuilder.Entity("Core.Entities.VoltageLevel", b =>
@@ -474,7 +474,7 @@ namespace Infra.Migrations
                     b.HasIndex("Level")
                         .IsUnique();
 
-                    b.ToTable("VoltageLevels");
+                    b.ToTable("VoltageLevels", (string)null);
                 });
 
             modelBuilder.Entity("Infra.Identity.ApplicationUser", b =>
@@ -812,7 +812,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("Bus2Id");
 
-                    b.ToTable("Elements", t =>
+                    b.ToTable("Elements", null, t =>
                         {
                             t.Property("Bus1Id")
                                 .HasColumnName("Line_Bus1Id");
@@ -848,7 +848,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("LineId");
 
-                    b.ToTable("Elements", t =>
+                    b.ToTable("Elements", null, t =>
                         {
                             t.Property("IsSwitchable")
                                 .HasColumnName("LineReactor_IsSwitchable");
@@ -879,7 +879,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("FilterBankId");
 
-                    b.ToTable("Elements", t =>
+                    b.ToTable("Elements", null, t =>
                         {
                             t.Property("IsSwitchable")
                                 .HasColumnName("SubFilterBank_IsSwitchable");
