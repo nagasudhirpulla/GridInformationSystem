@@ -35,8 +35,7 @@ public class CreateBayCommandValidator : AbstractValidator<CreateBayCommand>
                 .WithMessage("Both bay connected elements should be in same substation");
 
         RuleFor(v => v)
-            .MustAsync(CheckConnectedElementSemantics)
-                .WithMessage("Connected bay elements should follow semantics as per bay type");
+            .CustomAsync(CheckConnectedElementSemantics);
 
         RuleFor(v => v)
             .Must(cmd => !cmd.DeCommissioningDate.HasValue || (cmd.DeCommissioningDate > cmd.CommissioningDate))
@@ -77,39 +76,34 @@ public class CreateBayCommandValidator : AbstractValidator<CreateBayCommand>
         return commonSubstnExists;
     }
 
-    public async Task<bool> CheckConnectedElementSemantics(CreateBayCommand cmd, CancellationToken cancellationToken)
+    public async Task CheckConnectedElementSemantics(CreateBayCommand cmd, ValidationContext<CreateBayCommand> ctx, CancellationToken cancellationToken)
     {
-        // TODO get error message from this function
         Element? el1 = await _context.Elements.FirstOrDefaultAsync(e => e.Id == cmd.Element1Id, cancellationToken: cancellationToken);
         Element? el2 = await _context.Elements.FirstOrDefaultAsync(e => e.Id == cmd.Element2Id, cancellationToken: cancellationToken);
         if ((el1 == null) || (el2 == null))
         {
-            return false;
+            ctx.AddFailure("Both elements should be non null for Bay");
         }
         if (cmd.BayType == BayTypeEnum.TieBay)
         {
             if ((el1 is Bus) || (el2 is Bus))
             {
-                // "For a Tie Bay Element1 and Element2 should be Non-Bus"
-                return false;
+                ctx.AddFailure("For a Tie Bay Element1 and Element2 should be Non-Bus");
             }
         }
         else if (cmd.BayType == BayTypeEnum.MainBay)
         {
             if (((el1 is not Bus) && (el2 is not Bus)) || ((el1 is Bus) && (el2 is Bus)))
             {
-                // "For a Main Bay exactly one of the element1 or element2 should be bus"
-                return false;
+                ctx.AddFailure("For a Main Bay exactly one of the element1 or element2 should be bus");
             }
         }
         else if (new List<BayTypeEnum> { BayTypeEnum.BusCouplerBay, BayTypeEnum.BusSectionalizerBay, BayTypeEnum.TBCBay }.Contains(cmd.BayType))
         {
             if ((el1 is not Bus) && (el2 is not Bus))
             {
-                // "For a Bus Coupler, Bus Sectionalizer, TBC Bay elment1 and element2 both are bus type"
-                return false;
+                ctx.AddFailure("For a Bus Coupler, Bus Sectionalizer, TBC Bay elment1 and element2 both are bus type");
             }
         }
-        return true;
     }
 }
