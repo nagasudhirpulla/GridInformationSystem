@@ -1,4 +1,3 @@
-using App.Common.Interfaces;
 using App.Common.Security;
 using App.Locations.Commands.DeleteLocation;
 using App.Locations.Queries.GetLocation;

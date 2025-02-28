@@ -1,11 +1,9 @@
-﻿using App.Buses.Commands.CreateBus;
-using App.Common.Interfaces;
+﻿using App.Common.Interfaces;
 using App.Owners.Utils;
 using Core.Entities.Elements;
 using Core.Enums;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace App.Bays.Commands.CreateBay;
 

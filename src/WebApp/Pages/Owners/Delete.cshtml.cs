@@ -1,4 +1,3 @@
-using App.Common.Interfaces;
 using App.Common.Security;
 using App.Owners.Commands.DeleteOwner;
 using App.Owners.Queries.GetOwner;

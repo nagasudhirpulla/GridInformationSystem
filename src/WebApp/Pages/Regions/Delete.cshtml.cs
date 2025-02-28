@@ -1,4 +1,3 @@
-using App.Common.Interfaces;
 using App.Common.Security;
 using App.Regions.Commands.DeleteRegion;
 using App.Regions.Queries.GetRegion;

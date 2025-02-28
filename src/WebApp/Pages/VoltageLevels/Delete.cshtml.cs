@@ -1,4 +1,3 @@
-using App.Common.Interfaces;
 using App.Common.Security;
 using App.VoltageLevels.Commands.DeleteVoltageLevel;
 using App.VoltageLevels.Queries.GetVoltageLevel;

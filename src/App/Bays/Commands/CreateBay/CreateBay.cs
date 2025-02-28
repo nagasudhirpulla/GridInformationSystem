@@ -1,11 +1,12 @@
-﻿using App.Common.Behaviours;
+﻿using App.Buses.Commands.CreateBus;
+using App.Common.Behaviours;
+using App.Common.Interfaces;
+using App.Owners.Utils;
+using Core.Entities.Elements;
+using Core.Entities;
 using Core.Enums;
+using FluentValidation.Results;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace App.Bays.Commands.CreateBay;
 
@@ -32,4 +33,58 @@ public class CreateBayCommand : IRequest<int>
     public bool IsImportantGridElement { get; set; } = false;
     public BayTypeEnum BayType { get; set; } = null!;
     public bool IsFuture { get; set; } = false;
+}
+
+public class CreateBayCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateBayCommand, int>
+{
+    public async Task<int> Handle(CreateBayCommand request, CancellationToken cancellationToken)
+    {
+        // query substation from db
+        //var substation = await context.Substations
+        //    .Include(s => s.VoltageLevel)
+        //    .FirstOrDefaultAsync(s => s.Id == request.SubstationId, cancellationToken) ?? throw new Common.Exceptions.ValidationException([new ValidationFailure() {
+        //                                                                            ErrorMessage = "Substation Id is not present in database"
+        //                                                                        }]);
+
+        //// derive element name 
+        //string name = Utils.DeriveBayName.Execute(substation.NameCache, request.BayType);
+
+        //// derive voltage level, region from substation
+        //string voltLvl = substation.VoltageLevel.Level;
+        //string region = substation.RegionCache;
+
+        //// derive owner names cache
+        //List<Owner> owners = await OwnerUtils.GetOwnersFromIdsAsync(request.OwnerIds, context, cancellationToken);
+        //string ownersNames = OwnerUtils.DeriveOwnersCache(owners);
+
+        //// insert bus to db
+        //var entity = new Bay()
+        //{
+        //    Element1Id = request.Element1Id,
+        //    Element2Id = request.Element2Id,
+        //    BayType = request.BayType,
+        //    IsFuture = request.IsFuture,
+        //    ElementNameCache = todo,
+        //    VoltageLevelCache = voltLvl,
+        //    RegionCache = region,
+        //    Substation1Id = request.SubstationId,
+        //    OwnerNamesCache = ownersNames,
+        //    ElementNumber = "1",
+        //    CommissioningDate = request.CommissioningDate,
+        //    DeCommissioningDate = request.DeCommissioningDate,
+        //    CommercialOperationDate = request.CommercialOperationDate,
+        //    IsImportantGridElement = request.IsImportantGridElement
+        //};
+
+        //context.Bays.Add(entity);
+
+        //await context.SaveChangesAsync(cancellationToken);
+
+        //// create ElementOwners entries
+        //await OwnerUtils.InsertElementOwnersAsync(entity.Id, owners.Select(o => o.Id), context, cancellationToken);
+
+        //return entity.Id;
+        //TODO complete this
+        return await Task.FromResult(-1);
+    }
 }
