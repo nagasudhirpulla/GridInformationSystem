@@ -47,8 +47,7 @@ Grid Elements database service for managing and querying Grid Elements database
 
 ### Pending Entity Management UIs
 Refer WRLDC Tables excel file for CRUD logic strategies
-* Bay - Started CRUD in App layer; create, read app layer command done; update bay command in progress
-* Bus Reactor
+* Bay - Started CRUD in App layer; create, read, update app layer command done; delete bay command to be started
 * Transformer
 * Generating Unit
 * LineReactor

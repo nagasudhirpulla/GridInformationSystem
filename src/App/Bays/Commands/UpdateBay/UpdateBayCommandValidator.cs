@@ -1,5 +1,4 @@
-﻿using App.Bays.Commands.CreateBay;
-using App.Common.Interfaces;
+﻿using App.Common.Interfaces;
 using App.Owners.Utils;
 using Core.Entities.Elements;
 using Core.Enums;
@@ -103,7 +102,7 @@ public class UpdateBayCommandValidator : AbstractValidator<UpdateBayCommand>
         {
             if ((el1 is not Bus) && (el2 is not Bus))
             {
-                ctx.AddFailure("For a Bus Coupler, Bus Sectionalizer, TBC Bay elment1 and element2 both are bus type");
+                ctx.AddFailure("For a Bus Coupler, Bus Sectionalizer, TBC Bay elment1 and element2 both should be bus type");
             }
         }
     }

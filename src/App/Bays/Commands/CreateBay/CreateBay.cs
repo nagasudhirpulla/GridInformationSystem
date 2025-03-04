@@ -64,7 +64,7 @@ public class CreateBayCommandHandler(IApplicationDbContext context) : IRequestHa
         List<Owner> owners = await OwnerUtils.GetOwnersFromIdsAsync(request.OwnerIds, context, cancellationToken);
         string ownersNames = OwnerUtils.DeriveOwnersCache(owners);
 
-        //// insert bay to db
+        // insert bay to db
         var entity = new Bay()
         {
             Element1Id = request.Element1Id,
