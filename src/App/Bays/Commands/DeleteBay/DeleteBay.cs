@@ -4,22 +4,22 @@ using Ardalis.GuardClauses;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace App.Buses.Commands.DeleteBus;
+namespace App.Bays.Commands.DeleteBay;
 
 [Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
-public record DeleteBusCommand(int Id) : IRequest;
+public record DeleteBayCommand(int Id) : IRequest;
 
-public class DeleteBusCommandHandler(IApplicationDbContext context) : IRequestHandler<DeleteBusCommand>
+public class DeleteBayCommandHandler(IApplicationDbContext context) : IRequestHandler<DeleteBayCommand>
 {
-    public async Task Handle(DeleteBusCommand request, CancellationToken cancellationToken)
+    public async Task Handle(DeleteBayCommand request, CancellationToken cancellationToken)
     {
-        var entity = await context.Buses
+        var entity = await context.Bays
             .Where(l => l.Id == request.Id)
             .SingleOrDefaultAsync(cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
-        context.Buses.Remove(entity);
+        context.Bays.Remove(entity);
 
         await context.SaveChangesAsync(cancellationToken);
     }
