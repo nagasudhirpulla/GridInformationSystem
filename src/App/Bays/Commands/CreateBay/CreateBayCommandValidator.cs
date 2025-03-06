@@ -47,7 +47,7 @@ public class CreateBayCommandValidator : AbstractValidator<CreateBayCommand>
     public async Task<bool> BeUniqueBayInSubstation(CreateBayCommand cmd, CancellationToken cancellationToken)
     {
         bool sameBayExists = await _context.Bays
-            .AnyAsync(l => (l.Element1Id == cmd.Element1Id) && (l.Element2Id == cmd.Element2Id), cancellationToken);
+            .AnyAsync(l => new HashSet<int> { cmd.Element1Id, cmd.Element2Id }.IsSupersetOf(new[] { l.Element1Id, l.Element2Id }), cancellationToken);
         return !sameBayExists;
     }
 

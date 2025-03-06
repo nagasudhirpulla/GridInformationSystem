@@ -29,4 +29,9 @@ public static class SubstationUtils
         bool isElementsConnected = await context.Elements.AnyAsync(e => (e.Substation1Id == substationId) || (e.Substation2Id == substationId), cancellationToken);
         return isElementsConnected;
     }
+    public static async Task<bool> IsAcSubstation(int substationId, IApplicationDbContext context, CancellationToken cancellationToken)
+    {
+        bool isSubstationAc = await context.Substations.AnyAsync(e => (e.Id == substationId) && e.IsAc, cancellationToken);
+        return isSubstationAc;
+    }
 }
