@@ -9,7 +9,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 
-namespace App.Transformers.Commands;
+namespace App.Transformers.Commands.CreateTransformer;
 
 [Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
 public record CreateTransformerCommand : IRequest<int>
@@ -45,7 +45,7 @@ public class CreateTransformerCommandHandler(IApplicationDbContext context) : IR
                 ?? throw new Common.Exceptions.ValidationException([new ValidationFailure() {
                                                                                     ErrorMessage = "Substation 1 Id is not present in database"
                                                                                 }]);
-        IOrderedEnumerable<string> hvLvLevels = new[] { sub1.VoltageLevel.Level, sub2.VoltageLevel.Level }.OrderByDescending(i => Int32.Parse(Regex.Match(i, @"\d+").Value));
+        IOrderedEnumerable<string> hvLvLevels = new[] { sub1.VoltageLevel.Level, sub2.VoltageLevel.Level }.OrderByDescending(i => int.Parse(Regex.Match(i, @"\d+").Value));
         string transName = Utils.DeriveTransformerName.Execute(sub1.Location.Name, hvLvLevels.ElementAt(0), hvLvLevels.ElementAt(1), request.ElementNumber, request.TransformerType);
 
         // derive owner names cache
@@ -56,7 +56,7 @@ public class CreateTransformerCommandHandler(IApplicationDbContext context) : IR
         var entity = new Transformer()
         {
             ElementNameCache = transName,
-            VoltageLevelCache = sub1.VoltageLevel.Level,
+            VoltageLevelCache = Utils.DeriveTransformerVoltageLevel.Execute(hvLvLevels.ElementAt(0), hvLvLevels.ElementAt(1)),
             RegionCache = sub1.RegionCache,
             Substation1Id = request.Substation1Id,
             Substation2Id = request.Substation1Id,

@@ -4,13 +4,13 @@ using Core.Entities;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
-namespace App.Transformers.Commands;
+namespace App.Transformers.Commands.UpdateTransformer;
 
-public class CreateTransformerCommandValidator : AbstractValidator<CreateTransformerCommand>
+public class UpdateTransformerCommandValidator : AbstractValidator<UpdateTransformerCommand>
 {
     private readonly IApplicationDbContext _context;
 
-    public CreateTransformerCommandValidator(IApplicationDbContext context)
+    public UpdateTransformerCommandValidator(IApplicationDbContext context)
     {
         _context = context;
 
@@ -41,7 +41,7 @@ public class CreateTransformerCommandValidator : AbstractValidator<CreateTransfo
 
         RuleFor(v => v)
             .MustAsync(BeDifferentVoltageSubstationsAtSameLocation)
-                .WithMessage("Voltage levels of both substations of different voltage levels in same location")
+                .WithMessage("Voltage levels of both substations to be different in same location")
                 .WithErrorCode("Invalid");
 
         RuleFor(v => v.OwnerIds)
@@ -55,7 +55,7 @@ public class CreateTransformerCommandValidator : AbstractValidator<CreateTransfo
                 .WithErrorCode("Unique");
 
         RuleFor(v => v)
-            .Must(cmd => !cmd.DeCommissioningDate.HasValue || (cmd.DeCommissioningDate > cmd.CommissioningDate))
+            .Must(cmd => !cmd.DeCommissioningDate.HasValue || cmd.DeCommissioningDate > cmd.CommissioningDate)
                 .WithMessage("Decommissioning date should be greater than Commissioning Date")
                 .WithErrorCode("Invalid");
 
@@ -65,12 +65,12 @@ public class CreateTransformerCommandValidator : AbstractValidator<CreateTransfo
                 .WithErrorCode("Invalid");
     }
 
-    public async Task<bool> BeUniqueTranformerBetweenSubstations(CreateTransformerCommand cmd, CancellationToken cancellationToken)
+    public async Task<bool> BeUniqueTranformerBetweenSubstations(UpdateTransformerCommand cmd, CancellationToken cancellationToken)
     {
         // combination of FromBus, ToBus and Element number is unique
-        bool sameBusExists = await _context.Transformers
-            .AnyAsync(l => new HashSet<int> { cmd.Substation1Id, cmd.Substation2Id }.IsSupersetOf(new[] { l.Substation1Id, l.Substation2Id ?? -1 }) && (l.ElementNumber == cmd.ElementNumber), cancellationToken);
-        return !sameBusExists;
+        bool sameElementExists = await _context.Transformers
+            .AnyAsync(l => (l.Id != cmd.Id) && new HashSet<int> { cmd.Substation1Id, cmd.Substation2Id }.IsSupersetOf(new[] { l.Substation1Id, l.Substation2Id ?? -1 }) && l.ElementNumber == cmd.ElementNumber, cancellationToken);
+        return !sameElementExists;
     }
 
     public async Task<bool> BeAnAcSubstation(int substationId, CancellationToken cancellationToken)
@@ -78,7 +78,7 @@ public class CreateTransformerCommandValidator : AbstractValidator<CreateTransfo
         return await Substations.Utils.SubstationUtils.IsAcSubstation(substationId, _context, cancellationToken);
     }
 
-    public async Task<bool> BeDifferentVoltageSubstationsAtSameLocation(CreateTransformerCommand cmd, CancellationToken cancellationToken)
+    public async Task<bool> BeDifferentVoltageSubstationsAtSameLocation(UpdateTransformerCommand cmd, CancellationToken cancellationToken)
     {
         // sub1 and sub2 should have different voltage levels in same location
         Substation sub1 = await _context.Substations.AsNoTracking()
