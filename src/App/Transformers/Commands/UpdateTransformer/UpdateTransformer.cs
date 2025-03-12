@@ -54,10 +54,6 @@ public class UpdateTransformerCommandHandler(IApplicationDbContext context) : IR
         IOrderedEnumerable<string> hvLvLevels = new[] { sub1.VoltageLevel.Level, sub2.VoltageLevel.Level }.OrderByDescending(i => int.Parse(Regex.Match(i, @"\d+").Value));
         string transName = Utils.DeriveTransformerName.Execute(sub1.Location.Name, hvLvLevels.ElementAt(0), hvLvLevels.ElementAt(1), request.ElementNumber, request.TransformerType);
 
-        // derive owner names cache
-        List<Owner> owners = await OwnerUtils.GetOwnersFromIdsAsync(request.OwnerIds, context, cancellationToken);
-        string ownersNames = OwnerUtils.DeriveOwnersCache(owners);
-
         // update ownerIds if required
         var newOwnerIds = request.OwnerIds.Split(',').Select(int.Parse).ToList();
         var numOwnerChanges = await OwnerUtils.UpdateElementOwnersAsync(request.Id, newOwnerIds, context, cancellationToken);
@@ -75,7 +71,6 @@ public class UpdateTransformerCommandHandler(IApplicationDbContext context) : IR
         entity.RegionCache = sub1.RegionCache;
         entity.Substation1Id = request.Substation1Id;
         entity.Substation2Id = request.Substation1Id;
-        entity.OwnerNamesCache = ownersNames;
         entity.ElementNumber = request.ElementNumber;
         entity.CommissioningDate = request.CommissioningDate;
         entity.DeCommissioningDate = request.DeCommissioningDate;
