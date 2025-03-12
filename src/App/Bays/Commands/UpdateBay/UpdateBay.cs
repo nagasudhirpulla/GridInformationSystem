@@ -69,7 +69,7 @@ public class UpdateBayCommandHandler(IApplicationDbContext context) : IRequestHa
             entity.OwnerNamesCache = ownersCache;
         }
 
-
+        // update entity attributes
         entity.Element1Id = request.Element1Id;
         entity.Element2Id = request.Element2Id;
         entity.BayType = request.BayType;

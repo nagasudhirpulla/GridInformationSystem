@@ -25,6 +25,7 @@ public class UpdateRegionCommandHandler(IApplicationDbContext context) : IReques
 
         var existingRegionName = entity.Name;
 
+        // update entity attributes
         entity.Name = request.Name;
 
         await context.SaveChangesAsync(cancellationToken);

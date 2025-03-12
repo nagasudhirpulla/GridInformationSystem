@@ -35,6 +35,7 @@ public class UpdateLocationCommandHandler(IApplicationDbContext context) : IRequ
                                                                     ErrorMessage = "State Id is not present in database"
                                                                 }]);
             var regionName = state.Region.Name;
+            // update entity attributes
             entity.StateId = request.StateId;
             entity.RegionCache = regionName;
 

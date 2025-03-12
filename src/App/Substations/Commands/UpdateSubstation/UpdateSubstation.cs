@@ -32,6 +32,7 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
 
         Guard.Against.NotFound(request.Id, entity);
 
+        // update entity attributes
         entity.Latitude = request.Latitude;
         entity.Longitude = request.Longitude;
 

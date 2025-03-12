@@ -61,7 +61,7 @@ public class UpdateLineCommandHandler(IApplicationDbContext context) : IRequestH
             entity.OwnerNamesCache = ownersCache;
         }
 
-        // insert bus to db
+        // update entity attributes
         entity.ElementNameCache = lineName;
         entity.VoltageLevelCache = voltLevel;
         entity.RegionCache = region;

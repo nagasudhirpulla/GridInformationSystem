@@ -25,6 +25,7 @@ public class UpdateOwnerCommandHandler(IApplicationDbContext context) : IRequest
 
         string exisitingOwnerName = entity.Name;
 
+        // update entity attributes
         entity.Name = request.Name;
 
         await context.SaveChangesAsync(cancellationToken);

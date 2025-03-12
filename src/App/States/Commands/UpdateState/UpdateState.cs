@@ -21,6 +21,7 @@ public class UpdateStateCommandHandler(IApplicationDbContext context) : IRequest
 
         Guard.Against.NotFound(request.Id, entity);
 
+        // update entity attributes
         entity.Name = request.Name;
         entity.RegionId = request.RegionId;
 

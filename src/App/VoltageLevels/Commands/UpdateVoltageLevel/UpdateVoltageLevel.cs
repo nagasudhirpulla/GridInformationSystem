@@ -25,6 +25,7 @@ public class UpdateVoltageLevelCommandHandler(IApplicationDbContext context) : I
 
         string existingName = entity.Level;
 
+        // update entity attributes
         entity.Level = request.Level;
 
         await context.SaveChangesAsync(cancellationToken);
