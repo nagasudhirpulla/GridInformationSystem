@@ -41,7 +41,7 @@ public static class DependencyInjection
         //            configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
         //            {
         //                Type = OpenApiSecuritySchemeType.ApiKey,
-        //                Name = "Authorization",
+        //                StationType = "Authorization",
         //                In = OpenApiSecurityApiKeyLocation.Header,
         //                Description = "Type into the textbox: Bearer {your JWT token}."
         //            });

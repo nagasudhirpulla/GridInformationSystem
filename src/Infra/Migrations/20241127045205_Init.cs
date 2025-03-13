@@ -677,7 +677,7 @@ namespace Infra.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Locations_Name",
                 table: "Locations",
-                column: "Name",
+                column: "StationType",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -688,19 +688,19 @@ namespace Infra.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Owners_Name",
                 table: "Owners",
-                column: "Name",
+                column: "StationType",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Regions_Name",
                 table: "Regions",
-                column: "Name",
+                column: "StationType",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_States_Name",
                 table: "States",
-                column: "Name",
+                column: "StationType",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -736,7 +736,7 @@ namespace Infra.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Substations_Name",
                 table: "Substations",
-                column: "Name",
+                column: "StationType",
                 unique: true);
 
             migrationBuilder.CreateIndex(

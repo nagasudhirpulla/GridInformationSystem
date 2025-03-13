@@ -84,11 +84,11 @@ public class ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitial
             _ = await mediator.Send(new CreateRegionCommand() { Name = "NER" });
 
             //context.Regions.AddRange([
-            //    new Region { Name = "NR" },
-            //    new Region { Name = "ER" },
-            //    new Region { Name = "WR" },
-            //    new Region { Name = "SR" },
-            //    new Region { Name = "NER" }
+            //    new Region { StationType = "NR" },
+            //    new Region { StationType = "ER" },
+            //    new Region { StationType = "WR" },
+            //    new Region { StationType = "SR" },
+            //    new Region { StationType = "NER" }
             //    ]);
 
             //await context.SaveChangesAsync();
