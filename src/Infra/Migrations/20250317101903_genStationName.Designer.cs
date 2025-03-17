@@ -11,14 +11,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241127045205_Init")]
-    partial class Init
+    [Migration("20250317101903_genStationName")]
+    partial class genStationName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
             modelBuilder.Entity("Core.Entities.ElementOwner", b =>
                 {
@@ -238,7 +238,7 @@ namespace Infra.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -251,7 +251,7 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StationType")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.HasIndex("StateId");
@@ -277,13 +277,13 @@ namespace Infra.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StationType")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Owners");
@@ -307,13 +307,13 @@ namespace Infra.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StationType")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Regions");
@@ -337,7 +337,7 @@ namespace Infra.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -346,7 +346,7 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StationType")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.HasIndex("RegionId");
@@ -557,7 +557,7 @@ namespace Infra.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
@@ -668,14 +668,14 @@ namespace Infra.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("UserId", "LoginProvider", "StationType");
+                    b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
@@ -898,6 +898,9 @@ namespace Infra.Migrations
                 {
                     b.HasBaseType("Core.Entities.Elements.Element");
 
+                    b.Property<string>("Make")
+                        .HasColumnType("TEXT");
+
                     b.Property<double>("MvaCapacity")
                         .HasColumnType("REAL");
 
@@ -923,10 +926,10 @@ namespace Infra.Migrations
                     b.Property<double>("Installedcapacity")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("MVAcapacity")
+                    b.Property<double>("MvaCapacity")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -936,7 +939,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("GeneratingStationTypeId");
 
-                    b.HasIndex("StationType")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.HasDiscriminator().HasValue("GeneratingStation");

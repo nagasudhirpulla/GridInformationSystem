@@ -41,7 +41,7 @@ public class UpdateGeneratingUnitCommandHandler(IApplicationDbContext context) :
                                                                                 }]);
 
         // derive element name 
-        string name = Utils.DeriveGenUnitName.Execute(substation.NameCache, request.ElementNumber);
+        string name = Utils.DeriveGenUnitName.Execute(substation.Name, request.ElementNumber);
 
         // derive voltage level, region from substation
         string voltLvl = substation.VoltageLevel.Level;

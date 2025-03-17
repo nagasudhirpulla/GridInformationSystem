@@ -235,7 +235,7 @@ namespace Infra.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -248,7 +248,7 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StationType")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.HasIndex("StateId");
@@ -274,13 +274,13 @@ namespace Infra.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StationType")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Owners");
@@ -304,13 +304,13 @@ namespace Infra.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StationType")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.ToTable("Regions");
@@ -334,7 +334,7 @@ namespace Infra.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -343,7 +343,7 @@ namespace Infra.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StationType")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.HasIndex("RegionId");
@@ -554,7 +554,7 @@ namespace Infra.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .HasMaxLength(256)
                         .HasColumnType("TEXT");
 
@@ -665,14 +665,14 @@ namespace Infra.Migrations
                         .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("UserId", "LoginProvider", "StationType");
+                    b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
@@ -923,10 +923,10 @@ namespace Infra.Migrations
                     b.Property<double>("Installedcapacity")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("MVAcapacity")
+                    b.Property<double>("MvaCapacity")
                         .HasColumnType("REAL");
 
-                    b.Property<string>("StationType")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -936,7 +936,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("GeneratingStationTypeId");
 
-                    b.HasIndex("StationType")
+                    b.HasIndex("Name")
                         .IsUnique();
 
                     b.HasDiscriminator().HasValue("GeneratingStation");

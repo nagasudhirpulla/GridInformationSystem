@@ -52,7 +52,7 @@ Refer WRLDC Tables excel file for CRUD logic strategies
 * Generating Unit - completed CRUD in App layer
 * GeneratingStationType - completed CRUD in App layer
 * Generating Station Classification - completed CRUD in App layer
-* Generating Station
+* Generating Station - completed CRUD in App layer
 * LineReactor
 * HvdcLine
 * HvdcPole

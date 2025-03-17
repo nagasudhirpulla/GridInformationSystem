@@ -14,7 +14,7 @@ public class UnhandledExceptionBehaviour<TRequest, TResponse>(ILogger<TRequest> 
         {
             var requestName = typeof(TRequest).Name;
 
-            logger.LogError(ex, "GridElementsService Request: Unhandled Exception for Request {StationType} {@Request}", requestName, request);
+            logger.LogError(ex, "GridElementsService Request: Unhandled Exception for Request {Name} {@Request}", requestName, request);
 
             throw;
         }

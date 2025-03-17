@@ -6,7 +6,7 @@ public class GeneratingStation : Substation
 
     public required double Installedcapacity { get; set; }
 
-    public required double MVAcapacity { get; set; }
+    public required double MvaCapacity { get; set; }
 
     public GeneratingStationClassification GeneratingStationClassification { get; set; } = null!;
     public int GeneratingStationClassificationId { get; set; }

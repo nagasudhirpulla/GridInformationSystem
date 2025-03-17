@@ -5,7 +5,7 @@
 namespace Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -323,9 +323,8 @@ namespace Infra.Migrations
                     Latitude = table.Column<double>(type: "REAL", nullable: false),
                     Longitude = table.Column<double>(type: "REAL", nullable: false),
                     Discriminator = table.Column<string>(type: "TEXT", maxLength: 21, nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: true),
                     Installedcapacity = table.Column<double>(type: "REAL", nullable: true),
-                    MVAcapacity = table.Column<double>(type: "REAL", nullable: true),
+                    MvaCapacity = table.Column<double>(type: "REAL", nullable: true),
                     GeneratingStationClassificationId = table.Column<int>(type: "INTEGER", nullable: true),
                     GeneratingStationTypeId = table.Column<int>(type: "INTEGER", nullable: true),
                     FuelId = table.Column<int>(type: "INTEGER", nullable: true),
@@ -377,6 +376,7 @@ namespace Infra.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     ElementNameCache = table.Column<string>(type: "TEXT", nullable: false),
                     VoltageLevelCache = table.Column<string>(type: "TEXT", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", maxLength: 21, nullable: false),
                     RegionCache = table.Column<string>(type: "TEXT", nullable: false),
                     Substation1Id = table.Column<int>(type: "INTEGER", nullable: false),
                     Substation2Id = table.Column<int>(type: "INTEGER", nullable: true),
@@ -386,7 +386,6 @@ namespace Infra.Migrations
                     DeCommissioningDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     CommercialOperationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     IsImportantGridElement = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Discriminator = table.Column<string>(type: "TEXT", maxLength: 21, nullable: false),
                     Element1Id = table.Column<int>(type: "INTEGER", nullable: true),
                     Element2Id = table.Column<int>(type: "INTEGER", nullable: true),
                     BayType = table.Column<int>(type: "INTEGER", nullable: true),
@@ -419,6 +418,7 @@ namespace Infra.Migrations
                     SubFilterBank_IsSwitchable = table.Column<bool>(type: "INTEGER", nullable: true),
                     TransformerType = table.Column<int>(type: "INTEGER", nullable: true),
                     MvaCapacity = table.Column<double>(type: "REAL", nullable: true),
+                    Make = table.Column<string>(type: "TEXT", nullable: true),
                     CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
                     Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     LastModifiedBy = table.Column<string>(type: "TEXT", nullable: true),
@@ -677,7 +677,7 @@ namespace Infra.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Locations_Name",
                 table: "Locations",
-                column: "StationType",
+                column: "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -688,19 +688,19 @@ namespace Infra.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Owners_Name",
                 table: "Owners",
-                column: "StationType",
+                column: "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Regions_Name",
                 table: "Regions",
-                column: "StationType",
+                column: "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_States_Name",
                 table: "States",
-                column: "StationType",
+                column: "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -732,12 +732,6 @@ namespace Infra.Migrations
                 name: "IX_Substations_LocationId",
                 table: "Substations",
                 column: "LocationId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Substations_Name",
-                table: "Substations",
-                column: "StationType",
-                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Substations_NameCache",

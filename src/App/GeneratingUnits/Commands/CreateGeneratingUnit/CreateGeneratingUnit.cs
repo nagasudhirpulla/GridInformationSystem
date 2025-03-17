@@ -33,7 +33,7 @@ public class CreateGeneratingUnitCommandHandler(IApplicationDbContext context) :
             .FirstOrDefaultAsync(s => s.Id == request.GeneratingStationId, cancellationToken) ?? throw new Common.Exceptions.ValidationException([new ValidationFailure() { ErrorMessage = "Generating Station Id is not present in database" }]);
 
         // derive element name 
-        string name = Utils.DeriveGenUnitName.Execute(substation.NameCache, request.ElementNumber);
+        string name = Utils.DeriveGenUnitName.Execute(substation.Name, request.ElementNumber);
 
         // derive voltage level, region from substation
         string voltLvl = substation.VoltageLevel.Level;
@@ -43,7 +43,7 @@ public class CreateGeneratingUnitCommandHandler(IApplicationDbContext context) :
         List<Owner> owners = await OwnerUtils.GetOwnersFromIdsAsync(request.OwnerIds, context, cancellationToken);
         string ownersNames = OwnerUtils.DeriveOwnersCache(owners);
 
-        // insert bus to db
+        // insert element to db
         var entity = new GeneratingUnit()
         {
             ElementNameCache = name,
