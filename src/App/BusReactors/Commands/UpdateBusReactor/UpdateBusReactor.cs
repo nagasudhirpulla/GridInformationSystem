@@ -1,5 +1,4 @@
-﻿using App.Buses.Commands.UpdateBus;
-using App.Common.Behaviours;
+﻿using App.Common.Behaviours;
 using App.Common.Interfaces;
 using App.Owners.Utils;
 using Ardalis.GuardClauses;
