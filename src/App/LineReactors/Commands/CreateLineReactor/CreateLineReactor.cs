@@ -1,6 +1,5 @@
 ﻿using App.Common.Behaviours;
 using App.Common.Interfaces;
-using App.Lines.Commands.CreateLine;
 using App.Owners.Utils;
 using Core.Entities.Elements;
 using Core.Entities;

@@ -27,6 +27,11 @@ public class UpdateBusCommandValidator : AbstractValidator<UpdateBusCommand>
                 .WithErrorCode("Unique");
 
         RuleFor(v => v)
+            .MustAsync(NotHaveConnectedBusReactors)
+                .WithMessage("The bus should not have connected bus reactors while updating")
+                .WithErrorCode("Unique");
+
+        RuleFor(v => v)
             .Must(cmd => !cmd.DeCommissioningDate.HasValue || (cmd.DeCommissioningDate > cmd.CommissioningDate))
                 .WithMessage("Decommissioning date should be greater than Commissioning Date")
                 .WithErrorCode("Unique");
@@ -42,6 +47,13 @@ public class UpdateBusCommandValidator : AbstractValidator<UpdateBusCommand>
         bool sameBusExists = await _context.Buses
             .AnyAsync(l => (l.Id!=cmd.Id) && (l.Substation1Id == cmd.SubstationId) && (l.BusType == cmd.BusType) && (l.ElementNumber == cmd.ElementNumber), cancellationToken);
         return !sameBusExists;
+    }
+
+    public async Task<bool> NotHaveConnectedBusReactors(UpdateBusCommand cmd, CancellationToken cancellationToken)
+    {
+        bool connectedBrsExists = await _context.BusReactors
+            .AnyAsync(l => (l.BusId == cmd.Id), cancellationToken);
+        return !connectedBrsExists;
     }
 }
 

@@ -1,7 +1,4 @@
 ﻿using App.Common.Interfaces;
-using Core.Entities.Elements;
-using FluentValidation.Results;
-using Microsoft.EntityFrameworkCore;
 
 namespace App.LineReactors.Utils;
 

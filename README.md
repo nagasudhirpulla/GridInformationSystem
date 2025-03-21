@@ -53,7 +53,8 @@ Refer WRLDC Tables excel file for CRUD logic strategies
 * GeneratingStationType - completed CRUD in App layer
 * Generating Station Classification - completed CRUD in App layer
 * Generating Station - completed CRUD in App layer
-* LineReactor - completed, CREATE, READ, UPDATE in App layer
+* LineReactor - completed CRUD in App layer
+* BusReactor - completed Create, Read, Update in App layer
 * HvdcLine
 * HvdcPole
 * Filter Bank
