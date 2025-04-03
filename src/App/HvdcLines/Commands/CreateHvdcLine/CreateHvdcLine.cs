@@ -7,10 +7,10 @@ using FluentValidation.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace App.Lines.Commands.CreateLine;
+namespace App.HvdcLines.Commands.CreateHvdcLine;
 
 [Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
-public record CreateLineCommand : IRequest<int>
+public record CreateHvdcLineCommand : IRequest<int>
 {
     public int Bus1Id { get; set; }
     public int Bus2Id { get; set; }
@@ -22,12 +22,12 @@ public record CreateLineCommand : IRequest<int>
     public bool IsImportantGridElement { get; set; } = false;
     public double Length { get; set; }
     public required string ConductorType { get; set; }
-    public bool IsAutoReclosurePresent { get; set; }
+    public bool IsSpsPresent { get; set; } = false;
 }
 
-public class CreateLineCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateLineCommand, int>
+public class CreateHvdcLineCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateHvdcLineCommand, int>
 {
-    public async Task<int> Handle(CreateLineCommand request, CancellationToken cancellationToken)
+    public async Task<int> Handle(CreateHvdcLineCommand request, CancellationToken cancellationToken)
     {
         Bus bus1 = await context.Buses
                 .AsNoTracking()
@@ -41,14 +41,14 @@ public class CreateLineCommandHandler(IApplicationDbContext context) : IRequestH
                 ?? throw new Common.Exceptions.ValidationException([new ValidationFailure() {
                                                                                     ErrorMessage = "Bus Id is not present in database"
                                                                                 }]);
-        (string lineName, string voltLevel, string region) = await Utils.DeriveLineName.ExecuteAsync(request.Bus1Id, request.Bus2Id, request.ElementNumber, context, cancellationToken);
+        (string lineName, string voltLevel, string region) = await Utils.DeriveHvdcLineName.ExecuteAsync(request.Bus1Id, request.Bus2Id, request.ElementNumber, context, cancellationToken);
 
         // derive owner names cache
         List<Owner> owners = await OwnerUtils.GetOwnersFromIdsAsync(request.OwnerIds, context, cancellationToken);
         string ownersNames = OwnerUtils.DeriveOwnersCache(owners);
 
         // insert element to db
-        var entity = new Line()
+        var entity = new HvdcLine()
         {
             ElementNameCache = lineName,
             VoltageLevelCache = voltLevel,
@@ -65,10 +65,10 @@ public class CreateLineCommandHandler(IApplicationDbContext context) : IRequestH
             Bus2Id = request.Bus2Id,
             Length = request.Length,
             ConductorType = request.ConductorType,
-            IsAutoReclosurePresent = request.IsAutoReclosurePresent
+            IsSpsPresent = request.IsSpsPresent
         };
 
-        context.Lines.Add(entity);
+        context.HvdcLines.Add(entity);
 
         await context.SaveChangesAsync(cancellationToken);
 
