@@ -56,7 +56,7 @@ Refer WRLDC Tables excel file for CRUD logic strategies
 * LineReactor - completed CRUD in App layer
 * BusReactor - completed CRUD in App layer
 * HvdcLine - completed CRUD in App layer
-* HvdcPole
+* HvdcPole - completed CRUD in App layer
 * Filter Bank
 * SubFilterBank
 
