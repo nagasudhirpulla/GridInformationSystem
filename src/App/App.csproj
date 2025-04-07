@@ -17,4 +17,9 @@
     <ProjectReference Include="..\Core\Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="FilterBanks\Utils\" />
+    <Folder Include="FilterBanks\Queries\" />
+  </ItemGroup>
+
 </Project>
