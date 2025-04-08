@@ -3,15 +3,14 @@ using App.Common.Interfaces;
 using App.Owners.Utils;
 using Ardalis.GuardClauses;
 using Core.Entities;
-using Core.Enums;
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace App.HvdcPoles.Commands.UpdateHvdcPole;
+namespace App.FilterBanks.Commands.UpdateFilterBank;
 
 [Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
-public record UpdateHvdcPoleCommand : IRequest
+public record UpdateFilterBankCommand : IRequest
 {
     public int Id { get; set; }
     public int SubstationId { get; set; }
@@ -21,14 +20,15 @@ public record UpdateHvdcPoleCommand : IRequest
     public DateTime? DeCommissioningDate { get; set; }
     public DateTime CommercialOperationDate { get; set; }
     public bool IsImportantGridElement { get; set; } = false;
-    public HvdcPoleTypeEnum PoleType { get; set; } = null!;
+    public double Mvar { get; set; }
+    public bool IsSwitchable { get; set; }
 }
 
-public class UpdateHvdcPoleCommandHandler(IApplicationDbContext context) : IRequestHandler<UpdateHvdcPoleCommand>
+public class UpdateFilterBankCommandHandler(IApplicationDbContext context) : IRequestHandler<UpdateFilterBankCommand>
 {
-    public async Task Handle(UpdateHvdcPoleCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateFilterBankCommand request, CancellationToken cancellationToken)
     {
-        var entity = await context.HvdcPoles
+        var entity = await context.FilterBanks
             .FindAsync([request.Id], cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
@@ -41,7 +41,7 @@ public class UpdateHvdcPoleCommandHandler(IApplicationDbContext context) : IRequ
                                                                                 }]);
 
         // derive element name 
-        string name = Utils.DeriveHvdcPoleName.Execute(substation.NameCache, request.ElementNumber);
+        string name = Utils.DeriveFilterBankName.Execute(substation.NameCache, request.ElementNumber);
 
         // derive voltage level, region from substation
         string voltLvl = substation.VoltageLevel.Level;
@@ -58,9 +58,7 @@ public class UpdateHvdcPoleCommandHandler(IApplicationDbContext context) : IRequ
             entity.OwnerNamesCache = ownersCache;
         }
 
-
         // update entity attributes
-        entity.PoleType = request.PoleType;
         entity.ElementNameCache = name;
         entity.VoltageLevelCache = voltLvl;
         entity.RegionCache = region;
@@ -70,6 +68,8 @@ public class UpdateHvdcPoleCommandHandler(IApplicationDbContext context) : IRequ
         entity.DeCommissioningDate = request.DeCommissioningDate;
         entity.CommercialOperationDate = request.CommercialOperationDate;
         entity.IsImportantGridElement = request.IsImportantGridElement;
+        entity.Mvar = request.Mvar;
+        entity.IsSwitchable = request.IsSwitchable;
 
         await context.SaveChangesAsync(cancellationToken);
     }
