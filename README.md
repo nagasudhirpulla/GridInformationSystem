@@ -58,7 +58,7 @@ Refer WRLDC Tables excel file for CRUD logic strategies
 * HvdcLine - completed CRUD in App layer
 * HvdcPole - completed CRUD in App layer
 * Filter Bank - completed CRUD in App layer
-* SubFilterBank
+* SubFilterBank - completed CRUD in App layer
 
 ## TODOs
 * restict substations changes in lines when there are connected elements like line reactors

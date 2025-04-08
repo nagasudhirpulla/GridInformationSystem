@@ -28,8 +28,8 @@ public class UpdateFilterBankCommandValidator : AbstractValidator<UpdateFilterBa
                 .WithErrorCode("Unique");
 
         RuleFor(v => v.SubstationId)
-            .MustAsync(BeAcSubstation)
-                .WithMessage("The Substation should be AC substation")
+            .MustAsync(BeNonAcSubstation)
+                .WithMessage("The Substation should be DC substation")
                 .WithErrorCode("Unique");
 
         RuleFor(v => v)
@@ -50,7 +50,7 @@ public class UpdateFilterBankCommandValidator : AbstractValidator<UpdateFilterBa
         return !sameFilterBankExists;
     }
 
-    public async Task<bool> BeAcSubstation(int substationId, CancellationToken cancellationToken)
+    public async Task<bool> BeNonAcSubstation(int substationId, CancellationToken cancellationToken)
     {
         return !await SubstationUtils.IsAcSubstation(substationId, _context, cancellationToken);
     }
