@@ -1,9 +1,10 @@
 using App.Bays.Commands.CreateBay;
 using App.Common.Interfaces;
 using App.Common.Security;
+using App.Elements.Queries.GetElements;
 using App.Owners.Queries.GetOwners;
-using App.Substations.Queries.GetSubstations;
 using Core.Entities;
+using Core.Entities.Elements;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +12,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace WebApp.Pages.Bays;
-// TODO complete this
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
 public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
 {
@@ -24,7 +24,7 @@ public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
 
     private async Task InitSelectListsAsync()
     {
-        ViewData["SubstationId"] = new SelectList(await mediator.Send(new GetSubstationsQuery()), nameof(Substation.Id), nameof(Substation.NameCache));
+        ViewData["ElementId"] = new SelectList(await mediator.Send(new GetElementsQuery()), nameof(Element.Id), nameof(Element.ElementNameCache));
         ViewData["OwnerId"] = new MultiSelectList(await mediator.Send(new GetOwnersQuery()), nameof(Owner.Id), nameof(Owner.Name), NewBay?.OwnerIds.Split(","));
     }
 

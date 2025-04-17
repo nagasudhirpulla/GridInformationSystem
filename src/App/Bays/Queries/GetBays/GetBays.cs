@@ -15,6 +15,8 @@ public class GetBaysQueryHandler(IApplicationDbContext context) : IRequestHandle
     {
         var bays = await context.Bays.AsNoTracking()
                         .Include(e => e.Substation1)
+                        .Include(e => e.Element1)
+                        .Include(e => e.Element2)
                         .OrderBy(r => r.ElementNameCache)
                         .ToListAsync(cancellationToken);
         return bays;
