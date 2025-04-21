@@ -28,5 +28,4 @@ public class DeleteModel(ILogger<CreateModel> logger, IMediator mediator) : Page
         logger.LogInformation($"Deleted Bay with id {DelBayCmd.Id}");
         return RedirectToPage("./Index");
     }
-
 }

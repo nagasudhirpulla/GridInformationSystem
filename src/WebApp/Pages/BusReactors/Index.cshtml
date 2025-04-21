@@ -1,0 +1,69 @@
+﻿@page
+@model WebApp.Pages.BusReactors.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="./Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Voltage Level</th>
+            <th>Region</th>
+            <th>Substation</th>
+            <th>Element 1</th>
+            <th>Element 2</th>
+            <th>Owners</th>
+            <th>Commissioning Date</th>
+            <th>Commercial Operation Date</th>
+            <th>DeCommissioning Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.BusReactors)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ElementNameCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VoltageLevelCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegionCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Substation1.NameCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bus.ElementNameCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MvarCapacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerNamesCache)
+                </td>
+                <td>
+                    @(item.CommissioningDate.ToString("yyyy-MM-dd"))
+                </td>
+                <td>
+                    @(item.CommercialOperationDate.ToString("yyyy-MM-dd"))
+                </td>
+                <td>
+                    @(item.DeCommissioningDate.HasValue ? item.DeCommissioningDate.Value.ToString("yyyy-MM-dd") : "")
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
