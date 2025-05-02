@@ -14,8 +14,6 @@ using App.Buses.Queries.GetBuses;
 
 namespace WebApp.Pages.Lines;
 
-
-
 [Authorize(Roles = Core.Constants.Roles.Administrator)]
 public class EditModel(ILogger<CreateModel> logger, IMediator mediator, IApplicationDbContext context) : PageModel
 {

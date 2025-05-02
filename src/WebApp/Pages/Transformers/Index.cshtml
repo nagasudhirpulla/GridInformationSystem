@@ -1,0 +1,86 @@
+﻿@page
+@using Core.Entities.Elements
+@model WebApp.Pages.Transformers.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="./Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@nameof(Transformer.ElementNameCache)</th>
+            <th>@nameof(Transformer.VoltageLevelCache)</th>
+            <th>@nameof(Transformer.RegionCache)</th>
+            <th>@nameof(Transformer.Substation1)</th>
+            <th>@nameof(Transformer.Substation2)</th>
+            <th>@nameof(Transformer.ElementNumber)</th>
+            <th>@nameof(Transformer.OwnerNamesCache)</th>
+            <th>@nameof(Transformer.CommissioningDate)</th>
+            <th>@nameof(Transformer.CommercialOperationDate)</th>
+            <th>@nameof(Transformer.DeCommissioningDate)</th>
+            <th>@nameof(Transformer.IsImportantGridElement)</th>
+            <th>@nameof(Transformer.MvaCapacity)</th>
+            <th>@nameof(Transformer.Make)</th>
+            <th>@nameof(Transformer.TransformerType)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Transformers)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ElementNameCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VoltageLevelCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegionCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Substation1.NameCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => (item.Substation2 == null) ? "" : item.Substation2.NameCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ElementNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerNamesCache)
+                </td>
+                <td>
+                    @(item.CommissioningDate.ToString("yyyy-MM-dd"))
+                </td>
+                <td>
+                    @(item.CommercialOperationDate.ToString("yyyy-MM-dd"))
+                </td>
+                <td>
+                    @(item.DeCommissioningDate.HasValue ? item.DeCommissioningDate.Value.ToString("yyyy-MM-dd") : "")
+                </td>
+                <td>
+                    @(item.IsImportantGridElement ? "Yes" : "No")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MvaCapacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Make)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransformerType.Name)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
