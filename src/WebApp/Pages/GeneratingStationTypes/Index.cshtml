@@ -1,5 +1,5 @@
 ﻿@page
-@model WebApp.Pages.Regions.IndexModel
+@model WebApp.Pages.GeneratingStationTypes.IndexModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -19,11 +19,11 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Regions)
+        @foreach (var item in Model.GeneratingStationTypes)
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Name)
+                    @Html.DisplayFor(modelItem => item.StationType)
                 </td>
                 <td>
                     <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |

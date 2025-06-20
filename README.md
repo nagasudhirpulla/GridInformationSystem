@@ -50,7 +50,7 @@ Refer WRLDC Tables excel file for CRUD logic strategies
 * Bay - completed CRUD in App layer, completed UI
 * Transformer - completed CRUD in App layer, completed UI
 * Generating Unit - completed CRUD in App layer
-* GeneratingStationType - completed CRUD in App layer
+* GeneratingStationType - completed CRUD in App layer, completed UI
 * Generating Station Classification - completed CRUD in App layer, completed UI
 * Generating Station - completed CRUD in App layer
 * LineReactor - completed CRUD in App layer
