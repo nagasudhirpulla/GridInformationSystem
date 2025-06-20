@@ -1,0 +1,83 @@
+﻿@page
+@model WebApp.Pages.GeneratingStations.CreateModel
+@{
+    ViewData["Title"] = "Create New GeneratingStation";
+}
+
+<div class="row justify-content-center align-items-center">
+    <div class="col col-md-4 col-lg-4 col-xl-3">
+        <h2>@ViewData["Title"]</h2>
+        <form method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="mb-3">
+                <label asp-for="NewGeneratingStation.Name" class="form-label"></label>
+                <input asp-for="NewGeneratingStation.Name" class="form-control" />
+                <span asp-validation-for="NewGeneratingStation.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Voltage Level</label>
+                <select asp-for="NewGeneratingStation.VoltageLevelId" class="form-control" asp-items="ViewBag.VoltageLevelId"></select>
+                <span asp-validation-for="NewGeneratingStation.VoltageLevelId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Location</label>
+                <select asp-for="NewGeneratingStation.LocationId" class="form-control" asp-items="ViewBag.LocationId"></select>
+                <span asp-validation-for="NewGeneratingStation.LocationId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewGeneratingStation.IsAc" class="form-check-label"></label>
+                <input asp-for="NewGeneratingStation.IsAc" class="form-check-input" />
+                <span asp-validation-for="NewGeneratingStation.IsAc" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewGeneratingStation.OwnerIds" class="form-label"></label>
+                <select multiple class="form-control select2" asp-items="ViewBag.OwnerId" onchange="setMultiSelectVals(this)"></select>
+                <input asp-for="NewGeneratingStation.OwnerIds" type="hidden" />
+                <span asp-validation-for="NewGeneratingStation.OwnerIds" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewGeneratingStation.Latitude" class="form-label"></label>
+                <input asp-for="NewGeneratingStation.Latitude" class="form-control" />
+                <span asp-validation-for="NewGeneratingStation.Latitude" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewGeneratingStation.Longitude" class="form-label"></label>
+                <input asp-for="NewGeneratingStation.Longitude" class="form-control" />
+                <span asp-validation-for="NewGeneratingStation.Longitude" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewGeneratingStation.Installedcapacity" class="form-label"></label>
+                <input asp-for="NewGeneratingStation.Installedcapacity" class="form-control" />
+                <span asp-validation-for="NewGeneratingStation.Installedcapacity" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewGeneratingStation.MvaCapacity" class="form-label"></label>
+                <input asp-for="NewGeneratingStation.MvaCapacity" class="form-control" />
+                <span asp-validation-for="NewGeneratingStation.MvaCapacity" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Generating Station Classification</label>
+                <select asp-for="NewGeneratingStation.GeneratingStationClassificationId" class="form-control" asp-items="ViewBag.GeneratingStationClassificationId"></select>
+                <span asp-validation-for="NewGeneratingStation.GeneratingStationClassificationId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Generating Station Type</label>
+                <select asp-for="NewGeneratingStation.GeneratingStationTypeId" class="form-control" asp-items="ViewBag.GeneratingStationTypeId"></select>
+                <span asp-validation-for="NewGeneratingStation.GeneratingStationTypeId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Fuel Type</label>
+                <select asp-for="NewGeneratingStation.FuelId" class="form-control" asp-items="ViewBag.FuelId"></select>
+                <span asp-validation-for="NewGeneratingStation.FuelId" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-success mb-1">Create</button>
+        </form>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_Select2Partial" />
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
