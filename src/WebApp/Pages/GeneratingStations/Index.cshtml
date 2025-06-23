@@ -1,0 +1,82 @@
+﻿@page
+@model WebApp.Pages.GeneratingStations.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="./Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Installed Capacity</th>
+            <th>Owners</th>
+            <th>Region</th>
+            <th>Location</th>
+            <th>MVA Capacity</th>
+            <th>Classification</th>
+            <th>Type</th>
+            <th>Fuel</th>
+            <th>Voltage Level</th>
+            <th>AC_DC</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.GeneratingStations)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Installedcapacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerNamesCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegionCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MvaCapacity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GeneratingStationClassification)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GeneratingStationType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fuel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VoltageLevel.Level)
+                </td>
+                <td>
+                    @(item.IsAc ? "AC" : "DC")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Latitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Longitude)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
