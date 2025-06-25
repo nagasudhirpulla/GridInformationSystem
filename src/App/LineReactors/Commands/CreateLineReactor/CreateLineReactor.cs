@@ -35,7 +35,7 @@ public class CreateLineReactorCommandHandler(IApplicationDbContext context) : IR
                 .Include(x => x.Substation1)
                 .FirstOrDefaultAsync(e => e.Id == request.SubstationId, cancellationToken: cancellationToken)
                 ?? throw new Common.Exceptions.ValidationException([new ValidationFailure() {
-                                                                                    ErrorMessage = "Substation is not present in database"
+                                                                                    ErrorMessage = "Line is not present in database"
                                                                                 }]);
         // derive owner names cache
         List<Owner> owners = await OwnerUtils.GetOwnersFromIdsAsync(request.OwnerIds, context, cancellationToken);
