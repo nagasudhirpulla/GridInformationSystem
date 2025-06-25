@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using App.Common.Security;
 using FluentValidation.AspNetCore;
+using App.Substations.Queries.GetSubstations;
 
 namespace WebApp.Pages.LineReactors;
 
@@ -26,6 +27,7 @@ public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
     private async Task InitSelectListsAsync()
     {
         ViewData["LineId"] = new SelectList(await mediator.Send(new GetLinesQuery()), nameof(Line.Id), nameof(Line.ElementNameCache));
+        ViewData["SubstationId"] = new SelectList(await mediator.Send(new GetSubstationsQuery()), nameof(Substation.Id), nameof(Substation.NameCache));
         ViewData["OwnerId"] = new MultiSelectList(await mediator.Send(new GetOwnersQuery()), nameof(Owner.Id), nameof(Owner.Name), NewLineReactor?.OwnerIds.Split(","));
     }
 
