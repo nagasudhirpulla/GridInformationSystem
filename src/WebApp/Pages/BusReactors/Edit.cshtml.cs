@@ -21,18 +21,18 @@ public class EditModel(ILogger<EditModel> logger, IMediator mediator, IApplicati
     public required UpdateBusReactorCommand BusReactor { get; set; }
     public async Task OnGetAsync(int id)
     {
-        var bay = await mediator.Send(new GetBusReactorQuery() { Id = id });
+        var busReactor = await mediator.Send(new GetBusReactorQuery() { Id = id });
         BusReactor = new UpdateBusReactorCommand()
         {
-            Id = bay.Id,
-            OwnerIds = string.Join(',', bay.ElementOwners.Select(x => x.OwnerId)),
-            ElementNumber = bay.ElementNumber,
-            CommissioningDate = bay.CommissioningDate,
-            DeCommissioningDate = bay.DeCommissioningDate,
-            CommercialOperationDate = bay.CommercialOperationDate,
-            IsImportantGridElement = bay.IsImportantGridElement,
-            BusId = bay.BusId,
-            MvarCapacity = bay.MvarCapacity
+            Id = busReactor.Id,
+            OwnerIds = string.Join(',', busReactor.ElementOwners.Select(x => x.OwnerId)),
+            ElementNumber = busReactor.ElementNumber,
+            CommissioningDate = busReactor.CommissioningDate,
+            DeCommissioningDate = busReactor.DeCommissioningDate,
+            CommercialOperationDate = busReactor.CommercialOperationDate,
+            IsImportantGridElement = busReactor.IsImportantGridElement,
+            BusId = busReactor.BusId,
+            MvarCapacity = busReactor.MvarCapacity
         };
         await InitSelectListsAsync();
     }

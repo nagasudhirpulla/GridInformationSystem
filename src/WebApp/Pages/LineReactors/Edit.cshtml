@@ -1,0 +1,80 @@
+﻿@page
+@model WebApp.Pages.LineReactors.EditModel
+@{
+    ViewData["Title"] = "Update LineReactor";
+}
+
+<div class="row justify-content-center align-items-center">
+    <div class="col col-md-4 col-lg-4 col-xl-3">
+        <h2>@ViewData["Title"]</h2>
+        <form method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="LineReactor.Id" type="hidden" />
+            <div class="mb-3">
+                <label class="form-label">Line</label>
+                <select asp-for="LineReactor.LineId" class="form-control select2" asp-items="ViewBag.LineId"></select>
+                <span asp-validation-for="LineReactor.LineId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Substation</label>
+                <select asp-for="LineReactor.SubstationId" class="form-control select2" asp-items="ViewBag.SubstationId"></select>
+                <span asp-validation-for="LineReactor.SubstationId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LineReactor.ElementNumber" class="form-label"></label>
+                <input asp-for="LineReactor.ElementNumber" class="form-control" />
+                <span asp-validation-for="LineReactor.ElementNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LineReactor.MvarCapacity" class="form-label"></label>
+                <input asp-for="LineReactor.MvarCapacity" class="form-control" />
+                <span asp-validation-for="LineReactor.MvarCapacity" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LineReactor.OwnerIds" class="form-label"></label>
+                <select multiple class="form-control select2" asp-items="ViewBag.OwnerId" onchange="setMultiSelectVals(this)"></select>
+                <input asp-for="LineReactor.OwnerIds" type="hidden" />
+                <span asp-validation-for="LineReactor.OwnerIds" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LineReactor.IsConvertible" class="form-check-label"></label>
+                <input asp-for="LineReactor.IsConvertible" class="form-check-input" />
+                <span asp-validation-for="LineReactor.IsConvertible" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LineReactor.IsSwitchable" class="form-check-label"></label>
+                <input asp-for="LineReactor.IsSwitchable" class="form-check-input" />
+                <span asp-validation-for="LineReactor.IsSwitchable" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LineReactor.IsImportantGridElement" class="form-check-label"></label>
+                <input asp-for="LineReactor.IsImportantGridElement" class="form-check-input" />
+                <span asp-validation-for="LineReactor.IsImportantGridElement" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LineReactor.CommissioningDate" class="form-label"></label>
+                <input type="date" asp-for="LineReactor.CommissioningDate" class="form-control" />
+                <span asp-validation-for="LineReactor.CommissioningDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LineReactor.CommercialOperationDate" class="form-label"></label>
+                <input type="date" asp-for="LineReactor.CommercialOperationDate" class="form-control" />
+                <span asp-validation-for="LineReactor.CommercialOperationDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="LineReactor.DeCommissioningDate" class="form-label"></label>
+                <input type="date" asp-for="LineReactor.DeCommissioningDate" class="form-control" />
+                <span asp-validation-for="LineReactor.DeCommissioningDate" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success mb-1">Update</button>
+        </form>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_Select2Partial" />
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
