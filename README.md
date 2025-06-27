@@ -49,7 +49,7 @@ Grid Elements database service for managing and querying Grid Elements database
 Refer WRLDC Tables excel file for CRUD logic strategies
 * Bay - completed CRUD in App layer, completed UI
 * Transformer - completed CRUD in App layer, completed UI
-* Generating Unit - completed CRUD in App layer, UI pending
+* Generating Unit - completed CRUD in App layer, completed UI
 * GeneratingStationType - completed CRUD in App layer, completed UI
 * Generating Station Classification - completed CRUD in App layer, completed UI
 * Fuel - completed CRUD in App layer, completed UI

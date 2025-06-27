@@ -7,18 +7,18 @@ using Microsoft.EntityFrameworkCore;
 namespace App.GeneratingUnits.Queries.GetGeneratingUnit;
 
 [Authorize]
-public record GetGeneratingUnitQuery : IRequest<Bus>
+public record GetGeneratingUnitQuery : IRequest<GeneratingUnit>
 {
     public int Id { get; init; }
 }
 
-public class GetGeneratingUnitQueryHandler(IApplicationDbContext context) : IRequestHandler<GetGeneratingUnitQuery, Bus>
+public class GetGeneratingUnitQueryHandler(IApplicationDbContext context) : IRequestHandler<GetGeneratingUnitQuery, GeneratingUnit>
 {
-    public async Task<Bus> Handle(GetGeneratingUnitQuery request, CancellationToken cancellationToken)
+    public async Task<GeneratingUnit> Handle(GetGeneratingUnitQuery request, CancellationToken cancellationToken)
     {
-        Bus bus = await context.Buses.AsNoTracking()
+        GeneratingUnit genUnit = await context.GeneratingUnits.AsNoTracking()
                         .Include(e => e.ElementOwners)
                         .FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken: cancellationToken) ?? throw new KeyNotFoundException();
-        return bus;
+        return genUnit;
     }
 }
