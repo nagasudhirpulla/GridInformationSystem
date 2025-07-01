@@ -56,13 +56,13 @@ Refer WRLDC Tables excel file for CRUD logic strategies
 * Generating Station - completed CRUD in App layer, completed UI
 * LineReactor - completed CRUD in App layer, completed UI
 * BusReactor - completed CRUD in App layer, completed UI
-* HvdcLine - completed CRUD in App layer
-* HvdcPole - completed CRUD in App layer
+* HvdcLine - completed CRUD in App layer, completed UI
+* HvdcPole - completed CRUD in App layer, ui pending
 * Filter Bank - completed CRUD in App layer
 * SubFilterBank - completed CRUD in App layer
 
 ## TODOs
-* restict substations changes in lines when there are connected elements like line reactors
+* restrict substations changes in lines when there are connected elements like line reactors
 * Define control area and attach it to element
 * Model MSC, MSR, TCSC, STATCOM instead of compensator
 * Model SVC, FSC

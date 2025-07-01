@@ -1,0 +1,79 @@
+﻿@page
+@model WebApp.Pages.HvdcLines.EditModel
+@{
+    ViewData["Title"] = "Update HvdcLine";
+}
+
+<div class="row justify-content-center align-items-center">
+    <div class="col col-md-4 col-lg-4 col-xl-3">
+        <h2>@ViewData["Title"]</h2>
+        <form method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="HvdcLine.Id" type="hidden" />
+            <div class="mb-3">
+                <label class="form-label">From Bus</label>
+                <select asp-for="HvdcLine.Bus1Id" class="form-control select2" asp-items="ViewBag.Bus1Id"></select>
+                <span asp-validation-for="HvdcLine.Bus1Id" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">To Bus</label>
+                <select asp-for="HvdcLine.Bus2Id" class="form-control select2" asp-items="ViewBag.Bus2Id"></select>
+                <span asp-validation-for="HvdcLine.Bus2Id" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="HvdcLine.ElementNumber" class="form-label"></label>
+                <input asp-for="HvdcLine.ElementNumber" class="form-control" />
+                <span asp-validation-for="HvdcLine.ElementNumber" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="HvdcLine.OwnerIds" class="form-label"></label>
+                <select multiple class="form-control select2" asp-items="ViewBag.OwnerId" onchange="setMultiSelectVals(this)"></select>
+                <input asp-for="HvdcLine.OwnerIds" type="hidden" />
+                <span asp-validation-for="HvdcLine.OwnerIds" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="HvdcLine.IsSpsPresent" class="form-check-label"></label>
+                <input asp-for="HvdcLine.IsSpsPresent" class="form-check-input" />
+                <span asp-validation-for="HvdcLine.IsSpsPresent" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="HvdcLine.IsImportantGridElement" class="form-check-label"></label>
+                <input asp-for="HvdcLine.IsImportantGridElement" class="form-check-input" />
+                <span asp-validation-for="HvdcLine.IsImportantGridElement" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="HvdcLine.CommissioningDate" class="form-label"></label>
+                <input type="date" asp-for="HvdcLine.CommissioningDate" class="form-control" />
+                <span asp-validation-for="HvdcLine.CommissioningDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="HvdcLine.CommercialOperationDate" class="form-label"></label>
+                <input type="date" asp-for="HvdcLine.CommercialOperationDate" class="form-control" />
+                <span asp-validation-for="HvdcLine.CommercialOperationDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="HvdcLine.DeCommissioningDate" class="form-label"></label>
+                <input type="date" asp-for="HvdcLine.DeCommissioningDate" class="form-control" />
+                <span asp-validation-for="HvdcLine.DeCommissioningDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="HvdcLine.Length" class="form-label"></label>
+                <input asp-for="HvdcLine.Length" class="form-control" />
+                <span asp-validation-for="HvdcLine.Length" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="HvdcLine.ConductorType" class="form-label"></label>
+                <input asp-for="HvdcLine.ConductorType" class="form-control" />
+                <span asp-validation-for="HvdcLine.ConductorType" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-success mb-1">Update</button>
+        </form>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_Select2Partial" />
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

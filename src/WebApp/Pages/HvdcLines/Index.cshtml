@@ -1,0 +1,85 @@
+﻿@page
+@model WebApp.Pages.HvdcLines.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="./Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Voltage Level</th>
+            <th>Region</th>
+            <th>From Substation</th>
+            <th>To Substation</th>
+            <th>Element Number</th>
+            <th>Owners</th>
+            <th>Commissioning Date</th>
+            <th>Commercial Operation Date</th>
+            <th>DeCommissioning Date</th>
+            <th>ImportantGridElement</th>
+            <th>Length</th>
+            <th>Conductor Type</th>
+            <th>SPS</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.HvdcLines)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ElementNameCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VoltageLevelCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegionCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Substation1.NameCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Substation2.NameCache)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ElementNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerNamesCache)
+                </td>
+                <td>
+                    @(item.CommissioningDate.ToString("yyyy-MM-dd"))
+                </td>
+                <td>
+                    @(item.CommercialOperationDate.ToString("yyyy-MM-dd"))
+                </td>
+                <td>
+                    @(item.DeCommissioningDate.HasValue ? item.DeCommissioningDate.Value.ToString("yyyy-MM-dd") : "")
+                </td>
+                <td>
+                    @(item.IsImportantGridElement ? "Yes" : "No")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Length)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ConductorType)
+                </td>
+                <td>
+                    @(item.IsSpsPresent ? "Yes" : "No")
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
