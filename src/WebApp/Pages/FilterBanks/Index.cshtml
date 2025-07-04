@@ -1,5 +1,5 @@
 ﻿@page
-@model WebApp.Pages.Buses.IndexModel
+@model WebApp.Pages.FilterBanks.IndexModel
 @{
     ViewData["Title"] = "Index";
 }
@@ -18,7 +18,8 @@
             <th>Substation</th>
             <th>Owners</th>
             <th>Element Number</th>
-            <th>Bus Type</th>
+            <th>Mvar</th>
+            <th>IsSwitchable</th>
             <th>Commissioning Date</th>
             <th>Commercial Operation Date</th>
             <th>DeCommissioning Date</th>
@@ -26,9 +27,9 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Buses)
-    {
-        <tr>
+        @foreach (var item in Model.FilterBanks)
+        {
+            <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.ElementNameCache)
                 </td>
@@ -48,7 +49,10 @@
                     @Html.DisplayFor(modelItem => item.ElementNumber)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.BusType.Name)
+                    @Html.DisplayFor(modelItem => item.Mvar)
+                </td>
+                <td>
+                    @(item.IsSwitchable ? "Yes" : "No")
                 </td>
                 <td>
                     @(item.CommissioningDate.ToString("yyyy-MM-dd"))
@@ -64,6 +68,6 @@
                     <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
-    }
+        }
     </tbody>
 </table>
