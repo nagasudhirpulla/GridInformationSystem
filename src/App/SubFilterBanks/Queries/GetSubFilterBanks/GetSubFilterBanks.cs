@@ -15,6 +15,7 @@ public class GetSubFilterBankesQueryHandler(IApplicationDbContext context) : IRe
     {
         var subFilterBanks = await context.SubFilterBanks.AsNoTracking()
                         .Include(e => e.Substation1)
+                        .Include(e => e.FilterBank)
                         .OrderBy(r => r.ElementNameCache)
                         .ToListAsync(cancellationToken);
         return subFilterBanks;

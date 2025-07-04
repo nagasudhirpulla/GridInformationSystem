@@ -44,22 +44,19 @@ Grid Elements database service for managing and querying Grid Elements database
 * States
 * Substations
 * VoltageLevels
-
-### Pending Entity Management UIs
-Refer WRLDC Tables excel file for CRUD logic strategies
-* Bay - completed CRUD in App layer, completed UI
-* Transformer - completed CRUD in App layer, completed UI
-* Generating Unit - completed CRUD in App layer, completed UI
-* GeneratingStationType - completed CRUD in App layer, completed UI
-* Generating Station Classification - completed CRUD in App layer, completed UI
-* Fuel - completed CRUD in App layer, completed UI
-* Generating Station - completed CRUD in App layer, completed UI
-* LineReactor - completed CRUD in App layer, completed UI
-* BusReactor - completed CRUD in App layer, completed UI
-* HvdcLine - completed CRUD in App layer, completed UI
-* HvdcPole - completed CRUD in App layer, completed UI
-* Filter Bank - completed CRUD in App layer, completed UI
-* SubFilterBank - completed CRUD in App layer, create ui done, rest pending
+* Bay
+* Transformer
+* Generating Unit
+* GeneratingStationType
+* Generating Station Classification
+* Fuel
+* Generating Station
+* LineReactor
+* BusReactor
+* HvdcLine
+* HvdcPole
+* Filter Bank
+* SubFilterBank
 
 ## TODOs
 * update menu items in auth partial for elements management
