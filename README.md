@@ -59,7 +59,7 @@ Refer WRLDC Tables excel file for CRUD logic strategies
 * HvdcLine - completed CRUD in App layer, completed UI
 * HvdcPole - completed CRUD in App layer, completed UI
 * Filter Bank - completed CRUD in App layer, completed UI
-* SubFilterBank - completed CRUD in App layer, ui pending
+* SubFilterBank - completed CRUD in App layer, create ui done, rest pending
 
 ## TODOs
 * update menu items in auth partial for elements management

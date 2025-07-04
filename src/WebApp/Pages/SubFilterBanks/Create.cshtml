@@ -1,0 +1,69 @@
+﻿@page
+@model WebApp.Pages.SubFilterBanks.CreateModel
+@{
+    ViewData["Title"] = "Create New SubFilterBank";
+}
+
+<div class="row justify-content-center align-items-center">
+    <div class="col col-md-4 col-lg-4 col-xl-3">
+        <h2>@ViewData["Title"]</h2>
+        <form method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="mb-3">
+                <label class="form-label">Substation</label>
+                <select asp-for="NewSubFilterBank.FilterBankId" class="form-control select2" asp-items="ViewBag.FilterBankId"></select>
+                <span asp-validation-for="NewSubFilterBank.FilterBankId" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewSubFilterBank.OwnerIds" class="form-label"></label>
+                <select multiple class="form-control select2" asp-items="ViewBag.OwnerId" onchange="setMultiSelectVals(this)"></select>
+                <input asp-for="NewSubFilterBank.OwnerIds" type="hidden" />
+                <span asp-validation-for="NewSubFilterBank.OwnerIds" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewSubFilterBank.SubFilterTag" class="form-label"></label>
+                <input asp-for="NewSubFilterBank.SubFilterTag" class="form-control" />
+                <span asp-validation-for="NewSubFilterBank.SubFilterTag" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewSubFilterBank.Mvar" class="form-label"></label>
+                <input asp-for="NewSubFilterBank.Mvar" class="form-control" />
+                <span asp-validation-for="NewSubFilterBank.Mvar" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewSubFilterBank.IsSwitchable" class="form-check-label"></label>
+                <input asp-for="NewSubFilterBank.IsSwitchable" class="form-check-input" />
+                <span asp-validation-for="NewSubFilterBank.IsSwitchable" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewSubFilterBank.IsImportantGridElement" class="form-check-label"></label>
+                <input asp-for="NewSubFilterBank.IsImportantGridElement" class="form-check-input" />
+                <span asp-validation-for="NewSubFilterBank.IsImportantGridElement" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewSubFilterBank.CommissioningDate" class="form-label"></label>
+                <input type="date" asp-for="NewSubFilterBank.CommissioningDate" class="form-control" />
+                <span asp-validation-for="NewSubFilterBank.CommissioningDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewSubFilterBank.CommercialOperationDate" class="form-label"></label>
+                <input type="date" asp-for="NewSubFilterBank.CommercialOperationDate" class="form-control" />
+                <span asp-validation-for="NewSubFilterBank.CommercialOperationDate" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="NewSubFilterBank.DeCommissioningDate" class="form-label"></label>
+                <input type="date" asp-for="NewSubFilterBank.DeCommissioningDate" class="form-control" />
+                <span asp-validation-for="NewSubFilterBank.DeCommissioningDate" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success mb-1">Create</button>
+        </form>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_Select2Partial" />
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
