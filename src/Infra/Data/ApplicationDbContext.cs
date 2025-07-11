@@ -1,6 +1,7 @@
 ﻿using App.Common.Interfaces;
 using Core.Entities;
 using Core.Entities.Common;
+using Core.Entities.Data;
 using Core.Entities.Elements;
 using Infra.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -60,6 +61,11 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<SubFilterBank> SubFilterBanks => Set<SubFilterBank>();
 
     public DbSet<Transformer> Transformers => Set<Transformer>();
+
+
+    public DbSet<Metric> Metrics => Set<Metric>();
+    public DbSet<Measurement> Measurements => Set<Measurement>();
+    public DbSet<DataSource> DataSources => Set<DataSource>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

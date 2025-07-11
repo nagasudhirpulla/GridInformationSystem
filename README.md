@@ -59,6 +59,7 @@ Grid Elements database service for managing and querying Grid Elements database
 * SubFilterBank
 
 ## TODOs
+* Measurements App layer and UI layer pending
 * update menu items in auth partial for elements management
 * restrict substations changes in lines when there are connected elements like line reactors
 * Define control area and attach it to element
