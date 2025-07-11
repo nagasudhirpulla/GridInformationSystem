@@ -14,7 +14,7 @@ add control area also - control area suggestion - if 765 kV Imp grid element - c
 FSC
  */
 
-public class Element : AuditableEntity
+public class Element : GridEntity
 {
     public required string ElementNameCache { get; set; }
 

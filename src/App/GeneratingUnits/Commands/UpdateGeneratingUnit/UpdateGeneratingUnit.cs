@@ -69,7 +69,7 @@ public class UpdateGeneratingUnitCommandHandler(IApplicationDbContext context) :
         entity.DeCommissioningDate = request.DeCommissioningDate;
         entity.CommercialOperationDate = request.CommercialOperationDate;
         entity.IsImportantGridElement = request.IsImportantGridElement;
-        entity.InstalledCapacity = request.InstalledCapacity;
+        entity.Capacity = request.InstalledCapacity;
         entity.GeneratingVoltage = request.GeneratingVoltage;
 
         await context.SaveChangesAsync(cancellationToken);

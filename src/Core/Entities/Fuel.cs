@@ -2,7 +2,7 @@
 
 namespace Core.Entities;
 
-public class Fuel : AuditableEntity
+public class Fuel : GridEntity
 {
     public required string FuelName { get; set; }
 }

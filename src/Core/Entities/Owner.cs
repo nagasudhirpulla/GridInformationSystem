@@ -2,7 +2,7 @@
 
 namespace Core.Entities;
 
-public class Owner : AuditableEntity
+public class Owner : GridEntity
 {
     public required string Name { get; set; }
     public List<SubstationOwner> SubstationOwners { get; } = [];

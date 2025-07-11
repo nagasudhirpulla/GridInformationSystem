@@ -34,6 +34,7 @@ public class EditModel(ILogger<EditModel> logger, IMediator mediator, IApplicati
             LocationId = genStn.LocationId,
             Latitude = genStn.Latitude,
             Longitude = genStn.Longitude,
+            InstalledCapacity = genStn.InstalledCapacity,
             MvaCapacity = genStn.MvaCapacity,
             GeneratingStationClassificationId = genStn.GeneratingStationClassificationId,
             GeneratingStationTypeId = genStn.GeneratingStationTypeId,

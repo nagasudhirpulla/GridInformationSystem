@@ -29,7 +29,7 @@ public class CreateGenStationCommandValidator : AbstractValidator<CreateGenerati
         RuleFor(v => v.MvaCapacity)
             .GreaterThanOrEqualTo(0);
 
-        RuleFor(v => v.Installedcapacity)
+        RuleFor(v => v.InstalledCapacity)
             .GreaterThanOrEqualTo(0);
 
     }

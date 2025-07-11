@@ -4,7 +4,7 @@ public class GeneratingStation : Substation
 {
     public required string Name { get; set; }
 
-    public required double Installedcapacity { get; set; }
+    public required double InstalledCapacity { get; set; }
 
     public required double MvaCapacity { get; set; }
 

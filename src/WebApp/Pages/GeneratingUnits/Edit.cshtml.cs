@@ -31,7 +31,7 @@ public class EditModel(ILogger<EditModel> logger, IMediator mediator, IApplicati
             DeCommissioningDate = genUnit.DeCommissioningDate,
             CommercialOperationDate = genUnit.CommercialOperationDate,
             IsImportantGridElement = genUnit.IsImportantGridElement,
-            InstalledCapacity = genUnit.InstalledCapacity,
+            InstalledCapacity = genUnit.Capacity,
             GeneratingVoltage = genUnit.GeneratingVoltage
         };
         await InitSelectListsAsync();

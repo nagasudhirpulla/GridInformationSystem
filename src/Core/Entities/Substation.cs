@@ -2,7 +2,7 @@
 
 namespace Core.Entities;
 
-public class Substation : AuditableEntity
+public class Substation : GridEntity
 {
     public required string NameCache { get; set; }
 

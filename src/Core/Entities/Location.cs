@@ -2,7 +2,7 @@
 
 namespace Core.Entities;
 
-public class Location : AuditableEntity
+public class Location : GridEntity
 {
     public required string Name { get; set; }
 

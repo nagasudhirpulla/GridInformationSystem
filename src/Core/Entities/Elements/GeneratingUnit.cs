@@ -6,7 +6,7 @@ Generating Unit should be present in Generating station instead of Substation
 */
 public class GeneratingUnit : Element
 {
-    public double InstalledCapacity { get; set; }
+    public double Capacity { get; set; }
 
     public double GeneratingVoltage { get; set; }
 }

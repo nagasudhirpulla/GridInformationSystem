@@ -18,7 +18,7 @@ public record CreateGeneratingStationCommand : IRequest<int>
     public bool IsAc { get; set; } = true;
     public double Latitude { get; set; }
     public double Longitude { get; set; }
-    public double Installedcapacity { get; set; }
+    public double InstalledCapacity { get; set; }
     public double MvaCapacity { get; set; }
     public int GeneratingStationClassificationId { get; set; }
     public int GeneratingStationTypeId { get; set; }
@@ -52,7 +52,7 @@ public class CreateGeneratingStationCommandHandler(IApplicationDbContext context
             IsAc = request.IsAc,
             Latitude = request.Latitude,
             Longitude = request.Longitude,
-            Installedcapacity = request.Installedcapacity,
+            InstalledCapacity = request.InstalledCapacity,
             MvaCapacity = request.MvaCapacity,
             GeneratingStationTypeId = request.GeneratingStationTypeId,
             GeneratingStationClassificationId = request.GeneratingStationClassificationId,

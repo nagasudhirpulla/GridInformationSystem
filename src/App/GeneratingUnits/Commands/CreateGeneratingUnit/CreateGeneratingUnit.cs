@@ -56,7 +56,7 @@ public class CreateGeneratingUnitCommandHandler(IApplicationDbContext context) :
             DeCommissioningDate = request.DeCommissioningDate,
             CommercialOperationDate = request.CommercialOperationDate,
             IsImportantGridElement = request.IsImportantGridElement,
-            InstalledCapacity = request.InstalledCapacity,
+            Capacity = request.InstalledCapacity,
             GeneratingVoltage = request.GeneratingVoltage
         };
 

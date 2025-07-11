@@ -21,7 +21,7 @@ public record UpdateGeneratingStationCommand : IRequest
     public int LocationId { get; set; }
     public double Latitude { get; set; }
     public double Longitude { get; set; }
-    public double Installedcapacity { get; set; }
+    public double InstalledCapacity { get; set; }
     public double MvaCapacity { get; set; }
     public int GeneratingStationClassificationId { get; set; }
     public int GeneratingStationTypeId { get; set; }
@@ -40,6 +40,9 @@ public class UpdateGeneratingStationCommandHandler(IApplicationDbContext context
         // update entity attributes
         entity.Latitude = request.Latitude;
         entity.Longitude = request.Longitude;
+        entity.MvaCapacity = request.MvaCapacity;
+        entity.InstalledCapacity = request.InstalledCapacity;
+        entity.FuelId = request.FuelId;
 
         // update location if required
         bool? isElementsConnected = null;

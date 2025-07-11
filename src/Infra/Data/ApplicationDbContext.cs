@@ -1,5 +1,6 @@
 ﻿using App.Common.Interfaces;
 using Core.Entities;
+using Core.Entities.Common;
 using Core.Entities.Elements;
 using Infra.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -36,6 +37,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
     public DbSet<SubstationOwner> SubstationOwners => Set<SubstationOwner>();
 
+    public DbSet<GridEntity> GridEntities => Set<GridEntity>();
     public DbSet<Element> Elements => Set<Element>();
     public DbSet<Bay> Bays => Set<Bay>();
 
