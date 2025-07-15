@@ -76,3 +76,4 @@ Grid Elements database service for managing and querying Grid Elements database
 * multi select reference - https://github.com/nagasudhirpulla/wrldc_scada_issues_portal/blob/master/src/WrldcScadaIssuesPortal/ScadaIssuesPortal.Web/Views/ReportingCases/Create.cshtml
 * Using database transaction in mediatr command pipeline - https://github.com/Jefferycheng/FlexibleTransactionHandler/blob/master/FlexibleTransactionHandler.WebApi/Application/Behaviors/TransactionBehavior.cs
 * Smart Enum model binding - https://github.com/nagasudhirpulla/SmartEnumModelBinding/tree/main
+* Use @functions to call dotnet function in razor page javascript callback - https://stackoverflow.com/questions/61846815/how-to-add-a-event-to-a-button-using-razor/61864703 , https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-9.0
