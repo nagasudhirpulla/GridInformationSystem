@@ -65,7 +65,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
     public DbSet<Metric> Metrics => Set<Metric>();
     public DbSet<Measurement> Measurements => Set<Measurement>();
-    public DbSet<DataSource> DataSources => Set<DataSource>();
+    public DbSet<Datasource> Datasources => Set<Datasource>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

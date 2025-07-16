@@ -49,7 +49,7 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
                 b.UseTphMappingStrategy();
             });
 
-        modelBuilder.Entity("Core.Entities.Data.DataSource", b =>
+        modelBuilder.Entity("Core.Entities.Data.Datasource", b =>
             {
                 b.Property<int>("Id")
                     .ValueGeneratedOnAdd()
@@ -87,7 +87,7 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
                 b.Property<int>("MetricId")
                     .HasColumnType("INTEGER");
 
-                b.Property<int>("DataSourceId")
+                b.Property<int>("DatasourceId")
                     .HasColumnType("INTEGER");
 
                 b.Property<DateTimeOffset>("Created")
@@ -109,9 +109,9 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
                 b.Property<string>("LastModifiedBy")
                     .HasColumnType("TEXT");
 
-                b.HasKey("EntityId", "MetricId", "DataSourceId");
+                b.HasKey("EntityId", "MetricId", "DatasourceId");
 
-                b.HasIndex("DataSourceId");
+                b.HasIndex("DatasourceId");
 
                 b.HasIndex("MetricId");
 
@@ -993,9 +993,9 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
 
         modelBuilder.Entity("Core.Entities.Data.Measurement", b =>
             {
-                b.HasOne("Core.Entities.Data.DataSource", "DataSource")
+                b.HasOne("Core.Entities.Data.Datasource", "Datasource")
                     .WithMany()
-                    .HasForeignKey("DataSourceId")
+                    .HasForeignKey("DatasourceId")
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
@@ -1011,7 +1011,7 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
                     .OnDelete(DeleteBehavior.Restrict)
                     .IsRequired();
 
-                b.Navigation("DataSource");
+                b.Navigation("Datasource");
 
                 b.Navigation("Entity");
 

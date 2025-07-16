@@ -8,7 +8,7 @@ public class MeasurementConfiguration : IEntityTypeConfiguration<Measurement>
 {
     public void Configure(EntityTypeBuilder<Measurement> builder)
     {
-        builder.HasKey(e => new { e.EntityId, e.MetricId, e.DataSourceId });
+        builder.HasKey(e => new { e.EntityId, e.MetricId, e.DatasourceId });
 
         builder
             .HasOne(o => o.Entity)
@@ -21,7 +21,7 @@ public class MeasurementConfiguration : IEntityTypeConfiguration<Measurement>
             .OnDelete(DeleteBehavior.Restrict);
 
         builder
-            .HasOne(o => o.DataSource)
+            .HasOne(o => o.Datasource)
             .WithMany()
             .OnDelete(DeleteBehavior.Restrict);
     }

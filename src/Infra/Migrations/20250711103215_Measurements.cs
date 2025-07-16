@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -92,7 +91,7 @@ public partial class Measurements : Migration
         migrationBuilder.CreateIndex(
             name: "IX_Measurements_DataSourceId",
             table: "Measurements",
-            column: "DataSourceId");
+            column: "DatasourceId");
 
         migrationBuilder.CreateIndex(
             name: "IX_Measurements_MetricId",

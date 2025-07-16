@@ -1,4 +1,6 @@
 ﻿using Core.Entities;
+using Core.Entities.Common;
+using Core.Entities.Data;
 using Core.Entities.Elements;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -8,6 +10,7 @@ namespace App.Common.Interfaces;
 
 public interface IApplicationDbContext
 {
+    DbSet<GridEntity> GridEntities { get; }
     DbSet<Fuel> Fuels { get; }
     DbSet<GeneratingStation> GeneratingStations { get; }
     DbSet<GeneratingStationClassification> GeneratingStationClassifications { get; }
@@ -36,6 +39,10 @@ public interface IApplicationDbContext
     DbSet<LineReactor> LineReactors { get; }
     DbSet<SubFilterBank> SubFilterBanks { get; }
     DbSet<Transformer> Transformers { get; }
+    DbSet<Datasource> Datasources { get; }
+    DbSet<Metric> Metrics { get; }
+    DbSet<Measurement> Measurements { get; }
+
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     IDbContextTransaction? GetCurrentTransaction();
     bool HasActiveTransaction { get; }

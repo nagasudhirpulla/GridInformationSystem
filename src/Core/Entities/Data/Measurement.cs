@@ -10,8 +10,8 @@ public class Measurement : AuditableEntity
     public Metric Metric { get; set; } = null!;
     public int MetricId { get; set; }
 
-    public DataSource DataSource { get; set; } = null!;
-    public int DataSourceId { get; set; }
+    public Datasource Datasource { get; set; } = null!;
+    public int DatasourceId { get; set; }
 
     public required string HistorianPntId { get; set; }
 }
