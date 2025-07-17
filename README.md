@@ -57,9 +57,11 @@ Grid Elements database service for managing and querying Grid Elements database
 * HvdcPole
 * Filter Bank
 * SubFilterBank
+* Datasource
+* Metric
 
 ## TODOs
-* Measurements, Datasources, Metrics UI layer pending
+* Measurements UI layer pending
 * update menu items in auth partial for elements management
 * restrict substations changes in lines when there are connected elements like line reactors
 * Define control area and attach it to element
