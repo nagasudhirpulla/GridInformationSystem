@@ -1,6 +1,4 @@
 ﻿using App.Common.Models;
-using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace App.Common.Mappings;
