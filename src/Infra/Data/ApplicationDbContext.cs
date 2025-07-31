@@ -1,6 +1,5 @@
 ﻿using App.Common.Interfaces;
 using Core.Entities;
-using Core.Entities.Common;
 using Core.Entities.Data;
 using Core.Entities.Elements;
 using Infra.Identity;

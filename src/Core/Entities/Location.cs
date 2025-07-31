@@ -1,6 +1,4 @@
-﻿using Core.Entities.Common;
-
-namespace Core.Entities;
+﻿namespace Core.Entities;
 
 public class Location : GridEntity
 {
