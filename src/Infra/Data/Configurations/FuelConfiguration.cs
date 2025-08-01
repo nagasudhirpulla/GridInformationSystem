@@ -8,6 +8,6 @@ public class FuelConfiguration : IEntityTypeConfiguration<Fuel>
 {
     public void Configure(EntityTypeBuilder<Fuel> builder)
     {
-        builder.HasIndex(u => u.FuelName).IsUnique();
+        builder.HasIndex(u => u.Name).IsUnique();
     }
 }

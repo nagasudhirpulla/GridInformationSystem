@@ -16,7 +16,7 @@ public class GetBusReactorsQueryHandler(IApplicationDbContext context) : IReques
         var busReactors = await context.BusReactors.AsNoTracking()
                         .Include(e => e.Substation1)
                         .Include(e => e.Bus)
-                        .OrderBy(r => r.ElementNameCache)
+                        .OrderBy(r => r.Name)
                         .ToListAsync(cancellationToken);
         return busReactors;
     }

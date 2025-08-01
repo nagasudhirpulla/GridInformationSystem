@@ -41,7 +41,7 @@ public class CreateSubstationCommandHandler(IApplicationDbContext context) : IRe
 
         var entity = new Substation()
         {
-            NameCache = substationName,
+            Name = substationName,
             OwnerNamesCache = ownersCache,
             RegionCache = location.RegionCache,
             VoltageLevelId = request.VoltageLevelId,

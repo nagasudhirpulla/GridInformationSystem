@@ -35,7 +35,7 @@ public class CreateBusCommandHandler(IApplicationDbContext context) : IRequestHa
                                                                                 }]);
 
         // derive element name 
-        string name = Utils.DeriveBusName.Execute(substation.NameCache, request.BusType, request.ElementNumber);
+        string name = Utils.DeriveBusName.Execute(substation.Name, request.BusType, request.ElementNumber);
 
         // derive voltage level, region from substation
         string voltLvl = substation.VoltageLevel.Level;
@@ -49,7 +49,7 @@ public class CreateBusCommandHandler(IApplicationDbContext context) : IRequestHa
         var entity = new Bus()
         {
             BusType = request.BusType,
-            ElementNameCache = name,
+            Name = name,
             VoltageLevelCache = voltLvl,
             RegionCache = region,
             Substation1Id = request.SubstationId,

@@ -47,7 +47,7 @@ public class UpdateBusReactorCommandHandler(IApplicationDbContext context) : IRe
                                                                                 }]);
 
         // derive element name 
-        string name = Utils.DeriveBusReactorName.Execute(substation.NameCache, request.ElementNumber);
+        string name = Utils.DeriveBusReactorName.Execute(substation.Name, request.ElementNumber);
 
         // derive voltage level, region from substation
         string voltLvl = substation.VoltageLevel.Level;
@@ -66,7 +66,7 @@ public class UpdateBusReactorCommandHandler(IApplicationDbContext context) : IRe
 
 
         // update entity attributes
-        entity.ElementNameCache = name;
+        entity.Name = name;
         entity.VoltageLevelCache = voltLvl;
         entity.RegionCache = region;
         entity.Substation1Id = bus.Substation1Id;

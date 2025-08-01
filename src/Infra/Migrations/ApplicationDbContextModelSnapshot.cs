@@ -515,7 +515,7 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
                 b.Property<DateTime?>("DeCommissioningDate")
                     .HasColumnType("TEXT");
 
-                b.Property<string>("ElementNameCache")
+                b.Property<string>("Name")
                     .IsRequired()
                     .HasColumnType("TEXT");
 
@@ -544,7 +544,7 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
                     .IsRequired()
                     .HasColumnType("TEXT");
 
-                b.HasIndex("ElementNameCache")
+                b.HasIndex("Name")
                     .IsUnique();
 
                 b.HasIndex("Substation1Id");
@@ -558,11 +558,11 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
             {
                 b.HasBaseType("Core.Entities.Common.GridEntity");
 
-                b.Property<string>("FuelName")
+                b.Property<string>("Name")
                     .IsRequired()
                     .HasColumnType("TEXT");
 
-                b.HasIndex("FuelName")
+                b.HasIndex("Name")
                     .IsUnique();
 
                 b.HasDiscriminator().HasValue("Fuel");
@@ -684,7 +684,7 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
                 b.Property<double>("Longitude")
                     .HasColumnType("REAL");
 
-                b.Property<string>("NameCache")
+                b.Property<string>("Name")
                     .IsRequired()
                     .HasColumnType("TEXT");
 
@@ -701,7 +701,7 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
 
                 b.HasIndex("LocationId");
 
-                b.HasIndex("NameCache")
+                b.HasIndex("Name")
                     .IsUnique();
 
                 b.HasIndex("VoltageLevelId");

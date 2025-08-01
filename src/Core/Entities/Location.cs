@@ -2,7 +2,6 @@
 
 public class Location : GridEntity
 {
-    public required string Name { get; set; }
 
     public string? Alias { get; set; }
 

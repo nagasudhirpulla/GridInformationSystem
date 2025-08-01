@@ -8,7 +8,7 @@ public class SubstationConfiguration : IEntityTypeConfiguration<Substation>
 {
     public void Configure(EntityTypeBuilder<Substation> builder)
     {
-        builder.HasIndex(u => u.NameCache).IsUnique();
+        builder.HasIndex(u => u.Name).IsUnique();
 
         builder
             .HasOne(o => o.VoltageLevel)

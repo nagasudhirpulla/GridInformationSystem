@@ -6,6 +6,7 @@ namespace App.GridEntities.Dtos;
 
 public class GridEntityDto : AuditableEntity
 {
+    // TODO delete this
     public required string Name { get; set; }
 
     public static GridEntityDto GetFromGridEntity(GridEntity e)
@@ -14,10 +15,10 @@ public class GridEntityDto : AuditableEntity
         switch (e)
         {
             case Element element:
-                name = element.ElementNameCache;
+                name = element.Name;
                 break;
             case Fuel f:
-                name = f.FuelName;
+                name = f.Name;
                 break;
             case Location l:
                 name = l.Name;
@@ -32,7 +33,7 @@ public class GridEntityDto : AuditableEntity
                 name = s.Name;
                 break;
             case Substation sub:
-                name = sub.NameCache;
+                name = sub.Name;
                 break;
         }
 

@@ -41,12 +41,12 @@ public class CreateLineReactorCommandHandler(IApplicationDbContext context) : IR
         List<Owner> owners = await OwnerUtils.GetOwnersFromIdsAsync(request.OwnerIds, context, cancellationToken);
         string ownersNames = OwnerUtils.DeriveOwnersCache(owners);
 
-        string lrName = Utils.DeriveLineReactorName.Execute(line.ElementNameCache, line.Substation1.NameCache, request.ElementNumber, context, cancellationToken);
+        string lrName = Utils.DeriveLineReactorName.Execute(line.Name, line.Substation1.Name, request.ElementNumber, context, cancellationToken);
 
         // insert element to db
         var entity = new LineReactor()
         {
-            ElementNameCache = lrName,
+            Name = lrName,
             VoltageLevelCache = line.VoltageLevelCache,
             RegionCache = line.RegionCache,
             Substation1Id = request.SubstationId,

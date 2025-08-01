@@ -40,7 +40,7 @@ public class EditModel(ILogger<EditModel> logger, IMediator mediator, IApplicati
 
     private async Task InitSelectListsAsync()
     {
-        ViewData["FilterBankId"] = new SelectList(await mediator.Send(new GetFilterBanksQuery()), nameof(FilterBank.Id), nameof(FilterBank.ElementNameCache));
+        ViewData["FilterBankId"] = new SelectList(await mediator.Send(new GetFilterBanksQuery()), nameof(FilterBank.Id), nameof(FilterBank.Name));
         ViewData["OwnerId"] = new MultiSelectList(await mediator.Send(new GetOwnersQuery()), nameof(Owner.Id), nameof(Owner.Name), SubFilterBank.OwnerIds.Split(','));
     }
 

@@ -54,7 +54,7 @@ public class CreateBayCommandHandler(IApplicationDbContext context) : IRequestHa
                                                                                     ErrorMessage = "Substation Id is not present in database"
                                                                                 }]);
         // derive element name 
-        string name = Utils.DeriveBayName.Execute(el1.ElementNameCache, el2.ElementNameCache, request.BayType);
+        string name = Utils.DeriveBayName.Execute(el1.Name, el2.Name, request.BayType);
 
         // derive voltage level, region from substation
         string voltLvl = substation.VoltageLevel.Level;
@@ -71,7 +71,7 @@ public class CreateBayCommandHandler(IApplicationDbContext context) : IRequestHa
             Element2Id = request.Element2Id,
             BayType = request.BayType,
             IsFuture = request.IsFuture,
-            ElementNameCache = name,
+            Name = name,
             VoltageLevelCache = voltLvl,
             RegionCache = region,
             Substation1Id = substationId,

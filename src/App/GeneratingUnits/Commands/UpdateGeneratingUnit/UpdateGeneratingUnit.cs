@@ -60,7 +60,7 @@ public class UpdateGeneratingUnitCommandHandler(IApplicationDbContext context) :
 
 
         // update entity attributes
-        entity.ElementNameCache = name;
+        entity.Name = name;
         entity.VoltageLevelCache = voltLvl;
         entity.RegionCache = region;
         entity.Substation1Id = request.GeneratingStationId;

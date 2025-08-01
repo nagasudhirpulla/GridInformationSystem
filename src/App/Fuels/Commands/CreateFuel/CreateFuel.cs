@@ -13,7 +13,7 @@ public class CreateFuelCommandHandler(IApplicationDbContext context) : IRequestH
 {
     public async Task<int> Handle(CreateFuelCommand request, CancellationToken cancellationToken)
     {
-        var entity = new Fuel() { FuelName = request.Name };
+        var entity = new Fuel() { Name = request.Name };
 
         context.Fuels.Add(entity);
 

@@ -41,8 +41,8 @@ public class EditModel(ILogger<CreateModel> logger, IMediator mediator, IApplica
 
     private async Task InitSelectListsAsync()
     {
-        ViewData["Substation1Id"] = new SelectList(await mediator.Send(new GetSubstationsQuery()), nameof(Substation.Id), nameof(Substation.NameCache));
-        ViewData["Substation2Id"] = new SelectList(await mediator.Send(new GetSubstationsQuery()), nameof(Substation.Id), nameof(Substation.NameCache));
+        ViewData["Substation1Id"] = new SelectList(await mediator.Send(new GetSubstationsQuery()), nameof(Substation.Id), nameof(Substation.Name));
+        ViewData["Substation2Id"] = new SelectList(await mediator.Send(new GetSubstationsQuery()), nameof(Substation.Id), nameof(Substation.Name));
         ViewData["OwnerId"] = new MultiSelectList(await mediator.Send(new GetOwnersQuery()), nameof(Owner.Id), nameof(Owner.Name), Transformer?.OwnerIds.Split(","));
     }
 

@@ -17,7 +17,7 @@ public class GetBaysQueryHandler(IApplicationDbContext context) : IRequestHandle
                         .Include(e => e.Substation1)
                         .Include(e => e.Element1)
                         .Include(e => e.Element2)
-                        .OrderBy(r => r.ElementNameCache)
+                        .OrderBy(r => r.Name)
                         .ToListAsync(cancellationToken);
         return bays;
     }

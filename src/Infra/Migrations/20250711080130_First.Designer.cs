@@ -415,7 +415,7 @@ partial class First
                 b.Property<DateTime?>("DeCommissioningDate")
                     .HasColumnType("TEXT");
 
-                b.Property<string>("ElementNameCache")
+                b.Property<string>("Name")
                     .IsRequired()
                     .HasColumnType("TEXT");
 
@@ -444,7 +444,7 @@ partial class First
                     .IsRequired()
                     .HasColumnType("TEXT");
 
-                b.HasIndex("ElementNameCache")
+                b.HasIndex("Name")
                     .IsUnique();
 
                 b.HasIndex("Substation1Id");
@@ -458,11 +458,11 @@ partial class First
             {
                 b.HasBaseType("Core.Entities.Common.GridEntity");
 
-                b.Property<string>("FuelName")
+                b.Property<string>("Name")
                     .IsRequired()
                     .HasColumnType("TEXT");
 
-                b.HasIndex("FuelName")
+                b.HasIndex("Name")
                     .IsUnique();
 
                 b.HasDiscriminator().HasValue("Fuel");
@@ -584,7 +584,7 @@ partial class First
                 b.Property<double>("Longitude")
                     .HasColumnType("REAL");
 
-                b.Property<string>("NameCache")
+                b.Property<string>("Name")
                     .IsRequired()
                     .HasColumnType("TEXT");
 
@@ -601,7 +601,7 @@ partial class First
 
                 b.HasIndex("LocationId");
 
-                b.HasIndex("NameCache")
+                b.HasIndex("Name")
                     .IsUnique();
 
                 b.HasIndex("VoltageLevelId");

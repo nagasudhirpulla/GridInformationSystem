@@ -43,8 +43,8 @@ public class EditModel(ILogger<EditModel> logger, IMediator mediator, IApplicati
 
     private async Task InitSelectListsAsync()
     {
-        ViewData["LineId"] = new SelectList(await mediator.Send(new GetLinesQuery()), nameof(Line.Id), nameof(Line.ElementNameCache));
-        ViewData["BusId"] = new SelectList(await mediator.Send(new GetBusesQuery()), nameof(Bus.Id), nameof(Bus.ElementNameCache));
+        ViewData["LineId"] = new SelectList(await mediator.Send(new GetLinesQuery()), nameof(Line.Id), nameof(Line.Name));
+        ViewData["BusId"] = new SelectList(await mediator.Send(new GetBusesQuery()), nameof(Bus.Id), nameof(Bus.Name));
         ViewData["OwnerId"] = new MultiSelectList(await mediator.Send(new GetOwnersQuery()), nameof(Owner.Id), nameof(Owner.Name), LineReactor.OwnerIds.Split(','));
     }
 

@@ -16,7 +16,7 @@ public class GetTransformersQueryHandler(IApplicationDbContext context) : IReque
         var transformers = await context.Transformers.AsNoTracking()
                         .Include(e => e.Substation1)
                         .Include(e => e.Substation2)
-                        .OrderBy(r => r.ElementNameCache)
+                        .OrderBy(r => r.Name)
                         .ToListAsync(cancellationToken);
         return transformers;
     }

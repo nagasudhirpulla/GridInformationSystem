@@ -42,7 +42,7 @@ public class UpdateSubFilterBankCommandHandler(IApplicationDbContext context) : 
                                                                                 }]);
 
         // derive element elName 
-        string elName = Utils.DeriveSubFilterBankName.Execute(filterBank.Substation1.NameCache, filterBank.ElementNumber, request.SubFilterTag);
+        string elName = Utils.DeriveSubFilterBankName.Execute(filterBank.Substation1.Name, filterBank.ElementNumber, request.SubFilterTag);
 
         // derive voltage level, region from substation
         string voltLvl = filterBank.VoltageLevelCache;
@@ -61,7 +61,7 @@ public class UpdateSubFilterBankCommandHandler(IApplicationDbContext context) : 
 
 
         // update entity attributes
-        entity.ElementNameCache = elName;
+        entity.Name = elName;
         entity.VoltageLevelCache = voltLvl;
         entity.RegionCache = region;
         entity.Substation1Id = filterBank.Substation1Id;

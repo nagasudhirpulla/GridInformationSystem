@@ -2,5 +2,4 @@
 
 public class Fuel : GridEntity
 {
-    public required string FuelName { get; set; }
 }

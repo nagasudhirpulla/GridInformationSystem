@@ -35,7 +35,7 @@ public class CreateHvdcPoleCommandHandler(IApplicationDbContext context) : IRequ
                                                                                 }]);
 
         // derive element name 
-        string name = Utils.DeriveHvdcPoleName.Execute(substation.NameCache, request.ElementNumber);
+        string name = Utils.DeriveHvdcPoleName.Execute(substation.Name, request.ElementNumber);
 
         // derive voltage level, region from substation
         string voltLvl = substation.VoltageLevel.Level;
@@ -49,7 +49,7 @@ public class CreateHvdcPoleCommandHandler(IApplicationDbContext context) : IRequ
         var entity = new HvdcPole()
         {
             PoleType = request.PoleType,
-            ElementNameCache = name,
+            Name = name,
             VoltageLevelCache = voltLvl,
             RegionCache = region,
             Substation1Id = request.SubstationId,

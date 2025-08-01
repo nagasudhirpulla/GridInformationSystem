@@ -50,7 +50,7 @@ public class CreateHvdcLineCommandHandler(IApplicationDbContext context) : IRequ
         // insert element to db
         var entity = new HvdcLine()
         {
-            ElementNameCache = lineName,
+            Name = lineName,
             VoltageLevelCache = voltLevel,
             RegionCache = region,
             Substation1Id = bus1.Substation1Id,

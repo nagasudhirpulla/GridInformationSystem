@@ -40,7 +40,7 @@ public class CreateBusReactorCommandHandler(IApplicationDbContext context) : IRe
                                                                                 }]);
 
         // derive element name 
-        string name = Utils.DeriveBusReactorName.Execute(substation.NameCache, request.ElementNumber);
+        string name = Utils.DeriveBusReactorName.Execute(substation.Name, request.ElementNumber);
 
         // derive voltage level, region from substation
         string voltLvl = substation.VoltageLevel.Level;
@@ -53,7 +53,7 @@ public class CreateBusReactorCommandHandler(IApplicationDbContext context) : IRe
         // insert bus to db
         var entity = new BusReactor()
         {
-            ElementNameCache = name,
+            Name = name,
             VoltageLevelCache = voltLvl,
             RegionCache = region,
             Substation1Id = bus.Substation1Id,

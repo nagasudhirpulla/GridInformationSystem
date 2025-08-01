@@ -15,7 +15,7 @@ public class GetHvdcPoleesQueryHandler(IApplicationDbContext context) : IRequest
     {
         var hvdcPoles = await context.HvdcPoles.AsNoTracking()
                         .Include(e => e.Substation1)
-                        .OrderBy(r => r.ElementNameCache)
+                        .OrderBy(r => r.Name)
                         .ToListAsync(cancellationToken);
         return hvdcPoles;
     }

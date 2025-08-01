@@ -15,7 +15,7 @@ public class GetFilterBanksQueryHandler(IApplicationDbContext context) : IReques
     {
         var filterBanks = await context.FilterBanks.AsNoTracking()
                         .Include(e => e.Substation1)
-                        .OrderBy(r => r.ElementNameCache)
+                        .OrderBy(r => r.Name)
                         .ToListAsync(cancellationToken);
         return filterBanks;
     }

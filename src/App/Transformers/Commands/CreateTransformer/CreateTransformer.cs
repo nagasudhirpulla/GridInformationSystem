@@ -55,7 +55,7 @@ public class CreateTransformerCommandHandler(IApplicationDbContext context) : IR
         // insert transformer to db
         var entity = new Transformer()
         {
-            ElementNameCache = transName,
+            Name = transName,
             VoltageLevelCache = Utils.DeriveTransformerVoltageLevel.Execute(hvLvLevels.ElementAt(0), hvLvLevels.ElementAt(1)),
             RegionCache = sub1.RegionCache,
             Substation1Id = request.Substation1Id,

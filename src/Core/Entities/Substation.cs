@@ -2,8 +2,6 @@
 
 public class Substation : GridEntity
 {
-    public required string NameCache { get; set; }
-
     public required string OwnerNamesCache { get; set; }
 
     public required string RegionCache { get; set; }

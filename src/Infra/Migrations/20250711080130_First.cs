@@ -538,7 +538,7 @@ public partial class First : Migration
         migrationBuilder.CreateIndex(
             name: "IX_GridEntities_ElementNameCache",
             table: "GridEntities",
-            column: "ElementNameCache",
+            column: "Name",
             unique: true);
 
         migrationBuilder.CreateIndex(
@@ -554,7 +554,7 @@ public partial class First : Migration
         migrationBuilder.CreateIndex(
             name: "IX_GridEntities_FuelName",
             table: "GridEntities",
-            column: "FuelName",
+            column: "Name",
             unique: true);
 
         migrationBuilder.CreateIndex(
@@ -602,7 +602,7 @@ public partial class First : Migration
         migrationBuilder.CreateIndex(
             name: "IX_GridEntities_NameCache",
             table: "GridEntities",
-            column: "NameCache",
+            column: "Name",
             unique: true);
 
         migrationBuilder.CreateIndex(

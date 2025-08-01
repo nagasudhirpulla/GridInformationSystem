@@ -50,7 +50,7 @@ public class CreateLineCommandHandler(IApplicationDbContext context) : IRequestH
         // insert element to db
         var entity = new Line()
         {
-            ElementNameCache = lineName,
+            Name = lineName,
             VoltageLevelCache = voltLevel,
             RegionCache = region,
             Substation1Id = bus1.Substation1Id,

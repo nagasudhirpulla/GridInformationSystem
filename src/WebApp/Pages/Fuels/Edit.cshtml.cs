@@ -17,7 +17,7 @@ public class EditModel(ILogger<CreateModel> logger, IMediator mediator, IApplica
     public async Task OnGetAsync(int id)
     {
         var region = await mediator.Send(new GetFuelQuery() { Id = id });
-        Fuel = new UpdateFuelCommand() { Id = region.Id, FuelName = region.FuelName };
+        Fuel = new UpdateFuelCommand() { Id = region.Id, FuelName = region.Name };
     }
 
 

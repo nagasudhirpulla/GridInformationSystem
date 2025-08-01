@@ -14,7 +14,6 @@ FSC
 
 public class Element : GridEntity
 {
-    public required string ElementNameCache { get; set; }
 
     public required string VoltageLevelCache { get; set; }
 

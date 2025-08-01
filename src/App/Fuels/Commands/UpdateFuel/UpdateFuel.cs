@@ -22,10 +22,10 @@ public class UpdateFuelCommandHandler(IApplicationDbContext context) : IRequestH
 
         Guard.Against.NotFound(request.Id, entity);
 
-        var existingFuelName = entity.FuelName;
+        var existingFuelName = entity.Name;
 
         // update entity attributes
-        entity.FuelName = request.FuelName;
+        entity.Name = request.FuelName;
 
         await context.SaveChangesAsync(cancellationToken);
 

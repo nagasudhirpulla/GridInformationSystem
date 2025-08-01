@@ -24,7 +24,7 @@ public class UpdateFuelCommandValidator : AbstractValidator<UpdateFuelCommand>
     {
         return await _context.Fuels
             .Where(l => l.Id != model.Id)
-            .AllAsync(l => l.FuelName != title, cancellationToken);
+            .AllAsync(l => l.Name != title, cancellationToken);
     }
 
 }

@@ -13,7 +13,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>@nameof(Transformer.ElementNameCache)</th>
+            <th>@nameof(Transformer.Name)</th>
             <th>@nameof(Transformer.VoltageLevelCache)</th>
             <th>@nameof(Transformer.RegionCache)</th>
             <th>@nameof(Transformer.Substation1)</th>
@@ -26,7 +26,7 @@
             <th>@nameof(Transformer.IsImportantGridElement)</th>
             <th>@nameof(Transformer.MvaCapacity)</th>
             <th>@nameof(Transformer.Make)</th>
-            <th>@nameof(Transformer.TransformerType)</th>
+            <th>@nameof(Transformer.Make)</th>
             <th></th>
         </tr>
     </thead>
@@ -35,7 +35,7 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ElementNameCache)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.VoltageLevelCache)
@@ -44,10 +44,10 @@
                     @Html.DisplayFor(modelItem => item.RegionCache)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Substation1.NameCache)
+                    @Html.DisplayFor(modelItem => item.Substation1.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => (item.Substation2 == null) ? "" : item.Substation2.NameCache)
+                    @Html.DisplayFor(modelItem => (item.Substation2 == null) ? "" : item.Substation2.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ElementNumber)

@@ -25,7 +25,7 @@ public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
 
     private async Task InitSelectListsAsync()
     {
-        ViewData["FilterBankId"] = new SelectList(await mediator.Send(new GetFilterBanksQuery()), nameof(FilterBank.Id), nameof(FilterBank.ElementNameCache));
+        ViewData["FilterBankId"] = new SelectList(await mediator.Send(new GetFilterBanksQuery()), nameof(FilterBank.Id), nameof(FilterBank.Name));
         ViewData["OwnerId"] = new MultiSelectList(await mediator.Send(new GetOwnersQuery()), nameof(Owner.Id), nameof(Owner.Name), NewSubFilterBank?.OwnerIds.Split(","));
     }
 

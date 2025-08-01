@@ -23,6 +23,6 @@ public class CreateFuelCommandValidator : AbstractValidator<CreateFuelCommand>
     public async Task<bool> BeUniqueName(string name, CancellationToken cancellationToken)
     {
         return await _context.Fuels
-            .AllAsync(l => l.FuelName != name, cancellationToken);
+            .AllAsync(l => l.Name != name, cancellationToken);
     }
 }

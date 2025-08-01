@@ -46,7 +46,7 @@ public class CreateGeneratingUnitCommandHandler(IApplicationDbContext context) :
         // insert element to db
         var entity = new GeneratingUnit()
         {
-            ElementNameCache = name,
+            Name = name,
             VoltageLevelCache = voltLvl,
             RegionCache = region,
             Substation1Id = request.GeneratingStationId,

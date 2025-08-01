@@ -16,7 +16,7 @@ public class GetHvdcLinesQueryHandler(IApplicationDbContext context) : IRequestH
         var lines = await context.HvdcLines.AsNoTracking()
                         .Include(e => e.Substation1)
                         .Include(e => e.Substation2)
-                        .OrderBy(r => r.ElementNameCache)
+                        .OrderBy(r => r.Name)
                         .ToListAsync(cancellationToken);
         return lines;
     }

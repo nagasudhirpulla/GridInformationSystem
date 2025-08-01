@@ -94,7 +94,7 @@ public class UpdateGeneratingStationCommandHandler(IApplicationDbContext context
         if (isNameChangeRequested)
         {
             entity.Name = request.Name;
-            entity.NameCache = request.Name;
+            entity.Name = request.Name;
         }
 
         // update ownerIds if required

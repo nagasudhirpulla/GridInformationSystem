@@ -117,7 +117,7 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
         if (isNameChangeRequired)
         {
             var newName = await SubstationUtils.DeriveSubstationName(request.VoltageLevelId, request.LocationId, context, cancellationToken);
-            entity.NameCache = newName;
+            entity.Name = newName;
         }
 
         // save changes to DB

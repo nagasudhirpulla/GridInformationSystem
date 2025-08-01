@@ -15,7 +15,7 @@ public class GetGeneratingUnitsQueryHandler(IApplicationDbContext context) : IRe
     {
         var generatingUnits = await context.GeneratingUnits.AsNoTracking()
                         .Include(e => e.Substation1)
-                        .OrderBy(r => r.ElementNameCache)
+                        .OrderBy(r => r.Name)
                         .ToListAsync(cancellationToken);
         return generatingUnits;
     }

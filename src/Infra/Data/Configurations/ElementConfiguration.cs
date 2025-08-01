@@ -9,7 +9,7 @@ public class ElementConfiguration : IEntityTypeConfiguration<Element>
     public void Configure(EntityTypeBuilder<Element> builder)
     {
         builder.HasDiscriminator<string>(nameof(Element.Discriminator));
-        builder.HasIndex(e => e.ElementNameCache).IsUnique();
+        builder.HasIndex(e => e.Name).IsUnique();
 
         builder
             .HasOne(o => o.Substation1)

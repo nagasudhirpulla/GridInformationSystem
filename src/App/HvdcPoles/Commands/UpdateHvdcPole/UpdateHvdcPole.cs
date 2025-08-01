@@ -41,7 +41,7 @@ public class UpdateHvdcPoleCommandHandler(IApplicationDbContext context) : IRequ
                                                                                 }]);
 
         // derive element name 
-        string name = Utils.DeriveHvdcPoleName.Execute(substation.NameCache, request.ElementNumber);
+        string name = Utils.DeriveHvdcPoleName.Execute(substation.Name, request.ElementNumber);
 
         // derive voltage level, region from substation
         string voltLvl = substation.VoltageLevel.Level;
@@ -61,7 +61,7 @@ public class UpdateHvdcPoleCommandHandler(IApplicationDbContext context) : IRequ
 
         // update entity attributes
         entity.PoleType = request.PoleType;
-        entity.ElementNameCache = name;
+        entity.Name = name;
         entity.VoltageLevelCache = voltLvl;
         entity.RegionCache = region;
         entity.Substation1Id = request.SubstationId;

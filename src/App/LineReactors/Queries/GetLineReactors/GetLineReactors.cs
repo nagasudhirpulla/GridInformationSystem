@@ -16,7 +16,7 @@ public class GetLineReactorsQueryHandler(IApplicationDbContext context) : IReque
         var lines = await context.LineReactors.AsNoTracking()
                         .Include(e => e.Substation1)
                         .Include(e => e.Line)
-                        .OrderBy(r => r.ElementNameCache)
+                        .OrderBy(r => r.Name)
                         .ToListAsync(cancellationToken);
         return lines;
     }

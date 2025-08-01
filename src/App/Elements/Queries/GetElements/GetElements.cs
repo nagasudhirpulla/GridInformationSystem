@@ -14,7 +14,7 @@ public class GetElementsQueryHandler(IApplicationDbContext context) : IRequestHa
     public async Task<List<Element>> Handle(GetElementsQuery request, CancellationToken cancellationToken)
     {
         var elements = await context.Elements.AsNoTracking()
-                        .OrderBy(r => r.ElementNameCache)
+                        .OrderBy(r => r.Name)
                         .ToListAsync(cancellationToken);
         return elements;
     }

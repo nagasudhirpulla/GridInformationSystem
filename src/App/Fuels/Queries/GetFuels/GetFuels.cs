@@ -14,7 +14,7 @@ public class GetFuelsQueryHandler(IApplicationDbContext context) : IRequestHandl
     public async Task<List<Fuel>> Handle(GetFuelsQuery request, CancellationToken cancellationToken)
     {
         var fuels = await context.Fuels.AsNoTracking()
-                        .OrderBy(r => r.FuelName)
+                        .OrderBy(r => r.Name)
                         .ToListAsync(cancellationToken);
         return fuels;
     }

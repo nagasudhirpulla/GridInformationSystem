@@ -66,7 +66,7 @@ public class UpdateTransformerCommandHandler(IApplicationDbContext context) : IR
         }
 
         // update entity attributes
-        entity.ElementNameCache = transName;
+        entity.Name = transName;
         entity.VoltageLevelCache = Utils.DeriveTransformerVoltageLevel.Execute(hvLvLevels.ElementAt(0), hvLvLevels.ElementAt(1));
         entity.RegionCache = sub1.RegionCache;
         entity.Substation1Id = request.Substation1Id;

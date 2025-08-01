@@ -26,8 +26,8 @@ public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
 
     private async Task InitSelectListsAsync()
     {
-        ViewData["LineId"] = new SelectList(await mediator.Send(new GetLinesQuery()), nameof(Line.Id), nameof(Line.ElementNameCache));
-        ViewData["SubstationId"] = new SelectList(await mediator.Send(new GetSubstationsQuery()), nameof(Substation.Id), nameof(Substation.NameCache));
+        ViewData["LineId"] = new SelectList(await mediator.Send(new GetLinesQuery()), nameof(Line.Id), nameof(Line.Name));
+        ViewData["SubstationId"] = new SelectList(await mediator.Send(new GetSubstationsQuery()), nameof(Substation.Id), nameof(Substation.Name));
         ViewData["OwnerId"] = new MultiSelectList(await mediator.Send(new GetOwnersQuery()), nameof(Owner.Id), nameof(Owner.Name), NewLineReactor?.OwnerIds.Split(","));
     }
 

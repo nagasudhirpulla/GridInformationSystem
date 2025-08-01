@@ -44,7 +44,7 @@ public class CreateGeneratingStationCommandHandler(IApplicationDbContext context
         var entity = new GeneratingStation()
         {
             Name = request.Name,
-            NameCache = request.Name,
+            Name = request.Name,
             OwnerNamesCache = ownersCache,
             RegionCache = location.RegionCache,
             VoltageLevelId = request.VoltageLevelId,
