@@ -1,0 +1,44 @@
+﻿@page
+@using Core.Entities
+@model WebApp.Pages.GridEntities.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @nameof(GridEntity.Id)
+            </th>
+            <th>
+                @nameof(GridEntity.Name)
+            </th>
+            <th>
+                Type
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.GridEntities)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GetType())
+                </td>
+                <td>
+                    <a asp-page="/Measurements/Create" asp-route-elementId="@item.Id">Create Measurement</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

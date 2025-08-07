@@ -62,7 +62,6 @@ Grid Elements database service for managing and querying Grid Elements database
 
 ## TODOs
 * Measurements UI layer pending
-* update menu items in auth partial for elements management
 * restrict substations changes in lines when there are connected elements like line reactors
 * Define control area and attach it to element
 * Model MSC, MSR, TCSC, STATCOM instead of compensator
