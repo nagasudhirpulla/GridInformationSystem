@@ -1,5 +1,48 @@
 ﻿@page
 @model WebApp.Pages.Measurements.IndexModel
 @{
-    // TODO complete this
+    ViewData["Title"] = "Index";
 }
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="./Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Entity</th>
+            <th>Datasource</th>
+            <th>Metric</th>
+            <th>Datasource Measurement Id</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Measurements)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Entity.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Datasource.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Metric.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HistorianPntId)
+                </td>
+                <td>
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

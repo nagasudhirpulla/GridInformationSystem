@@ -1,12 +1,18 @@
+using App.Measurements.Queries.GetMeasurements;
+using Core.Entities;
+using Core.Entities.Data;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebApp.Pages.Measurements
+namespace WebApp.Pages.Measurements;
+
+public class IndexModel(IMediator mediator) : PageModel
 {
-    public class IndexModel : PageModel
+    public IList<Measurement> Measurements { get; set; } = [];
+
+    public async Task OnGetAsync()
     {
-        public void OnGet()
-        {
-        }
+        Measurements = await mediator.Send(new GetMeasurementsQuery());
     }
 }
