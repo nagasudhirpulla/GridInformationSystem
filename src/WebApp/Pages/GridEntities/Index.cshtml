@@ -33,10 +33,10 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.GetType())
+                    @Html.DisplayFor(modelItem => item.GetType().Name)
                 </td>
                 <td>
-                    <a asp-page="/Measurements/Create" asp-route-elementId="@item.Id">Create Measurement</a>
+                    <a asp-page="/Measurements/Create" asp-route-entityId="@item.Id">Create Measurement</a>
                 </td>
             </tr>
         }
