@@ -17,10 +17,15 @@ public class CreateModel(ILogger<CreateModel> logger, IMediator mediator, IAppli
 {
     [BindProperty]
     public required CreateMeasurementCommand NewMeasurement { get; set; }
-    public async Task OnGetAsync(int entityId)
+    public async Task<IActionResult> OnGetAsync(int entityId)
     {
+        if (entityId <= 0)
+        {
+            return NotFound();
+        }
         NewMeasurement = new() { EntityId = entityId, MetricId = -1, HistorianPntId = "", DatasourceId = -1 };
         await InitSelectListsAsync();
+        return Page();
     }
 
     private async Task InitSelectListsAsync()

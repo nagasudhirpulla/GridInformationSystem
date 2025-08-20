@@ -8,7 +8,7 @@ public class MeasurementConfiguration : IEntityTypeConfiguration<Measurement>
 {
     public void Configure(EntityTypeBuilder<Measurement> builder)
     {
-        builder.HasKey(e => new { e.EntityId, e.MetricId, e.DatasourceId });
+        builder.HasIndex(e => new { e.EntityId, e.MetricId, e.DatasourceId }).IsUnique();
 
         builder
             .HasOne(o => o.Entity)
