@@ -72,6 +72,12 @@ For example, if a substation name changes, a notification can be issued to updat
 * lat long value object implementation
 * lat long to be made optional
 
+## How to handle domain events
+* All base entities have domain events (`List<BaseEvent> _domainEvents`) that can be dispatched while saving the entity changes
+* Multiple Events are defined that are derived from BaseEvent ([example](https://github.com/jasontaylordev/CleanArchitecture/blob/b46a41b20059316e897b9a77aa277be7d42cb974/src/Domain/Events/TodoItemCreatedEvent.cs#L4)). These events can be dispatched from the mediatr command handlers ([example](https://github.com/jasontaylordev/CleanArchitecture/blob/b46a41b20059316e897b9a77aa277be7d42cb974/src/Application/TodoItems/Commands/CreateTodoItem/CreateTodoItem.cs#L32))
+* Event handlers are defined as INotificationHandler<EventType> ([example](https://github.com/jasontaylordev/CleanArchitecture/blob/b46a41b20059316e897b9a77aa277be7d42cb974/src/Application/TodoItems/EventHandlers/TodoItemCreatedEventHandler.cs#L6))
+* Before persisting the entity changes into the database, domain events are dispatched (using mediatr.Publish) first and then entity changes are committed ([example](https://github.com/jasontaylordev/CleanArchitecture/blob/b46a41b20059316e897b9a77aa277be7d42cb974/src/Infrastructure/Data/Interceptors/DispatchDomainEventsInterceptor.cs#L8)). But for scenarios like updating cache columns, event handlers should run after entity update. Both entity update and domain events should run atomically in a transaction ([example](https://github.com/nagasudhirpulla/wrldc_codes_mgmt/blob/2f44fd53e9863d808949e9023820fcec89574e03/src/Infra/Persistence/AppDbContext.cs#L60))
+
 ## References
 * Clean architecture - https://github.com/jasontaylordev/CleanArchitecture/blob/a713468e27deb655eeb96b340318274eeccc5c3f/src/Infrastructure/Data/ApplicationDbContext.cs
 * Many-to-Many in EF Core - https://learn.microsoft.com/en-us/ef/core/modeling/relationships/many-to-many#direct-use-of-join-table
