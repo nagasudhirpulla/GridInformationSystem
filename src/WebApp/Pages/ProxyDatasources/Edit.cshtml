@@ -1,0 +1,38 @@
+﻿@page
+@model WebApp.Pages.ProxyDatasources.EditModel
+@{
+    ViewData["Title"] = "Edit Proxy Datasource";
+}
+
+<div class="row justify-content-center align-items-center">
+    <div class="col col-md-4 col-lg-4 col-xl-3">
+        <h2>@ViewData["Title"]</h2>
+        <form method="post">
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input asp-for="Datasource.Id" type="hidden" />
+            <div class="mb-3">
+                <label asp-for="Datasource.Name" class="form-label"></label>
+                <input asp-for="Datasource.Name" class="form-control" />
+                <span asp-validation-for="Datasource.Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Datasource.BaseUrl" class="form-label"></label>
+                <input asp-for="Datasource.BaseUrl" class="form-control" />
+                <span asp-validation-for="Datasource.BaseUrl" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Datasource.ApiKey" class="form-label"></label>
+                <input asp-for="Datasource.ApiKey" class="form-control" />
+                <span asp-validation-for="Datasource.ApiKey" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-success mb-1">Update</button>
+        </form>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

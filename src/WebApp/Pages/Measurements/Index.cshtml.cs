@@ -1,8 +1,6 @@
 using App.Measurements.Queries.GetMeasurements;
-using Core.Entities;
 using Core.Entities.Data;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace WebApp.Pages.Measurements;

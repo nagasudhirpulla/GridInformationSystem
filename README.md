@@ -58,6 +58,7 @@ Grid Elements database service for managing and querying Grid Elements database
 * Filter Bank
 * SubFilterBank
 * Datasource
+* ProxyDatasource
 * Metric
 * Measurement
 

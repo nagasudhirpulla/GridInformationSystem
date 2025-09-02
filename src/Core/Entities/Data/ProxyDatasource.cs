@@ -7,4 +7,5 @@
 public class ProxyDatasource : Datasource
 {
     public required string BaseUrl { get; set; }
+    public string? ApiKey { get; set; }
 }
