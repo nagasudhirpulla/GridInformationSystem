@@ -39,6 +39,7 @@ public interface IApplicationDbContext
     DbSet<SubFilterBank> SubFilterBanks { get; }
     DbSet<Transformer> Transformers { get; }
     DbSet<Datasource> Datasources { get; }
+    DbSet<ProxyDatasource> ProxyDatasources { get; }
     DbSet<Metric> Metrics { get; }
     DbSet<Measurement> Measurements { get; }
 
