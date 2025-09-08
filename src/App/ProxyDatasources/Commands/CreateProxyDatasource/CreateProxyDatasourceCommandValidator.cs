@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
+using NJsonSchema;
 
 namespace App.ProxyDatasources.Commands.CreateProxyDatasource;
 
@@ -25,6 +26,12 @@ public class CreateProxyDatasourceCommandValidator : AbstractValidator<CreatePro
             .Must(BeValidUrl)
                 .WithMessage("'{PropertyName}' must be valid URL.")
                 .WithErrorCode("Invalid");
+        RuleFor(v => v.PayloadSchema)
+            .NotEmpty()
+            .MaximumLength(200)
+            .MustAsync(BeValidJsonSchema)
+                .WithMessage("'{PropertyName}' should be valid JSON Schema.")
+                .WithErrorCode("Invalid");
     }
 
     public async Task<bool> BeUniqueName(string name, CancellationToken cancellationToken)
@@ -45,5 +52,19 @@ public class CreateProxyDatasourceCommandValidator : AbstractValidator<CreatePro
             return true;
         else
             return false;
+    }
+
+
+    public static async Task<bool> BeValidJsonSchema(string schemaStr, CancellationToken cancellationToken)
+    {
+        try
+        {
+            _ = await JsonSchema.FromJsonAsync(schemaStr, cancellationToken);
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
     }
 }

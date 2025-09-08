@@ -8,4 +8,7 @@ public class ProxyDatasource : Datasource
 {
     public required string BaseUrl { get; set; }
     public string? ApiKey { get; set; }
+
+    // JSON schema of the request payload that will be sent to datasource
+    public string? PayloadSchema { get; set; }
 }

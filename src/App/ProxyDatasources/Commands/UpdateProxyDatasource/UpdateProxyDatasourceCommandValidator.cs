@@ -26,6 +26,12 @@ public class UpdateProxyDatasourceCommandValidator : AbstractValidator<UpdatePro
             .Must(CreateProxyDatasourceCommandValidator.BeValidUrl)
                 .WithMessage("'{PropertyName}' must be valid URL.")
                 .WithErrorCode("Invalid");
+        RuleFor(v => v.PayloadSchema)
+            .NotEmpty()
+            .MaximumLength(200)
+            .MustAsync(CreateProxyDatasourceCommandValidator.BeValidJsonSchema)
+                .WithMessage("'{PropertyName}' should be valid JSON Schema.")
+                .WithErrorCode("Invalid");
     }
 
     public async Task<bool> BeUniqueName(UpdateProxyDatasourceCommand model, string title, CancellationToken cancellationToken)

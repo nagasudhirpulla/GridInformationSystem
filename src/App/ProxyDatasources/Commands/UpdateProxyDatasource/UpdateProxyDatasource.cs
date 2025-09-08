@@ -13,6 +13,7 @@ public record UpdateProxyDatasourceCommand : IRequest
     public required string Name { get; init; }
     public required string BaseUrl { get; init; }
     public string? ApiKey { get; init; }
+    public string? PayloadSchema { get; init; }
 }
 
 public class UpdateProxyDatasourceCommandHandler(IApplicationDbContext context) : IRequestHandler<UpdateProxyDatasourceCommand>
@@ -30,6 +31,7 @@ public class UpdateProxyDatasourceCommandHandler(IApplicationDbContext context) 
         entity.Name = request.Name;
         entity.BaseUrl = request.BaseUrl;
         entity.ApiKey = request.ApiKey;
+        entity.PayloadSchema = request.PayloadSchema;
 
         await context.SaveChangesAsync(cancellationToken);
 

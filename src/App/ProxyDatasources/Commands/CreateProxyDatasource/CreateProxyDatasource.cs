@@ -9,13 +9,14 @@ public record CreateProxyDatasourceCommand : IRequest<int>
     public required string Name { get; init; }
     public required string BaseUrl { get; init; }
     public string? ApiKey { get; init; }
+    public string? PayloadSchema { get; init; }
 }
 
 public class CreateProxyDatasourceCommandHandler(IApplicationDbContext context) : IRequestHandler<CreateProxyDatasourceCommand, int>
 {
     public async Task<int> Handle(CreateProxyDatasourceCommand request, CancellationToken cancellationToken)
     {
-        var entity = new ProxyDatasource() { Name = request.Name, BaseUrl = request.BaseUrl, ApiKey = request.ApiKey };
+        var entity = new ProxyDatasource() { Name = request.Name, BaseUrl = request.BaseUrl, ApiKey = request.ApiKey, PayloadSchema = request.PayloadSchema };
 
         context.ProxyDatasources.Add(entity);
 
