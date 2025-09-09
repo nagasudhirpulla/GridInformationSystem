@@ -1,25 +1,47 @@
 ﻿using App.MeasurementData.Dtos;
 using App.MeasurementData.Interfaces;
-using System;
 using System.Text;
 using System.Text.Json;
+using System.Web;
 
 namespace Infra.Data;
 
 public class ProxyDataSourceFetcher : IProxyDataSourceFetcher
 {
+    private static int GetUtcSeconds(DateTime dt)
+    {
+        return (int)dt.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+    }
+
     public async Task<List<MeasurementDataDto>> FetchData(string measHistorianId, string baseUrl, string? apiKey, string? jsonPayload, DateTime fromTime, DateTime toTime)
     {
         try
         {
             using var client = new HttpClient();
-            // TODO use times, measId, api key  in payload
+
+            // use api key
+            if (apiKey != null)
+            {
+                client.DefaultRequestHeaders.Authorization = new("Bearer", apiKey);
+            }
+
+            // create full URI with query parameters
+            UriBuilder uriBuilder = new(baseUrl)
+            {
+                Query = $"fromTime={GetUtcSeconds(fromTime)}&toTime={GetUtcSeconds(fromTime)}&id={HttpUtility.UrlEncode(measHistorianId)}"
+            };
+            Uri requestUri = uriBuilder.Uri;
+
+            // send request for data
             var postBody = new StringContent(jsonPayload ?? "{}", Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(baseUrl, postBody);
+            HttpResponseMessage response = await client.PostAsync(requestUri, postBody);
+
+            // parse response
             response.EnsureSuccessStatusCode(); // Throws an exception for non-success status codes
-            // TODO optimize this
-            string responseBody = await response.Content.ReadAsStringAsync();
-            var samples = JsonSerializer.Deserialize<List<MeasurementDataDto>>(responseBody);
+            string responseString = await response.Content.ReadAsStringAsync();
+            var samples = JsonSerializer.Deserialize<List<MeasurementDataDto>>(responseString);
+
+            // return samples
             return samples ?? [];
         }
         catch (HttpRequestException)
