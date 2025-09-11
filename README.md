@@ -63,7 +63,7 @@ Grid Elements database service for managing and querying Grid Elements database
 * Measurement
 
 ## TODOs
-* complete IDataIngestionService and DataIngestionService
+* Create Data ingestion API and Data Query API. Plan authentication
 * Create DB trigger type of notification when an element changes so that policies can be checked and caches can be updated with in a transaction.
 For example, if a substation name changes, a notification can be issued to update all related elements names with in a trasaction so that atomicity can be implemented.
 * restrict substations changes in lines when there are connected elements like line reactors
@@ -90,3 +90,5 @@ For example, if a substation name changes, a notification can be issued to updat
 * Query items from DB with pagination - https://github.com/jasontaylordev/CleanArchitecture/blob/main/src/Application/TodoItems/Queries/GetTodoItemsWithPagination/GetTodoItemsWithPagination.cs
 * Use @functions to call dotnet function in razor page javascript callback - https://stackoverflow.com/questions/61846815/how-to-add-a-event-to-a-button-using-razor/61864703 , https://learn.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-9.0
 * Dotnet QuickGrid for displaying tabular data
+* SQLite db initialization in C# - https://learn.microsoft.com/en-us/windows/apps/develop/data-access/sqlite-data-access#initialize-the-sqlite-database
+* API Auth with JWT token in .NET - https://www.c-sharpcorner.com/article/authentication-and-authorization-in-asp-net-core-web-api-with-json-web-tokens/

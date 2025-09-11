@@ -1,8 +1,10 @@
 ﻿using App.Common.Interfaces;
+using App.MeasurementData.Interfaces;
 using Ardalis.GuardClauses;
 using Core.Constants;
 using Infra.Data;
 using Infra.Data.Interceptors;
+using Infra.Data.LocalMeasDataStores;
 using Infra.Identity;
 using Infra.Identity.TokenProviders;
 using Microsoft.AspNetCore.Identity;
@@ -36,6 +38,7 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+        services.AddScoped<IMeasDataStore, SqliteMeasDataStore>();
         services.AddScoped<ApplicationDbContextInitialiser>();
 
 #if (UseApiOnly)

@@ -1,5 +1,6 @@
 ﻿using App.MeasurementData.Dtos;
 using App.MeasurementData.Interfaces;
+using App.Utils;
 using System.Text;
 using System.Text.Json;
 using System.Web;
@@ -8,11 +9,6 @@ namespace Infra.Data;
 
 public class ProxyDataSourceFetcher : IProxyDataSourceFetcher
 {
-    private static int GetUtcSeconds(DateTime dt)
-    {
-        return (int)dt.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
-    }
-
     public async Task<List<MeasurementDataDto>> FetchData(string measHistorianId, string baseUrl, string? apiKey, string? jsonPayload, DateTime fromTime, DateTime toTime)
     {
         try
@@ -28,7 +24,7 @@ public class ProxyDataSourceFetcher : IProxyDataSourceFetcher
             // create full URI with query parameters
             UriBuilder uriBuilder = new(baseUrl)
             {
-                Query = $"fromTime={GetUtcSeconds(fromTime)}&toTime={GetUtcSeconds(fromTime)}&id={HttpUtility.UrlEncode(measHistorianId)}"
+                Query = $"fromTime={TimeUtils.GetUtcMs(fromTime)}&toTime={TimeUtils.GetUtcMs(fromTime)}&id={HttpUtility.UrlEncode(measHistorianId)}"
             };
             Uri requestUri = uriBuilder.Uri;
 
