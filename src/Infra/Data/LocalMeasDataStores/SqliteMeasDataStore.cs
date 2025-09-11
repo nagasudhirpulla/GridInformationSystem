@@ -64,11 +64,11 @@ public class SqliteMeasDataStore(IConfiguration configuration) : IMeasDataStore
         upsertCommand.Parameters.Add(new SqliteParameter("@measId", SqliteType.Integer));
         upsertCommand.Parameters.Add(new SqliteParameter("@value", SqliteType.Real));
 
-        foreach (var s in samples)
+        foreach (var (measId, timestamp, value) in samples)
         {
-            upsertCommand.Parameters["@timestamp"].Value = s.timestamp;
-            upsertCommand.Parameters["@measId"].Value = s.measId;
-            upsertCommand.Parameters["@value"].Value = s.value;
+            upsertCommand.Parameters["@timestamp"].Value = timestamp;
+            upsertCommand.Parameters["@measId"].Value = measId;
+            upsertCommand.Parameters["@value"].Value = value;
             upsertCommand.ExecuteNonQuery();
         }
     }
