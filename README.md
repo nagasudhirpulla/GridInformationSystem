@@ -92,3 +92,37 @@ For example, if a substation name changes, a notification can be issued to updat
 * Dotnet QuickGrid for displaying tabular data
 * SQLite db initialization in C# - https://learn.microsoft.com/en-us/windows/apps/develop/data-access/sqlite-data-access#initialize-the-sqlite-database
 * API Auth with JWT token in .NET - https://www.c-sharpcorner.com/article/authentication-and-authorization-in-asp-net-core-web-api-with-json-web-tokens/
+* Read only DbContext for API Web app so that it can query elements information from elements app - https://stackoverflow.com/a/10438977/2746323
+
+```csharp
+public class MyReadOnlyContext : DbContext
+{
+    // Use ReadOnlyConnectionString from App/Web.config
+    public MyContext()
+        : base("Name=ReadOnlyConnectionString")
+    {
+    }
+
+    // Don't expose Add(), Remove(), etc.
+    public DbQuery<Customer> Customers
+    {
+        get
+        {
+            // Don't track changes to query results
+            return Set<Customer>().AsNoTracking();
+        }
+    }
+
+    public override int SaveChanges()
+    {
+        // Throw if they try to call this
+        throw new InvalidOperationException("This context is read-only.");
+    }
+
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        // Need this since there is no DbSet<Customer> property
+        modelBuilder.Entity<Customer>();
+    }
+}
+```
