@@ -3,27 +3,26 @@ using App.Common.Interfaces;
 using Ardalis.GuardClauses;
 using MediatR;
 
-namespace App.Fuels.Commands.UpdateFuel;
+namespace App.ApiRoles.Commands.UpdateApiRole;
 
 [Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
-public record UpdateFuelCommand : IRequest
+public record UpdateApiRoleCommand : IRequest
 {
     public int Id { get; init; }
-
-    public required string FuelName { get; init; }
+    public required string ApiRoleName { get; init; }
 }
 
-public class UpdateFuelCommandHandler(IApplicationDbContext context) : IRequestHandler<UpdateFuelCommand>
+public class UpdateApiRoleCommandHandler(IApplicationDbContext context) : IRequestHandler<UpdateApiRoleCommand>
 {
-    public async Task Handle(UpdateFuelCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateApiRoleCommand request, CancellationToken cancellationToken)
     {
-        var entity = await context.Fuels
+        var entity = await context.ApiRoles
             .FindAsync([request.Id], cancellationToken);
 
         Guard.Against.NotFound(request.Id, entity);
 
         // update entity attributes
-        entity.Name = request.FuelName;
+        entity.Name = request.ApiRoleName;
 
         await context.SaveChangesAsync(cancellationToken);
 
