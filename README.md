@@ -63,7 +63,7 @@ Grid Elements database service for managing and querying Grid Elements database
 * Measurement
 
 ## TODOs
-* Create app and UI layers for API clients and API roles
+* Create app and UI layers for API clients and API roles, app layer done for api role, app layer done for api client create
 * Restrict on delete in all many-to-many relations
 * Create Data ingestion API and Data Query API. Authentication would be by jwt tokens issued by api client keys
 * Create DB trigger type of notification when an element changes so that policies can be checked and caches can be updated with in a transaction.
