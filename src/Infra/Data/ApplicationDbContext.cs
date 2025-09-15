@@ -66,6 +66,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<Measurement> Measurements => Set<Measurement>();
     public DbSet<Datasource> Datasources => Set<Datasource>();
     public DbSet<ProxyDatasource> ProxyDatasources => Set<ProxyDatasource>();
+    public DbSet<ApiClient> ApiClients => Set<ApiClient>();
+    public DbSet<ApiRole> ApiRoles => Set<ApiRole>();
+    public DbSet<ApiClientRole> ApiClientRoles => Set<ApiClientRole>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

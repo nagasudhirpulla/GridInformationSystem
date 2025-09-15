@@ -38,10 +38,17 @@ public interface IApplicationDbContext
     DbSet<LineReactor> LineReactors { get; }
     DbSet<SubFilterBank> SubFilterBanks { get; }
     DbSet<Transformer> Transformers { get; }
+
+    // Data Storage for Measurements
     DbSet<Datasource> Datasources { get; }
     DbSet<ProxyDatasource> ProxyDatasources { get; }
     DbSet<Metric> Metrics { get; }
     DbSet<Measurement> Measurements { get; }
+
+    // Api Clients
+    DbSet<ApiRole> ApiRoles { get; }
+    DbSet<ApiClient> ApiClients { get; }
+    DbSet<ApiClientRole> ApiClientRoles { get; }
 
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     IDbContextTransaction? GetCurrentTransaction();
