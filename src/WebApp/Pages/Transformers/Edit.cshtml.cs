@@ -1,15 +1,15 @@
 using App.Common.Interfaces;
+using App.Common.Security;
+using App.Owners.Queries.GetOwners;
+using App.Substations.Queries.GetSubstations;
 using App.Transformers.Commands.UpdateTransformer;
 using App.Transformers.Queries.GetTransformer;
-using App.Owners.Queries.GetOwners;
 using Core.Entities;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using App.Common.Security;
-using FluentValidation.AspNetCore;
-using App.Substations.Queries.GetSubstations;
 
 namespace WebApp.Pages.Transformers;
 
@@ -25,7 +25,7 @@ public class EditModel(ILogger<CreateModel> logger, IMediator mediator, IApplica
         {
             Id = transformer.Id,
             Substation1Id = transformer.Substation1Id,
-            Substation2Id = transformer.Substation2Id??-1,
+            Substation2Id = transformer.Substation2Id ?? -1,
             OwnerIds = string.Join(',', transformer.ElementOwners.Select(x => x.OwnerId)),
             ElementNumber = transformer.ElementNumber,
             CommissioningDate = transformer.CommissioningDate,

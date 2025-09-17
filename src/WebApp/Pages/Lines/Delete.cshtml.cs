@@ -1,10 +1,10 @@
 using App.Common.Security;
+using App.Lines.Commands.DeleteLine;
+using App.Lines.Queries.GetLine;
 using Core.Entities.Elements;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using App.Lines.Commands.DeleteLine;
-using App.Lines.Queries.GetLine;
 
 namespace WebApp.Pages.Lines;
 

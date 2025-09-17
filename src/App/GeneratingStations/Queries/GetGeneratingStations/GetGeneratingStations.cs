@@ -22,4 +22,4 @@ public class GetGeneratingStationsQueryHandler(IApplicationDbContext context) : 
                         .ToListAsync(cancellationToken);
         return substations;
     }
-} 
+}

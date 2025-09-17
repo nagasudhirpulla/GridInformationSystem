@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using Core.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Data.Configurations;
 
@@ -8,6 +8,6 @@ public class GeneratingStationClassificationConfiguration : IEntityTypeConfigura
 {
     public void Configure(EntityTypeBuilder<GeneratingStationClassification> builder)
     {
-        builder.HasIndex(u => u.Classification).IsUnique();        
+        builder.HasIndex(u => u.Classification).IsUnique();
     }
 }

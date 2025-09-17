@@ -1,8 +1,8 @@
 ﻿using App.Common.Behaviours;
 using App.Common.Interfaces;
 using App.Owners.Utils;
-using Core.Entities.Elements;
 using Core.Entities;
+using Core.Entities.Elements;
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

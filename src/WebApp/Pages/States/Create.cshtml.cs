@@ -2,12 +2,12 @@ using App.Common.Interfaces;
 using App.Common.Security;
 using App.Regions.Queries.GetRegions;
 using App.States.Commands.CreateState;
+using Core.Entities;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using FluentValidation.AspNetCore;
-using Core.Entities;
 
 namespace WebApp.Pages.States;
 

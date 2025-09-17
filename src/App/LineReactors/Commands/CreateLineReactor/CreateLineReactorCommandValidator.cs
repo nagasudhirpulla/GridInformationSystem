@@ -61,7 +61,7 @@ public class CreateLineReactorCommandValidator : AbstractValidator<CreateLineRea
     public async Task<bool> BeUniqueLineReactorInSubstation(CreateLineReactorCommand cmd, CancellationToken cancellationToken)
     {
         bool sameLrExists = await _context.LineReactors
-            .AnyAsync(l => l.LineId.Equals(cmd.LineId) &&  l.Substation1Id.Equals(cmd.SubstationId) && (l.ElementNumber == cmd.ElementNumber), cancellationToken);
+            .AnyAsync(l => l.LineId.Equals(cmd.LineId) && l.Substation1Id.Equals(cmd.SubstationId) && (l.ElementNumber == cmd.ElementNumber), cancellationToken);
         return sameLrExists;
     }
 }

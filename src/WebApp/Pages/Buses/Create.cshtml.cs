@@ -1,14 +1,14 @@
+using App.Buses.Commands.CreateBus;
 using App.Common.Interfaces;
 using App.Common.Security;
 using App.Owners.Queries.GetOwners;
-using App.Buses.Commands.CreateBus;
+using App.Substations.Queries.GetSubstations;
 using Core.Entities;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using FluentValidation.AspNetCore;
-using App.Substations.Queries.GetSubstations;
 
 namespace WebApp.Pages.Buses;
 

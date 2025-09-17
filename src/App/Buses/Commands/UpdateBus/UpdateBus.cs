@@ -1,12 +1,12 @@
 ﻿using App.Common.Behaviours;
 using App.Common.Interfaces;
 using App.Owners.Utils;
+using Ardalis.GuardClauses;
 using Core.Entities;
 using Core.Enums;
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Ardalis.GuardClauses;
 
 namespace App.Buses.Commands.UpdateBus;
 

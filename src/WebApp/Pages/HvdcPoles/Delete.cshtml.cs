@@ -1,6 +1,6 @@
+using App.Common.Security;
 using App.HvdcPoles.Commands.DeleteHvdcPole;
 using App.HvdcPoles.Queries.GetHvdcPole;
-using App.Common.Security;
 using Core.Entities.Elements;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

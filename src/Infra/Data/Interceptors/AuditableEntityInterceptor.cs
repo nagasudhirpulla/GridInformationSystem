@@ -1,8 +1,8 @@
 ﻿using App.Common.Interfaces;
+using Core.Entities.Common;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore;
-using Core.Entities.Common;
 
 namespace Infra.Data.Interceptors;
 

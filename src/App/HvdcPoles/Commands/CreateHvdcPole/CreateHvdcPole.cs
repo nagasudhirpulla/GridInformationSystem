@@ -1,12 +1,12 @@
 ﻿using App.Common.Behaviours;
-using Core.Enums;
-using MediatR;
 using App.Common.Interfaces;
 using App.Owners.Utils;
 using Core.Entities;
-using FluentValidation.Results;
-using Microsoft.EntityFrameworkCore;
 using Core.Entities.Elements;
+using Core.Enums;
+using FluentValidation.Results;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.HvdcPoles.Commands.CreateHvdcPole;
 

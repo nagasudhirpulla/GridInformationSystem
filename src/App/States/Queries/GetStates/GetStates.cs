@@ -14,7 +14,7 @@ public class GetStatesQueryHandler(IApplicationDbContext context) : IRequestHand
     public async Task<List<State>> Handle(GetStatesQuery request, CancellationToken cancellationToken)
     {
         var states = await context.States.AsNoTracking()
-                        .Include(s=>s.Region)
+                        .Include(s => s.Region)
                         .OrderBy(r => r.Name)
                         .ToListAsync(cancellationToken);
         return states;

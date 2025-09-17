@@ -1,7 +1,7 @@
-using Infra;
-using WebApp;
 using App;
+using Infra;
 using Infra.Data;
+using WebApp;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,7 +1,8 @@
-using App.GeneratingUnits.Commands.UpdateGeneratingUnit;
-using App.GeneratingUnits.Queries.GetGeneratingUnit;
 using App.Common.Interfaces;
 using App.Common.Security;
+using App.GeneratingStations.Queries.GetGeneratingStations;
+using App.GeneratingUnits.Commands.UpdateGeneratingUnit;
+using App.GeneratingUnits.Queries.GetGeneratingUnit;
 using App.Owners.Queries.GetOwners;
 using Core.Entities;
 using FluentValidation.AspNetCore;
@@ -9,7 +10,6 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using App.GeneratingStations.Queries.GetGeneratingStations;
 
 namespace WebApp.Pages.GeneratingUnits;
 

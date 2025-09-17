@@ -1,9 +1,9 @@
 ﻿using App.Common.Interfaces;
 using App.Owners.Utils;
-using Microsoft.EntityFrameworkCore;
 using App.Substations.Utils;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.EntityFrameworkCore;
 
 namespace App.SubFilterBanks.Commands.CreateSubFilterBank;
 

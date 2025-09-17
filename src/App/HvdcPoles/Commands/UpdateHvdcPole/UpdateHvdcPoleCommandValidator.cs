@@ -1,8 +1,8 @@
 ﻿using App.Common.Interfaces;
 using App.Owners.Utils;
+using App.Substations.Utils;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using App.Substations.Utils;
 
 namespace App.HvdcPoles.Commands.UpdateHvdcPole;
 

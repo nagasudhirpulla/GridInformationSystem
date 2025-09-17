@@ -63,7 +63,7 @@ Grid Elements database service for managing and querying Grid Elements database
 * Measurement
 
 ## TODOs
-* Create app and UI layers for API clients and API roles, app layer done for api role, app layer done for api client create
+* Create UI layers for API clients and API roles
 * Restrict on delete in all many-to-many relations
 * Create Data ingestion API and Data Query API. Authentication would be by jwt tokens issued by api client keys
 * Provision to provide Tags to elements. This can be useful for element categorization
@@ -129,3 +129,4 @@ public class MyReadOnlyContext : DbContext
     }
 }
 ```
+* Configure Code Cleanup Profile: Goto Tools > Options > Text Editor > C# > Code Cleanup, click on "Configure Code Cleanup". In the Code Cleanup dialog, ensure that the profile you intend to run on save includes the action "Remove unnecessary usings". You can create a new profile or modify an existing one.

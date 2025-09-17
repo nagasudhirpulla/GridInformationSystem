@@ -25,7 +25,7 @@ public class UpdateGeneratingStationCommandValidator : AbstractValidator<UpdateG
             .Must(OwnerUtils.BeValidOwnerIds)
                 .WithMessage("invalid owner Ids provided")
                 .WithErrorCode("Unique");
-        
+
         RuleFor(v => v.MvaCapacity)
             .GreaterThanOrEqualTo(0);
 

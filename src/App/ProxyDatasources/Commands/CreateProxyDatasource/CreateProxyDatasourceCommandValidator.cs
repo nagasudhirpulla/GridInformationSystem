@@ -1,8 +1,8 @@
 ﻿using App.Common.Interfaces;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 using NJsonSchema;
+using System.Text.RegularExpressions;
 
 namespace App.ProxyDatasources.Commands.CreateProxyDatasource;
 

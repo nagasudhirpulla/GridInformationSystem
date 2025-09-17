@@ -1,7 +1,7 @@
-using App.HvdcPoles.Commands.UpdateHvdcPole;
-using App.HvdcPoles.Queries.GetHvdcPole;
 using App.Common.Interfaces;
 using App.Common.Security;
+using App.HvdcPoles.Commands.UpdateHvdcPole;
+using App.HvdcPoles.Queries.GetHvdcPole;
 using App.Owners.Queries.GetOwners;
 using App.Substations.Queries.GetSubstations;
 using Core.Entities;

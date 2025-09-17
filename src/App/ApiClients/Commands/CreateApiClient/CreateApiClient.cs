@@ -9,7 +9,7 @@ namespace App.ApiClients.Commands.CreateApiClient;
 [Transactional(IsolationLevel = System.Data.IsolationLevel.Serializable)]
 public record CreateApiClientCommand : IRequest<int>
 {
-    public required string ApiRoleIds { get; init; }
+    public required string ApiRoleIds { get; set; }
     public required string Name { get; set; }
     public required string Key { get; set; }
 }

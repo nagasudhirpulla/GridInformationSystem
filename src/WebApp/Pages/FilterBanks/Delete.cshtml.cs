@@ -1,6 +1,6 @@
+using App.Common.Security;
 using App.FilterBanks.Commands.DeleteFilterBank;
 using App.FilterBanks.Queries.GetFilterBank;
-using App.Common.Security;
 using Core.Entities.Elements;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

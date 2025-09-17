@@ -1,6 +1,6 @@
+using App.Common.Security;
 using App.GeneratingUnits.Commands.DeleteGeneratingUnit;
 using App.GeneratingUnits.Queries.GetGeneratingUnit;
-using App.Common.Security;
 using Core.Entities.Elements;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

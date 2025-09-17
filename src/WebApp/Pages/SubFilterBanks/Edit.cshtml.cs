@@ -1,16 +1,16 @@
 using App.Common.Interfaces;
 using App.Common.Security;
+using App.FilterBanks.Queries.GetFilterBanks;
+using App.Owners.Queries.GetOwners;
 using App.SubFilterBanks.Commands.UpdateSubFilterBank;
 using App.SubFilterBanks.Queries.GetSubFilterBank;
-using App.Owners.Queries.GetOwners;
 using Core.Entities;
+using Core.Entities.Elements;
 using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using App.FilterBanks.Queries.GetFilterBanks;
-using Core.Entities.Elements;
 
 namespace WebApp.Pages.SubFilterBanks;
 

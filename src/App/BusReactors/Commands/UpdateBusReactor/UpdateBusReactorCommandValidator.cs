@@ -52,8 +52,8 @@ public class UpdateBusReactorCommandValidator : AbstractValidator<UpdateBusReact
 
     public async Task<bool> BeInSameSubstation(UpdateBusReactorCommand cmd, CancellationToken cancellationToken)
     {
-        Bus newBus = await _context.Buses.FirstOrDefaultAsync(b=>b.Id == cmd.BusId, cancellationToken: cancellationToken) ?? throw new KeyNotFoundException();
-        BusReactor existingBr = await _context.BusReactors.FirstOrDefaultAsync(br=>br.Id==cmd.Id, cancellationToken:cancellationToken) ?? throw new KeyNotFoundException();
+        Bus newBus = await _context.Buses.FirstOrDefaultAsync(b => b.Id == cmd.BusId, cancellationToken: cancellationToken) ?? throw new KeyNotFoundException();
+        BusReactor existingBr = await _context.BusReactors.FirstOrDefaultAsync(br => br.Id == cmd.Id, cancellationToken: cancellationToken) ?? throw new KeyNotFoundException();
         bool isBrInSameSubstation = existingBr.Substation1Id == newBus.Substation1Id;
         return !isBrInSameSubstation;
     }

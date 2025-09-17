@@ -1,10 +1,10 @@
+using App.Buses.Commands.DeleteBus;
+using App.Buses.Queries.GetBus;
 using App.Common.Security;
+using Core.Entities.Elements;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Core.Entities.Elements;
-using App.Buses.Commands.DeleteBus;
-using App.Buses.Queries.GetBus;
 
 namespace WebApp.Pages.Buses;
 

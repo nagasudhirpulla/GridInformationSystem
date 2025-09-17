@@ -1,10 +1,10 @@
 using App.Common.Interfaces;
 using App.Common.Security;
 using App.Regions.Commands.CreateRegion;
+using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using FluentValidation.AspNetCore;
 
 namespace WebApp.Pages.Regions;
 

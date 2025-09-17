@@ -2,8 +2,8 @@
 using App.Common.Interfaces;
 using App.Owners.Utils;
 using Ardalis.GuardClauses;
-using Core.Entities.Elements;
 using Core.Entities;
+using Core.Entities.Elements;
 using FluentValidation.Results;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

@@ -1,6 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Core.Entities;
 using Microsoft.EntityFrameworkCore;
-using Core.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infra.Data.Configurations;
 

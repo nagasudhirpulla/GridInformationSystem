@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.EntityFrameworkCore;
-using Core.Entities.Common;
+﻿using Core.Entities.Common;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Infra.Data.Interceptors;
 
