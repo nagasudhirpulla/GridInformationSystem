@@ -66,6 +66,7 @@ Grid Elements database service for managing and querying Grid Elements database
 * Create app and UI layers for API clients and API roles, app layer done for api role, app layer done for api client create
 * Restrict on delete in all many-to-many relations
 * Create Data ingestion API and Data Query API. Authentication would be by jwt tokens issued by api client keys
+* Provision to provide Tags to elements. This can be useful for element categorization
 * Create DB trigger type of notification when an element changes so that policies can be checked and caches can be updated with in a transaction.
 For example, if a substation name changes, a notification can be issued to update all related elements names with in a trasaction so that atomicity can be implemented.
 * restrict substations changes in lines when there are connected elements like line reactors
