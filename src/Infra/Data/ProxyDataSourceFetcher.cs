@@ -1,5 +1,4 @@
-﻿using App.MeasurementData.Dtos;
-using App.MeasurementData.Interfaces;
+﻿using App.MeasurementData.Interfaces;
 using App.Utils;
 using System.Text;
 using System.Text.Json;
@@ -9,7 +8,7 @@ namespace Infra.Data;
 
 public class ProxyDataSourceFetcher : IProxyDataSourceFetcher
 {
-    public async Task<List<MeasurementDataDto>> FetchData(string measHistorianId, string baseUrl, string? apiKey, string? jsonPayload, DateTime fromTime, DateTime toTime)
+    public async Task<List<(int timestamp, float value)>> FetchData(string measHistorianId, string baseUrl, string? apiKey, string? jsonPayload, DateTime fromTime, DateTime toTime)
     {
         try
         {
@@ -35,7 +34,7 @@ public class ProxyDataSourceFetcher : IProxyDataSourceFetcher
             // parse response
             response.EnsureSuccessStatusCode(); // Throws an exception for non-success status codes
             string responseString = await response.Content.ReadAsStringAsync();
-            var samples = JsonSerializer.Deserialize<List<MeasurementDataDto>>(responseString);
+            var samples = JsonSerializer.Deserialize<List<(int timestamp, float value)>>(responseString);
 
             // return samples
             return samples ?? [];

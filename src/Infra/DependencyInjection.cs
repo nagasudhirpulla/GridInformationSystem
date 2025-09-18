@@ -38,8 +38,9 @@ public static class DependencyInjection
         });
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
-        services.AddScoped<IMeasDataStore, SqliteMeasDataStore>();
         services.AddScoped<ApplicationDbContextInitialiser>();
+        services.AddScoped<IMeasDataStore, SqliteMeasDataStore>();
+        services.AddScoped<IProxyDataSourceFetcher, ProxyDataSourceFetcher>();
 
 #if (UseApiOnly)
         services.AddAuthentication()
