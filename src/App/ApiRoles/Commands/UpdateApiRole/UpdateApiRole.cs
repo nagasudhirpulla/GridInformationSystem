@@ -9,7 +9,7 @@ namespace App.ApiRoles.Commands.UpdateApiRole;
 public record UpdateApiRoleCommand : IRequest
 {
     public int Id { get; init; }
-    public required string ApiRoleName { get; init; }
+    public required string Name { get; init; }
 }
 
 public class UpdateApiRoleCommandHandler(IApplicationDbContext context) : IRequestHandler<UpdateApiRoleCommand>
@@ -22,7 +22,7 @@ public class UpdateApiRoleCommandHandler(IApplicationDbContext context) : IReque
         Guard.Against.NotFound(request.Id, entity);
 
         // update entity attributes
-        entity.Name = request.ApiRoleName;
+        entity.Name = request.Name;
 
         await context.SaveChangesAsync(cancellationToken);
 

@@ -12,7 +12,7 @@ public class UpdateApiRoleCommandValidator : AbstractValidator<UpdateApiRoleComm
     {
         _context = context;
 
-        RuleFor(v => v.ApiRoleName)
+        RuleFor(v => v.Name)
             .NotEmpty()
             .MaximumLength(200)
             .MustAsync(BeUniqueName)

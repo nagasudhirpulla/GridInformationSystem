@@ -15,6 +15,7 @@ public class GetApiClientsQueryHandler(IApplicationDbContext context) : IRequest
     {
         var apiClients = await context.ApiClients.AsNoTracking()
             .Include(s => s.ApiClientRoles)
+            .ThenInclude(ar => ar.ApiRole)
             .OrderBy(r => r.Name)
             .ToListAsync(cancellationToken);
         return apiClients;

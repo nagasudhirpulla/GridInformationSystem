@@ -61,9 +61,10 @@ Grid Elements database service for managing and querying Grid Elements database
 * ProxyDatasource
 * Metric
 * Measurement
+* API Clients
+* API Roles
 
 ## TODOs
-* Create UI layers for API clients and API roles
 * Restrict on delete in all many-to-many relations
 * Create Data ingestion API and Data Query API. Authentication would be by jwt tokens issued by api client keys
 * Provision to provide Tags to elements. This can be useful for element categorization
