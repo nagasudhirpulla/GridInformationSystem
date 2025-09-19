@@ -90,4 +90,28 @@ public static class DependencyInjection
 
         return services;
     }
+
+    public static IServiceCollection AddReadOnlyDbInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    {
+        var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+        Guard.Against.Null(connectionString, message: "Connection string 'DefaultConnection' not found.");
+
+        services.AddDbContext<ReadOnlyAppDbContext>((sp, options) =>
+        {
+#if (UseSQLite)
+            options.UseSqlite(connectionString);
+#else
+            options.UseNpgsql(connectionString);
+#endif
+        });
+
+        services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ReadOnlyAppDbContext>());
+        services.AddScoped<IMeasDataStore, SqliteMeasDataStore>();
+        services.AddScoped<IProxyDataSourceFetcher, ProxyDataSourceFetcher>();
+
+        services.AddSingleton(TimeProvider.System);
+
+        return services;
+    }
 }
