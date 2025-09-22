@@ -10,7 +10,7 @@ using System.Data;
 
 namespace Infra.Data;
 
-public class ReadOnlyAppDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options), IApplicationDbContext
+public class ReadOnlyAppDbContext(DbContextOptions<ReadOnlyAppDbContext> options) : IdentityDbContext<ApplicationUser>(options), IApplicationDbContext
 {
     public DbSet<Fuel> Fuels => Set<Fuel>();
 

@@ -29,7 +29,7 @@ public class SqliteMeasDataStore(IConfiguration configuration) : IMeasDataStore
 
     public List<(int timestamp, float value)> FetchSamples(int measId, DateTime startTime, DateTime endTime)
     {
-        List<(int timestamp, float value)> samples = new();
+        List<(int timestamp, float value)> samples = [];
         using (var db = new SqliteConnection(DbConnStr))
         {
             db.Open();
@@ -51,7 +51,7 @@ public class SqliteMeasDataStore(IConfiguration configuration) : IMeasDataStore
         return samples;
     }
 
-    public void InsertSamples(List<(int measId, int timestamp, float value)> samples)
+    public async Task InsertSamples(List<(int measId, int timestamp, float value)> samples)
     {
         using var db = new SqliteConnection(DbConnStr);
         db.Open();
@@ -71,5 +71,6 @@ public class SqliteMeasDataStore(IConfiguration configuration) : IMeasDataStore
             upsertCommand.Parameters["@value"].Value = value;
             upsertCommand.ExecuteNonQuery();
         }
+        _ = await Task.FromResult(0);
     }
 }

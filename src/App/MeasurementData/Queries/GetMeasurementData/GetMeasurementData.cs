@@ -10,6 +10,7 @@ namespace App.MeasurementData.Queries.GetMeasurementData;
 [Authorize]
 public record GetMeasurementDataQuery : IRequest<List<MeasurementDataDto>>
 {
+    // TODO FromTime, ToTime in unix timestamp instead of datetime
     public int MeasId { get; init; }
     public DateTime FromTime { get; set; }
     public DateTime ToTime { get; set; }

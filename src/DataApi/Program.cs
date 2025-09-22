@@ -1,4 +1,5 @@
 using App;
+using DataApi;
 using Infra;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -6,9 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationServices();
 builder.Services.AddReadOnlyDbInfrastructureServices(builder.Configuration);
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+
+builder.Services.AddWebServices();
 
 var app = builder.Build();
 
