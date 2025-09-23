@@ -1,6 +1,8 @@
-﻿using App.MeasurementData.Queries.GetMeasurementData;
+﻿using App.ApiClients.Dtos;
+using App.ApiClients.Queries.GetApiClientByKey;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace DataApi.Controllers
 {
@@ -8,44 +10,18 @@ namespace DataApi.Controllers
     [Route("[controller]")]
     public class AuthController(IMediator mediator, ILogger<MeasDataController> logger) : ControllerBase
     {
-        private readonly ILogger<MeasDataController> _logger = logger;
-
         [HttpPost("Login")]
-        public async Task<List<(int timestamp, float value)>> Get([FromBody] GetMeasurementDataQuery cmd)
+        public async Task<JwtResponseDto> Login([FromBody] GetApiClientJwtQuery cmd)
         {
-            //var user = await userManager.FindByNameAsync(model.Username);
-            //if (user != null && await userManager.CheckPasswordAsync(user, model.Password))
-            //{
-            //    var userRoles = await userManager.GetRolesAsync(user);
+            JwtSecurityToken? token = await mediator.Send(cmd) ?? throw new Exception("Unable to find user");
 
-            //    var authClaims = new List<Claim>
-            //    {
-            //        new Claim(ClaimTypes.Name, user.UserName),
-            //        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-            //    };
+            logger.LogInformation($"Issuing Jwt for api client named {token.Subject}");
 
-            //    foreach (var userRole in userRoles)
-            //    {
-            //        authClaims.Add(new Claim(ClaimTypes.Role, userRole));
-            //    }
-
-            //    var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
-
-            //    var token = new JwtSecurityToken(
-            //        issuer: _configuration["JWT:ValidIssuer"],
-            //        audience: _configuration["JWT:ValidAudience"],
-            //        expires: DateTime.Now.AddHours(3),
-            //        claims: authClaims,
-            //        signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
-            //        );
-
-            //    return Ok(new
-            //    {
-            //        token = new JwtSecurityTokenHandler().WriteToken(token),
-            //        expiration = token.ValidTo
-            //    });
-            //}
-            //return Unauthorized();
+            return new JwtResponseDto
+            {
+                Token = new JwtSecurityTokenHandler().WriteToken(token),
+                Expiration = token.ValidTo
+            };
         }
     }
 }

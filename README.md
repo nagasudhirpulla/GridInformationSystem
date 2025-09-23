@@ -65,6 +65,7 @@ Grid Elements database service for managing and querying Grid Elements database
 * API Roles
 
 ## TODOs
+* Create IIdentityService implementation in DataApi, this is required for Authorizing commands and queries in Application layer
 * Restrict on delete in all many-to-many relations
 * API Authentication to be done by jwt tokens issued by api client's keys
 * Provision to provide Tags to elements. This can be useful for element categorization

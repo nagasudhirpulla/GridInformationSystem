@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddApplicationServices();
-builder.Services.AddReadOnlyDbInfrastructureServices(builder.Configuration);
+builder.Services.AddDataApiInfrastructureServices(builder.Configuration);
 
 builder.Services.AddWebServices();
 
@@ -27,6 +27,7 @@ app.UseHealthChecks("/health");
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

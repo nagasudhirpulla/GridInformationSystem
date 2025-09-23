@@ -1,4 +1,5 @@
 ﻿using App.Common.Interfaces;
+using App.Config;
 using App.MeasurementData.Interfaces;
 using Ardalis.GuardClauses;
 using Core.Constants;
@@ -7,11 +8,14 @@ using Infra.Data.Interceptors;
 using Infra.Data.LocalMeasDataStores;
 using Infra.Identity;
 using Infra.Identity.TokenProviders;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace Infra;
 
@@ -91,7 +95,7 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddReadOnlyDbInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDataApiInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
@@ -104,6 +108,32 @@ public static class DependencyInjection
 #else
             options.UseNpgsql(connectionString);
 #endif
+        });
+
+        // Adding Authentication
+        // add pmu config
+        JwtConfig jwtConfig = new();
+        configuration.Bind("JWT", jwtConfig);
+        services.AddSingleton(jwtConfig);
+
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.SaveToken = true;
+            options.RequireHttpsMetadata = false;
+            options.TokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidAudience = jwtConfig.ValidAudience,
+                ValidIssuer = jwtConfig.ValidIssuer,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfig.Secret))
+            };
         });
 
         services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ReadOnlyAppDbContext>());

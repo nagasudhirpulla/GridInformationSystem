@@ -1,3 +1,4 @@
+using App.Common.Security;
 using App.MeasurementData.Commands.InsertData;
 using App.MeasurementData.Queries.GetMeasurementData;
 using MediatR;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace DataApi.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class MeasDataController(IMediator mediator, ILogger<MeasDataController> logger) : ControllerBase
