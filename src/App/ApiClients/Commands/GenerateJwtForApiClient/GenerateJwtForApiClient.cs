@@ -8,17 +8,17 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace App.ApiClients.Queries.GetApiClientByKey;
+namespace App.ApiClients.Commands.GenerateJwtForApiClient;
 
 [Authorize]
-public record GetApiClientJwtQuery : IRequest<JwtSecurityToken?>
+public record GenerateJwtForApiClientCommand : IRequest<JwtSecurityToken?>
 {
     public required string Key { get; init; }
 }
 
-public class GetApiClientByKeyQueryHandler(IApplicationDbContext context, JwtConfig jwtCfg) : IRequestHandler<GetApiClientJwtQuery, JwtSecurityToken?>
+public class GenerateJwtForApiClientCommandHandler(IApplicationDbContext context, JwtConfig jwtCfg) : IRequestHandler<GenerateJwtForApiClientCommand, JwtSecurityToken?>
 {
-    public async Task<JwtSecurityToken?> Handle(GetApiClientJwtQuery request, CancellationToken cancellationToken)
+    public async Task<JwtSecurityToken?> Handle(GenerateJwtForApiClientCommand request, CancellationToken cancellationToken)
     {
         var client = await context.ApiClients.AsNoTracking()
             .Include(s => s.ApiClientRoles)
@@ -28,6 +28,7 @@ public class GetApiClientByKeyQueryHandler(IApplicationDbContext context, JwtCon
         if (client != null)
         {
             List<Claim> authClaims = [
+                                        new(ClaimTypes.NameIdentifier, client.Name),
                                         new(ClaimTypes.Name, client.Name),
                                         new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                                      ];

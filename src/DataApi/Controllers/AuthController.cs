@@ -1,5 +1,5 @@
-﻿using App.ApiClients.Dtos;
-using App.ApiClients.Queries.GetApiClientByKey;
+﻿using App.ApiClients.Commands.GenerateJwtForApiClient;
+using App.ApiClients.Dtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,7 +11,7 @@ namespace DataApi.Controllers
     public class AuthController(IMediator mediator, ILogger<MeasDataController> logger) : ControllerBase
     {
         [HttpPost("Login")]
-        public async Task<JwtResponseDto> Login([FromBody] GetApiClientJwtQuery cmd)
+        public async Task<JwtResponseDto> Login([FromBody] GenerateJwtForApiClientCommand cmd)
         {
             JwtSecurityToken? token = await mediator.Send(cmd) ?? throw new Exception("Unable to find user");
 

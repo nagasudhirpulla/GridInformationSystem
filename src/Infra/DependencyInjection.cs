@@ -141,6 +141,7 @@ public static class DependencyInjection
         services.AddScoped<IProxyDataSourceFetcher, ProxyDataSourceFetcher>();
 
         services.AddSingleton(TimeProvider.System);
+        services.AddTransient<IIdentityService, ApiIdentityService>();
 
         return services;
     }
