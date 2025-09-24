@@ -5,7 +5,14 @@ namespace App.MeasurementData.Commands.InsertData;
 
 public record InsertDataCommand : IRequest
 {
-    public required List<(int measId, int timestamp, float value)> Samples { get; init; }
+    public required List<InsertDataRecord> Samples { get; init; }
+}
+
+public class InsertDataRecord
+{
+    public int MeasId { get; set; }
+    public int Timestamp { get; set; }
+    public float Value { get; set; }
 }
 
 public class InsertDataCommandHandler(IMeasDataStore measDataStore) : IRequestHandler<InsertDataCommand>

@@ -1,4 +1,6 @@
-﻿using App.MeasurementData.Interfaces;
+﻿using App.MeasurementData.Commands.InsertData;
+using App.MeasurementData.Dtos;
+using App.MeasurementData.Interfaces;
 using App.Utils;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
@@ -27,9 +29,9 @@ public class SqliteMeasDataStore(IConfiguration configuration) : IMeasDataStore
         createTableCmd.ExecuteReader();
     }
 
-    public List<(int timestamp, float value)> FetchSamples(int measId, DateTime startTime, DateTime endTime)
+    public List<MeasurementDataDto> FetchSamples(int measId, DateTime startTime, DateTime endTime)
     {
-        List<(int timestamp, float value)> samples = [];
+        List<MeasurementDataDto> samples = [];
         using (var db = new SqliteConnection(DbConnStr))
         {
             db.Open();
@@ -45,13 +47,13 @@ public class SqliteMeasDataStore(IConfiguration configuration) : IMeasDataStore
             {
                 int dt = reader.GetInt32(reader.GetOrdinal(TimeColName));
                 float val = reader.GetFloat(reader.GetOrdinal(ValColName));
-                samples.Add((dt, val));
+                samples.Add(new MeasurementDataDto() { Timestamp = dt, Value = val });
             }
         }
         return samples;
     }
 
-    public async Task InsertSamples(List<(int measId, int timestamp, float value)> samples)
+    public async Task InsertSamples(List<InsertDataRecord> samples)
     {
         using var db = new SqliteConnection(DbConnStr);
         db.Open();
@@ -64,11 +66,11 @@ public class SqliteMeasDataStore(IConfiguration configuration) : IMeasDataStore
         upsertCommand.Parameters.Add(new SqliteParameter("@measId", SqliteType.Integer));
         upsertCommand.Parameters.Add(new SqliteParameter("@value", SqliteType.Real));
 
-        foreach (var (measId, timestamp, value) in samples)
+        foreach (var dataRecord in samples)
         {
-            upsertCommand.Parameters["@timestamp"].Value = timestamp;
-            upsertCommand.Parameters["@measId"].Value = measId;
-            upsertCommand.Parameters["@value"].Value = value;
+            upsertCommand.Parameters["@timestamp"].Value = dataRecord.Timestamp;
+            upsertCommand.Parameters["@measId"].Value = dataRecord.MeasId;
+            upsertCommand.Parameters["@value"].Value = dataRecord.Value;
             upsertCommand.ExecuteNonQuery();
         }
         _ = await Task.FromResult(0);

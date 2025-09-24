@@ -1,5 +1,6 @@
 ﻿using App.Common.Interfaces;
 using App.Common.Security;
+using App.MeasurementData.Dtos;
 using App.MeasurementData.Interfaces;
 using Core.Entities.Data;
 using MediatR;

@@ -1,5 +1,6 @@
 using App.Common.Security;
 using App.MeasurementData.Commands.InsertData;
+using App.MeasurementData.Dtos;
 using App.MeasurementData.Queries.GetMeasurementData;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -14,7 +15,7 @@ namespace DataApi.Controllers
         private readonly ILogger<MeasDataController> _logger = logger;
 
         [HttpPost("GetData")]
-        public async Task<List<(int timestamp, float value)>> Get([FromBody] GetMeasurementDataQuery cmd)
+        public async Task<List<MeasurementDataDto>> Get([FromBody] GetMeasurementDataQuery cmd)
         {
             var data = await mediator.Send(cmd);
             return data;
