@@ -20,10 +20,12 @@ public interface IApplicationDbContext
     DbSet<State> States { get; }
     DbSet<Substation> Substations { get; }
     DbSet<VoltageLevel> VoltageLevels { get; }
+    DbSet<Tag> Tags { get; }
 
     // Many to Many tables
     DbSet<ElementOwner> ElementOwners { get; }
     DbSet<SubstationOwner> SubstationOwners { get; }
+    DbSet<GridEntityTag> GridEntityTags { get; }
 
     // Elements
     DbSet<Element> Elements { get; }

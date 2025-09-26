@@ -65,7 +65,7 @@ Grid Elements database service for managing and querying Grid Elements database
 * API Roles
 
 ## TODOs
-* Provision to provide Tags to elements. This can be useful for element categorization
+* GridEntity tag db schema and domain layer done, app layer pending
 * Restrict on delete in all many-to-many relations
 * Create DB trigger type of notification when an element changes so that policies can be checked and caches can be updated with in a transaction.
 For example, if a substation name changes, a notification can be issued to update all related elements names with in a trasaction so that atomicity can be implemented.

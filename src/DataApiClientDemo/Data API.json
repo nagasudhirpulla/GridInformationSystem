@@ -19,17 +19,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/GenerateJwtForApiClientCommand"
+                "type": "string"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/GenerateJwtForApiClientCommand"
+                "type": "string"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/GenerateJwtForApiClientCommand"
+                "type": "string"
               }
             }
           },
@@ -152,17 +152,6 @@
   },
   "components": {
     "schemas": {
-      "GenerateJwtForApiClientCommand": {
-        "required": [
-          "key"
-        ],
-        "type": "object",
-        "properties": {
-          "key": {
-            "type": "string"
-          }
-        }
-      },
       "GetMeasurementDataQuery": {
         "type": "object",
         "properties": {

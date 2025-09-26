@@ -14,9 +14,10 @@ namespace App.ApiClients.Commands.GenerateJwtForApiClient;
 public record GenerateJwtForApiClientCommand : IRequest<JwtSecurityToken?>
 {
     public required string Key { get; init; }
+    public required JwtConfig JwtConfig { get; set; }
 }
 
-public class GenerateJwtForApiClientCommandHandler(IApplicationDbContext context, JwtConfig jwtCfg) : IRequestHandler<GenerateJwtForApiClientCommand, JwtSecurityToken?>
+public class GenerateJwtForApiClientCommandHandler(IApplicationDbContext context) : IRequestHandler<GenerateJwtForApiClientCommand, JwtSecurityToken?>
 {
     public async Task<JwtSecurityToken?> Handle(GenerateJwtForApiClientCommand request, CancellationToken cancellationToken)
     {
@@ -37,7 +38,7 @@ public class GenerateJwtForApiClientCommandHandler(IApplicationDbContext context
             {
                 authClaims.Add(new Claim(ClaimTypes.Role, role.ApiRole.Name));
             }
-
+            var jwtCfg = request.JwtConfig;
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtCfg.Secret));
 
             var token = new JwtSecurityToken(

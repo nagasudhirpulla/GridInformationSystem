@@ -33,7 +33,11 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
     public DbSet<VoltageLevel> VoltageLevels => Set<VoltageLevel>();
 
+    public DbSet<Tag> Tags => Set<Tag>();
+
     public DbSet<ElementOwner> ElementOwners => Set<ElementOwner>();
+
+    public DbSet<GridEntityTag> GridEntityTags => Set<GridEntityTag>();
 
     public DbSet<SubstationOwner> SubstationOwners => Set<SubstationOwner>();
 

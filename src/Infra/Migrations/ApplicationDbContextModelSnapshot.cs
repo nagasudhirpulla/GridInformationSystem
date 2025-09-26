@@ -17,6 +17,103 @@ namespace Infra.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
+            modelBuilder.Entity("Core.Entities.Data.ApiClient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Key")
+                        .IsUnique();
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ApiClients");
+                });
+
+            modelBuilder.Entity("Core.Entities.Data.ApiClientRole", b =>
+                {
+                    b.Property<int>("ApiClientId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ApiRoleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ApiClientId", "ApiRoleId");
+
+                    b.HasIndex("ApiRoleId");
+
+                    b.ToTable("ApiClientRoles");
+                });
+
+            modelBuilder.Entity("Core.Entities.Data.ApiRole", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("ApiRoles");
+                });
+
             modelBuilder.Entity("Core.Entities.Data.Datasource", b =>
                 {
                     b.Property<int>("Id")
@@ -259,6 +356,36 @@ namespace Infra.Migrations
                     b.UseTphMappingStrategy();
                 });
 
+            modelBuilder.Entity("Core.Entities.GridEntityTag", b =>
+                {
+                    b.Property<int>("GridEntityId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("TagId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("GridEntityId", "TagId");
+
+                    b.HasIndex("TagId");
+
+                    b.ToTable("GridEntityTags");
+                });
+
             modelBuilder.Entity("Core.Entities.SubstationOwner", b =>
                 {
                     b.Property<int>("SubstationId")
@@ -287,6 +414,36 @@ namespace Infra.Migrations
                     b.HasIndex("OwnerId");
 
                     b.ToTable("SubstationOwners");
+                });
+
+            modelBuilder.Entity("Core.Entities.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTimeOffset>("LastModified")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Core.Entities.VoltageLevel", b =>
@@ -528,6 +685,9 @@ namespace Infra.Migrations
 
                     b.Property<string>("BaseUrl")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PayloadSchema")
                         .HasColumnType("TEXT");
 
                     b.HasDiscriminator().HasValue("ProxyDatasource");
@@ -1047,6 +1207,25 @@ namespace Infra.Migrations
                     b.HasDiscriminator().HasValue("GeneratingStation");
                 });
 
+            modelBuilder.Entity("Core.Entities.Data.ApiClientRole", b =>
+                {
+                    b.HasOne("Core.Entities.Data.ApiClient", "ApiClient")
+                        .WithMany("ApiClientRoles")
+                        .HasForeignKey("ApiClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Data.ApiRole", "ApiRole")
+                        .WithMany("ApiClientRoles")
+                        .HasForeignKey("ApiRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApiClient");
+
+                    b.Navigation("ApiRole");
+                });
+
             modelBuilder.Entity("Core.Entities.Data.Measurement", b =>
                 {
                     b.HasOne("Core.Entities.Data.Datasource", "Datasource")
@@ -1091,6 +1270,25 @@ namespace Infra.Migrations
                     b.Navigation("Element");
 
                     b.Navigation("Owner");
+                });
+
+            modelBuilder.Entity("Core.Entities.GridEntityTag", b =>
+                {
+                    b.HasOne("Core.Entities.GridEntity", "GridEntity")
+                        .WithMany("GridEntityTags")
+                        .HasForeignKey("GridEntityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Tag", "Tag")
+                        .WithMany("GridEntityTags")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GridEntity");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("Core.Entities.SubstationOwner", b =>
@@ -1337,6 +1535,26 @@ namespace Infra.Migrations
                     b.Navigation("GeneratingStationClassification");
 
                     b.Navigation("GeneratingStationType");
+                });
+
+            modelBuilder.Entity("Core.Entities.Data.ApiClient", b =>
+                {
+                    b.Navigation("ApiClientRoles");
+                });
+
+            modelBuilder.Entity("Core.Entities.Data.ApiRole", b =>
+                {
+                    b.Navigation("ApiClientRoles");
+                });
+
+            modelBuilder.Entity("Core.Entities.GridEntity", b =>
+                {
+                    b.Navigation("GridEntityTags");
+                });
+
+            modelBuilder.Entity("Core.Entities.Tag", b =>
+                {
+                    b.Navigation("GridEntityTags");
                 });
 
             modelBuilder.Entity("Core.Entities.Elements.Element", b =>

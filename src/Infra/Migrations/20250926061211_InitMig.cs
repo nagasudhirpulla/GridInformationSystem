@@ -1,15 +1,51 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class InitMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "ApiClients",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Key = table.Column<string>(type: "TEXT", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    LastModified = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApiClients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ApiRoles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    LastModified = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApiRoles", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -57,6 +93,10 @@ namespace Infra.Migrations
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", maxLength: 21, nullable: false),
+                    BaseUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    ApiKey = table.Column<string>(type: "TEXT", nullable: true),
+                    PayloadSchema = table.Column<string>(type: "TEXT", nullable: true),
                     CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
                     Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
                     LastModifiedBy = table.Column<string>(type: "TEXT", nullable: true),
@@ -120,6 +160,23 @@ namespace Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    LastModified = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tags", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "VoltageLevels",
                 columns: table => new
                 {
@@ -134,6 +191,35 @@ namespace Infra.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_VoltageLevels", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ApiClientRoles",
+                columns: table => new
+                {
+                    ApiClientId = table.Column<int>(type: "INTEGER", nullable: false),
+                    ApiRoleId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    LastModified = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ApiClientRoles", x => new { x.ApiClientId, x.ApiRoleId });
+                    table.ForeignKey(
+                        name: "FK_ApiClientRoles_ApiClients_ApiClientId",
+                        column: x => x.ApiClientId,
+                        principalTable: "ApiClients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ApiClientRoles_ApiRoles_ApiRoleId",
+                        column: x => x.ApiRoleId,
+                        principalTable: "ApiRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -456,13 +542,11 @@ namespace Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Measurements",
+                name: "GridEntityTags",
                 columns: table => new
                 {
-                    EntityId = table.Column<int>(type: "INTEGER", nullable: false),
-                    MetricId = table.Column<int>(type: "INTEGER", nullable: false),
-                    DatasourceId = table.Column<int>(type: "INTEGER", nullable: false),
-                    HistorianPntId = table.Column<string>(type: "TEXT", nullable: false),
+                    GridEntityId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TagId = table.Column<int>(type: "INTEGER", nullable: false),
                     Id = table.Column<int>(type: "INTEGER", nullable: false),
                     CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
                     Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
@@ -471,7 +555,39 @@ namespace Infra.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Measurements", x => new { x.EntityId, x.MetricId, x.DatasourceId });
+                    table.PrimaryKey("PK_GridEntityTags", x => new { x.GridEntityId, x.TagId });
+                    table.ForeignKey(
+                        name: "FK_GridEntityTags_GridEntities_GridEntityId",
+                        column: x => x.GridEntityId,
+                        principalTable: "GridEntities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GridEntityTags_Tags_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tags",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Measurements",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    EntityId = table.Column<int>(type: "INTEGER", nullable: false),
+                    MetricId = table.Column<int>(type: "INTEGER", nullable: false),
+                    DatasourceId = table.Column<int>(type: "INTEGER", nullable: false),
+                    HistorianPntId = table.Column<string>(type: "TEXT", nullable: false),
+                    CreatedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTimeOffset>(type: "TEXT", nullable: false),
+                    LastModifiedBy = table.Column<string>(type: "TEXT", nullable: true),
+                    LastModified = table.Column<DateTimeOffset>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Measurements", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Measurements_Datasources_DatasourceId",
                         column: x => x.DatasourceId,
@@ -520,6 +636,29 @@ namespace Infra.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApiClientRoles_ApiRoleId",
+                table: "ApiClientRoles",
+                column: "ApiRoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApiClients_Key",
+                table: "ApiClients",
+                column: "Key",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApiClients_Name",
+                table: "ApiClients",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ApiRoles_Name",
+                table: "ApiRoles",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -678,9 +817,20 @@ namespace Infra.Migrations
                 column: "VoltageLevelId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_GridEntityTags_TagId",
+                table: "GridEntityTags",
+                column: "TagId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Measurements_DatasourceId",
                 table: "Measurements",
                 column: "DatasourceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Measurements_EntityId_MetricId_DatasourceId",
+                table: "Measurements",
+                columns: new[] { "EntityId", "MetricId", "DatasourceId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Measurements_MetricId",
@@ -699,6 +849,12 @@ namespace Infra.Migrations
                 column: "OwnerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Tags_Name",
+                table: "Tags",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_VoltageLevels_Level",
                 table: "VoltageLevels",
                 column: "Level",
@@ -708,6 +864,9 @@ namespace Infra.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ApiClientRoles");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -727,16 +886,28 @@ namespace Infra.Migrations
                 name: "ElementOwners");
 
             migrationBuilder.DropTable(
+                name: "GridEntityTags");
+
+            migrationBuilder.DropTable(
                 name: "Measurements");
 
             migrationBuilder.DropTable(
                 name: "SubstationOwners");
 
             migrationBuilder.DropTable(
+                name: "ApiClients");
+
+            migrationBuilder.DropTable(
+                name: "ApiRoles");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Tags");
 
             migrationBuilder.DropTable(
                 name: "Datasources");

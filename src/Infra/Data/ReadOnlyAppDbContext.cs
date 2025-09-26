@@ -60,6 +60,10 @@ public class ReadOnlyAppDbContext(DbContextOptions<ReadOnlyAppDbContext> options
 
     public DbSet<Transformer> Transformers => Set<Transformer>();
 
+    public DbSet<Tag> Tags => Set<Tag>();
+
+    public DbSet<GridEntityTag> GridEntityTags => Set<GridEntityTag>();
+
 
     public DbSet<Metric> Metrics => Set<Metric>();
     public DbSet<Measurement> Measurements => Set<Measurement>();
