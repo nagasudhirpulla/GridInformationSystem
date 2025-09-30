@@ -1,5 +1,8 @@
 Grid Elements database service for managing and querying Grid Elements database
 
+## System Architecture
+![system architecture](assets/design/system_architecture.png)
+
 ## Status
 ### Defined Element Entities
 * Element
@@ -63,6 +66,9 @@ Grid Elements database service for managing and querying Grid Elements database
 * Measurement
 * API Clients
 * API Roles
+
+## Database schema
+![sb schema](assets/design/db_schema.png)
 
 ## TODOs
 * GridEntity tag db schema and domain layer done, app layer pending
