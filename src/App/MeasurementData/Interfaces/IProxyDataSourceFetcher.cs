@@ -4,5 +4,5 @@ namespace App.MeasurementData.Interfaces;
 
 public interface IProxyDataSourceFetcher
 {
-    public Task<List<MeasurementDataDto>> FetchData(string measHistorianId, string baseUrl, string? apiKey, string? jsonPayload, DateTime fromTime, DateTime toTime);
+    public Task<List<MeasurementDataDto>> FetchData(string measHistorianId, string baseUrl, string? apiKey, string? jsonPayload, int startTimeUtcMs, int endTimeUtcMs);
 }

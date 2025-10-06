@@ -111,10 +111,8 @@ public static class DependencyInjection
         });
 
         // Adding Authentication
-        // add pmu config
-        JwtConfig jwtConfig = new();
-        configuration.Bind("JWT", jwtConfig);
-        services.AddSingleton(jwtConfig);
+        // add jwt config
+        JwtConfig jwtConfig = configuration.GetSection("JWT").Get<JwtConfig>() ?? throw new Exception("JWT section not present in config");
 
         services.AddAuthentication(options =>
         {

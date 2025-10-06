@@ -11,10 +11,9 @@ namespace App.MeasurementData.Queries.GetMeasurementData;
 [Authorize]
 public record GetMeasurementDataQuery : IRequest<List<MeasurementDataDto>>
 {
-    // TODO FromTime, ToTime in unix timestamp instead of datetime
     public int MeasId { get; init; }
-    public DateTime FromTime { get; set; }
-    public DateTime ToTime { get; set; }
+    public int FromTimeUtcMs { get; set; }
+    public int ToTimeUtcMs { get; set; }
     public string? JsonPayload { get; set; }
 }
 
@@ -30,11 +29,11 @@ public class GetMeasurementDataQueryHandler(IProxyDataSourceFetcher fetcher, IMe
         if (meas.Datasource is ProxyDatasource pds)
         {
             // TODO validate payload schema if required
-            data = await fetcher.FetchData(meas.HistorianPntId, pds.BaseUrl, pds.ApiKey, request.JsonPayload, request.FromTime, request.ToTime);
+            data = await fetcher.FetchData(meas.HistorianPntId, pds.BaseUrl, pds.ApiKey, request.JsonPayload, request.FromTimeUtcMs, request.ToTimeUtcMs);
         }
         else
         {
-            data = measDataStore.FetchSamples(meas.Id, request.FromTime, request.ToTime);
+            data = measDataStore.FetchSamples(meas.Id, request.FromTimeUtcMs, request.ToTimeUtcMs);
         }
         return data;
     }

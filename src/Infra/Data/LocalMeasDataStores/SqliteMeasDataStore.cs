@@ -1,7 +1,6 @@
 ﻿using App.MeasurementData.Commands.InsertData;
 using App.MeasurementData.Dtos;
 using App.MeasurementData.Interfaces;
-using App.Utils;
 using Microsoft.Data.Sqlite;
 using Microsoft.Extensions.Configuration;
 
@@ -29,7 +28,7 @@ public class SqliteMeasDataStore(IConfiguration configuration) : IMeasDataStore
         createTableCmd.ExecuteReader();
     }
 
-    public List<MeasurementDataDto> FetchSamples(int measId, DateTime startTime, DateTime endTime)
+    public List<MeasurementDataDto> FetchSamples(int measId, int startTimeUtcMs, int endTimeUtcMs)
     {
         List<MeasurementDataDto> samples = [];
         using (var db = new SqliteConnection(DbConnStr))
@@ -39,8 +38,8 @@ public class SqliteMeasDataStore(IConfiguration configuration) : IMeasDataStore
                                                     where ({MeasIdColName}=@measId) 
                                                     and ({TimeColName} BETWEEN @startTime and @endTime);", db);
             selectCommand.Parameters.AddWithValue("@measId", measId);
-            selectCommand.Parameters.AddWithValue("@startTime", TimeUtils.GetUtcMs(startTime));
-            selectCommand.Parameters.AddWithValue("@endTime", TimeUtils.GetUtcMs(endTime));
+            selectCommand.Parameters.AddWithValue("@startTime", startTimeUtcMs);
+            selectCommand.Parameters.AddWithValue("@endTime", endTimeUtcMs);
 
             using var reader = selectCommand.ExecuteReader();
             while (reader.Read())

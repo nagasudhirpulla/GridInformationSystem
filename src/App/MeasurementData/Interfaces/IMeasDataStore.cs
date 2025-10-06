@@ -6,6 +6,6 @@ public interface IMeasDataStore
 {
     // TODO return number of samples instead
     Task InsertSamples(List<InsertDataRecord> samples);
-    List<MeasurementDataDto> FetchSamples(int measId, DateTime startTime, DateTime endTime);
+    List<MeasurementDataDto> FetchSamples(int measId, int startTimeUtcMs, int endTimeUtcMs);
     void EnsureDatabase();
 }
