@@ -1,5 +1,6 @@
 ﻿using App.Common.Interfaces;
 using Ardalis.GuardClauses;
+using Core.Events.Locations;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
@@ -25,9 +26,14 @@ public class UpdateLocationCommandHandler(IApplicationDbContext context) : IRequ
 
         Guard.Against.NotFound(request.Id, entity);
 
-        entity.Name = request.Name;
+        bool isLocationNameChanged = entity.Name != request.Name;
+        bool isLocationStateChanged = entity.StateId != request.StateId;
+        if (isLocationNameChanged)
+        {
+            entity.Name = request.Name;
+        }
         entity.Alias = request.Alias;
-        if (entity.StateId != request.StateId)
+        if (isLocationStateChanged)
         {
             var state = await context.States.Include(s => s.Region)
                     .Where(s => s.Id == request.StateId)
@@ -40,7 +46,14 @@ public class UpdateLocationCommandHandler(IApplicationDbContext context) : IRequ
             entity.RegionCache = regionName;
 
         }
-
+        if (isLocationNameChanged)
+        {
+            entity.AddDomainEvent(new LocationNameChangedEvent(entity));
+        }
+        if (isLocationStateChanged)
+        {
+            entity.AddDomainEvent(new LocationStateChangedEvent(entity));
+        }
         await context.SaveChangesAsync(cancellationToken);
     }
 }

@@ -28,4 +28,5 @@ public static class DeriveLineName
         string region = $"{bus1.RegionCache}-{bus2.RegionCache}";
         return (lineName, voltLvl, region);
     }
+    // TODO implement name change listener for voltage level, location
 }

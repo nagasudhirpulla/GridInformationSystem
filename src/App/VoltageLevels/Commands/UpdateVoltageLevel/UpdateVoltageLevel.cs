@@ -2,6 +2,7 @@
 using App.Common.Interfaces;
 using Ardalis.GuardClauses;
 using Core.Entities.Elements;
+using Core.Events.VoltageLevels;
 using MediatR;
 
 namespace App.VoltageLevels.Commands.UpdateVoltageLevel;
@@ -25,8 +26,15 @@ public class UpdateVoltageLevelCommandHandler(IApplicationDbContext context) : I
 
         string existingName = entity.Level;
 
+        if (existingName == request.Level)
+        {
+            return;
+        }
+
         // update entity attributes
         entity.Level = request.Level;
+
+        entity.AddDomainEvent(new VoltageLevelNameChangedEvent(entity));
 
         await context.SaveChangesAsync(cancellationToken);
 

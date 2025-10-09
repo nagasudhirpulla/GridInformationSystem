@@ -3,6 +3,7 @@ using Core.Entities;
 using Core.Entities.Data;
 using Core.Entities.Elements;
 using Infra.Identity;
+using MediatR;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -11,7 +12,7 @@ using System.Reflection;
 
 namespace Infra.Data;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options), IApplicationDbContext
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, IMediator mediator) : IdentityDbContext<ApplicationUser>(options), IApplicationDbContext
 {
     public DbSet<Fuel> Fuels => Set<Fuel>();
 
@@ -141,4 +142,48 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     {
         await ReplaceColumnSubstring.ExecuteAsync(this, oldValue, newValue, colName, cancellationToken);
     }
+
+    //public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    //{
+    //    if (_currentTransaction == null)
+    //    {
+    //        using var transaction = await BeginTransactionAsync(IsolationLevel.Serializable);
+    //        try
+    //        {
+    //            var result = await base.SaveChangesAsync(cancellationToken);
+    //            await DispatchEvents();
+    //            await CommitTransactionAsync(transaction);
+    //            return result;
+    //        }
+    //        catch (Exception ex)
+    //        {
+    //            RollbackTransaction();
+    //            Console.WriteLine($"rolling back changes occured while saving DB changes, {ex.Message}");
+    //            throw;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        var result = await base.SaveChangesAsync(cancellationToken);
+    //        await DispatchEvents();
+    //        return result;
+    //    }
+    //}
+
+    //private async Task DispatchEvents()
+    //{
+    //    var entities = ChangeTracker
+    //        .Entries<BaseEntity>()
+    //        .Where(e => e.Entity.DomainEvents.Count != 0)
+    //        .Select(e => e.Entity);
+
+    //    var domainEvents = entities
+    //        .SelectMany(e => e.DomainEvents)
+    //        .ToList();
+
+    //    entities.ToList().ForEach(e => e.ClearDomainEvents());
+
+    //    foreach (var domainEvent in domainEvents)
+    //        await mediator.Publish(domainEvent);
+    //}
 }
