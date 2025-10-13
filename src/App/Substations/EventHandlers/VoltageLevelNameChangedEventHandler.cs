@@ -26,6 +26,5 @@ public class VoltageLevelNameChangedEventHandler(ILogger<VoltageLevelNameChanged
             sb.Name = newSubstationName;
             sb.AddDomainEvent(new SubstationNameChangedEvent(sb));
         }
-        await context.SaveChangesAsync(cancellationToken);
     }
 }

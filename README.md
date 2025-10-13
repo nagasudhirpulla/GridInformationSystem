@@ -67,6 +67,14 @@ Grid Elements database service for managing and querying Grid Elements database
 * API Clients
 * API Roles
 
+## Name cache update domain events implementation progress
+* Substation - done for voltage and location events
+* Bus - done for substation name change event
+* Bus Reactor
+* Line
+* Line Reactor
+* Transformer
+
 ## Database schema
 ![sb schema](assets/design/db_schema.png)
 

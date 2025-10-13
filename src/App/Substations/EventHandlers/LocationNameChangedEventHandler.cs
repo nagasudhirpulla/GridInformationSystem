@@ -26,6 +26,5 @@ public class LocationNameChangedEventHandler(ILogger<LocationNameChangedEventHan
             sb.Name = newSubstationName;
             sb.AddDomainEvent(new SubstationNameChangedEvent(sb));
         }
-        await context.SaveChangesAsync(cancellationToken);
     }
 }
