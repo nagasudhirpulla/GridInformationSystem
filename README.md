@@ -71,14 +71,16 @@ Grid Elements database service for managing and querying Grid Elements database
 * Substation - done for voltage and location events
 * Bus - done for substation name change event
 * Bus Reactor - done for substation name change event
-* Line
+* Line - done for voltage event, location event
 * Line Reactor
 * Transformer
+* update region cache of elements in a state when a state's region changes
 
 ## Database schema
 ![sb schema](assets/design/db_schema.png)
 
 ## TODOs
+* List out all the cached columns of all entities and implement domain events to update them
 * GridEntity tag db schema and domain layer done, app layer pending
 * Restrict on delete in all many-to-many relations
 * Create DB trigger type of notification when an element changes so that policies can be checked and caches can be updated with in a transaction.

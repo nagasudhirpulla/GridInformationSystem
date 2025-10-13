@@ -24,6 +24,7 @@ public class UpdateStateCommandHandler(IApplicationDbContext context) : IRequest
         // update entity attributes
         entity.Name = request.Name;
         entity.RegionId = request.RegionId;
+        // TODO update region cache of elements in this state
 
         await context.SaveChangesAsync(cancellationToken);
     }

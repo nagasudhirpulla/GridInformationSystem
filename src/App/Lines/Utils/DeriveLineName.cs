@@ -24,9 +24,13 @@ public static class DeriveLineName
         string voltLvl = bus1.VoltageLevelCache;
         string location1 = bus1.Substation1.Location.Name;
         string location2 = bus2.Substation1.Location.Name;
-        string lineName = $"{voltLvl}-{location1}-{location2}-{elementNumber}";
+        string lineName = Execute(voltLvl, location1, location2, elementNumber);
         string region = $"{bus1.RegionCache}-{bus2.RegionCache}";
         return (lineName, voltLvl, region);
+    }
+    public static string Execute(string voltLvl, string location1, string location2, string elementNumber)
+    {
+        return $"{voltLvl}-{location1}-{location2}-{elementNumber}";
     }
     // TODO implement name change listener for voltage level, location
 }
