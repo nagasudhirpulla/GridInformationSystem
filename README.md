@@ -70,7 +70,7 @@ Grid Elements database service for managing and querying Grid Elements database
 ## Name cache update domain events implementation progress
 * Substation - done for voltage and location events
 * Bus - done for substation name change event
-* Bus Reactor
+* Bus Reactor - done for substation name change event
 * Line
 * Line Reactor
 * Transformer
