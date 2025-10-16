@@ -1,6 +1,5 @@
 ﻿using App.Common.Interfaces;
 using App.Substations.Utils;
-using Core.Events.Substations;
 using Core.Events.VoltageLevels;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +23,6 @@ public class VoltageLevelNameChangedEventHandler(ILogger<VoltageLevelNameChanged
         {
             var newSubstationName = SubstationUtils.DeriveSubstationName(notification.VoltageLevel.Level, sb.Location.Name);
             sb.Name = newSubstationName;
-            sb.AddDomainEvent(new SubstationNameChangedEvent(sb));
         }
     }
 }

@@ -76,6 +76,24 @@ Grid Elements database service for managing and querying Grid Elements database
 * Transformer
 * update region cache of elements in a state when a state's region changes
 
+## Cached properties in entities
+* Generating Station - OwnerNamesCache, RegionCache
+* Substation - Name (VoltageLevel.Level, Location.Name), OwnerNamesCache, RegionCache (different for Line and HVDC Line)
+* Element - VoltageLevelCache (VoltageLevel.Level), RegionCache, OwnerNamesCache
+* Bay - Name (BayType, Element1.Name, Element2.Name)
+* Bus - Name (Substation.Name, BusType, ElementNumber)
+* BusReactor - Name (Substation.Name, ElementNumber)
+* FilterBank - Name (Substation.Name, ElementNumber)
+* GeneratingUnit - Name (Substation.Name, ElementNumber)
+* HvdcLine - Name (VoltageLevel.Level, Substation1.Name, Substation2.Name, ElementNumber)
+* HvdcPole - Name (Substation.Name, ElementNumber)
+* Line - Name (VoltageLevel.Level, Substation1.Name, Substation2.Name, ElementNumber)
+* LineReactor - Name (Line.Name, Substation.Name, ElementNumber)
+* SubFilterBank - Name (Substation.Name, Filterbank Number, subFilterbankTag)
+* Transformer - Name (Substation1.Voltage.Level, Substation2.Voltage.Level, Substation1.Location.Name, TransformerType, ElementNumber)
+* Events to be triggered for name update - VoltageLevel.Level, Location.Name, Element1.Name, Element2.Name, Substation.Name, Line.Name
+* Events to be triggered for region update - State.RegionId, Location.StateId, Substation.LocationId
+
 ## Database schema
 ![sb schema](assets/design/db_schema.png)
 

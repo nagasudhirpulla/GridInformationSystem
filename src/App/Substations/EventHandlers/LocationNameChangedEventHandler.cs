@@ -1,7 +1,6 @@
 ﻿using App.Common.Interfaces;
 using App.Substations.Utils;
 using Core.Events.Locations;
-using Core.Events.Substations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -24,7 +23,6 @@ public class LocationNameChangedEventHandler(ILogger<LocationNameChangedEventHan
         {
             var newSubstationName = SubstationUtils.DeriveSubstationName(sb.VoltageLevel.Level, notification.Location.Name);
             sb.Name = newSubstationName;
-            sb.AddDomainEvent(new SubstationNameChangedEvent(sb));
         }
     }
 }

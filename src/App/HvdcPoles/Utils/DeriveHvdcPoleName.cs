@@ -4,7 +4,7 @@ public static class DeriveHvdcPoleName
 {
     public static string Execute(string substationName, string elementNumber)
     {
-        string busName = $"HVDC {substationName} Pole-{elementNumber}";
-        return busName;
+        string hvdcPoleName = $"HVDC {substationName} Pole-{elementNumber}";
+        return hvdcPoleName;
     }
 }

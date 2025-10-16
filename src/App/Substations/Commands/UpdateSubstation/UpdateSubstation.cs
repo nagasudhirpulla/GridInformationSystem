@@ -4,7 +4,6 @@ using App.Owners.Utils;
 using App.Substations.Utils;
 using Ardalis.GuardClauses;
 using Core.Entities;
-using Core.Events.Substations;
 using FluentValidation;
 using FluentValidation.Results;
 using MediatR;
@@ -119,7 +118,6 @@ public class UpdateSubstationCommandHandler(IApplicationDbContext context) : IRe
         {
             var newName = await SubstationUtils.DeriveSubstationName(request.VoltageLevelId, request.LocationId, context, cancellationToken);
             entity.Name = newName;
-            entity.AddDomainEvent(new SubstationNameChangedEvent(entity));
         }
 
         // save changes to DB
