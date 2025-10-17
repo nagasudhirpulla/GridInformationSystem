@@ -1,11 +1,11 @@
-﻿using App.Buses.Utils;
-using App.Common.Interfaces;
+﻿using App.Common.Interfaces;
+using App.FilterBanks.Utils;
 using Core.Events.Substations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace App.Buses.EventHandlers;
+namespace App.FilterBanks.EventHandlers;
 
 public class SubstationNameChangedEventHandler(ILogger<SubstationNameChangedEventHandler> logger, IApplicationDbContext context) : INotificationHandler<SubstationNameChangedEvent>
 {
@@ -13,15 +13,15 @@ public class SubstationNameChangedEventHandler(ILogger<SubstationNameChangedEven
     {
         logger.LogInformation("App Domain Event: {DomainEvent}", notification.GetType().Name);
 
-        // get buses at the desired substation
-        var buses = await context.Buses
+        // get filter banks at the desired substation
+        var filterBanks = await context.FilterBanks
             .Where(s => s.Substation1Id == notification.Substation.Id)
             .ToListAsync(cancellationToken: cancellationToken);
 
-        foreach (var b in buses)
+        foreach (var e in filterBanks)
         {
-            var newBusName = DeriveBusName.Execute(notification.Substation.Name, b.BusType, b.ElementNumber);
-            b.Name = newBusName;
+            var newName = DeriveFilterBankName.Execute(notification.Substation.Name, e.ElementNumber);
+            e.Name = newName;
         }
     }
 }

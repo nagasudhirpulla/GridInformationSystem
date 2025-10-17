@@ -78,14 +78,14 @@ Grid Elements database service for managing and querying Grid Elements database
 
 ## Cached properties in entities
 * Generating Station - OwnerNamesCache, RegionCache
-* Substation - Name (VoltageLevel.Level, Location.Name), OwnerNamesCache, RegionCache (different for Line and HVDC Line)
-* Element - VoltageLevelCache (VoltageLevel.Level), RegionCache, OwnerNamesCache
-* Bay - Name (BayType, Element1.Name, Element2.Name)
-* Bus - Name (Substation.Name, BusType, ElementNumber)
-* BusReactor - Name (Substation.Name, ElementNumber)
-* FilterBank - Name (Substation.Name, ElementNumber)
-* GeneratingUnit - Name (Substation.Name, ElementNumber)
-* HvdcLine - Name (VoltageLevel.Level, Substation1.Name, Substation2.Name, ElementNumber)
+* Substation - Name (VoltageLevel.Level[done], Location.Name[done]), OwnerNamesCache, RegionCache (different for Line and HVDC Line)
+* Element - VoltageLevelCache (VoltageLevel.Level[done]), RegionCache, OwnerNamesCache
+* Bay - Name (BayType, Element1.Name[done], Element2.Name[done])
+* Bus - Name (Substation.Name[done], BusType, ElementNumber)
+* BusReactor - Name (Substation.Name[done], ElementNumber)
+* FilterBank - Name (Substation.Name[done], ElementNumber)
+* GeneratingUnit - Name (Substation.Name[done], ElementNumber)
+* HvdcLine - Name (VoltageLevel.Level[done], Substation1.Name[done], Substation2.Name[done], ElementNumber)
 * HvdcPole - Name (Substation.Name, ElementNumber)
 * Line - Name (VoltageLevel.Level, Substation1.Name, Substation2.Name, ElementNumber)
 * LineReactor - Name (Line.Name, Substation.Name, ElementNumber)

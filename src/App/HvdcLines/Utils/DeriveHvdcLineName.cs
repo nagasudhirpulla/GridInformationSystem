@@ -28,4 +28,16 @@ public static class DeriveHvdcLineName
         string region = $"{bus1.RegionCache}-{bus2.RegionCache}";
         return (lineName, voltLvl, region);
     }
+
+    public static async Task<string> FromEntity(int hId, IApplicationDbContext context, CancellationToken cancellationToken)
+    {
+        var hl = await context.HvdcLines
+            .Include(e => e.Substation1).ThenInclude(e => e.VoltageLevel)
+            .Include(e => e.Substation1).ThenInclude(e => e.Location)
+            .Include(e => e.Substation2).ThenInclude(e => e.Location)
+            .Where(e => e.Id == hId)
+            .FirstOrDefaultAsync(cancellationToken)??throw new KeyNotFoundException();
+        string lineName = $"HVDC {hl.Substation1.VoltageLevel.Level}-{hl.Substation1.Location.Name}-{hl.Substation2?.Location.Name}-{hl.ElementNumber}";
+        return lineName;
+    }
 }
