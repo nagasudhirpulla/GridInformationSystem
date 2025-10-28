@@ -95,7 +95,7 @@ Grid Elements database service for managing and querying Grid Elements database
 * Events to be triggered for region update - State.RegionId, Location.StateId, Substation.LocationId
 
 ## Database schema
-![sb schema](assets/design/db_schema.png)
+![db schema](assets/design/db_schema.png)
 
 ## TODOs
 * List out all the cached columns of all entities and implement domain events to update them
