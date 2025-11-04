@@ -86,7 +86,7 @@ Grid Elements database service for managing and querying Grid Elements database
 * FilterBank - Name (Substation.Name[done], ElementNumber)
 * GeneratingUnit - Name (Substation.Name[done], ElementNumber)
 * HvdcLine - Name (VoltageLevel.Level[done], Substation1.Name[done], Substation2.Name[done], ElementNumber)
-* HvdcPole - Name (Substation.Name, ElementNumber)
+* HvdcPole - Name (Substation.Name[done], ElementNumber)
 * Line - Name (VoltageLevel.Level, Substation1.Name, Substation2.Name, ElementNumber)
 * LineReactor - Name (Line.Name, Substation.Name, ElementNumber)
 * SubFilterBank - Name (Substation.Name, Filterbank Number, subFilterbankTag)
