@@ -79,6 +79,13 @@ public class NameCacheUpdatesEventGenerationInterceptor(
                         ln.AddDomainEvent(new Core.Events.Lines.LineNameChangedEvent(ln));
                     }
                 }
+                if (entry.Entity is FilterBank fb)
+                {
+                    if (changedProperties.Contains(nameof(FilterBank.ElementNumber)))
+                    {
+                        fb.AddDomainEvent(new Core.Events.FilterBanks.FilterBankNumberChangedEvent(fb));
+                    }
+                }
             }
         }
     }
