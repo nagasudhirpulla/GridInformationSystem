@@ -87,9 +87,9 @@ Grid Elements database service for managing and querying Grid Elements database
 * GeneratingUnit - Name (Substation.Name[done], ElementNumber)
 * HvdcLine - Name (VoltageLevel.Level[done], Substation1.Name[done], Substation2.Name[done], ElementNumber)
 * HvdcPole - Name (Substation.Name[done], ElementNumber)
-* Line - Name (VoltageLevel.Level, Substation1.Name, Substation2.Name, ElementNumber)
-* LineReactor - Name (Line.Name, Substation.Name, ElementNumber)
-* SubFilterBank - Name (Substation.Name, Filterbank Number, subFilterbankTag)
+* Line - Name (VoltageLevel.Level[done], Substation1.Location.Name[done], Substation2.Location.Name[done], ElementNumber)
+* LineReactor - Name (Line.Name[done], Substation.Name[done], ElementNumber)
+* SubFilterBank - Name (Substation.Name[done], Filterbank Number[todo create event for this], subFilterbankTag)
 * Transformer - Name (Substation1.Voltage.Level, Substation2.Voltage.Level, Substation1.Location.Name, TransformerType, ElementNumber)
 * Events to be triggered for name update - VoltageLevel.Level, Location.Name, Element1.Name, Element2.Name, Substation.Name, Line.Name
 * Events to be triggered for region update - State.RegionId, Location.StateId, Substation.LocationId
