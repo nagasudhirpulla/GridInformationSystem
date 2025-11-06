@@ -90,7 +90,7 @@ Grid Elements database service for managing and querying Grid Elements database
 * Line - Name (VoltageLevel.Level[done], Substation1.Location.Name[done], Substation2.Location.Name[done], ElementNumber)
 * LineReactor - Name (Line.Name[done], Substation.Name[done], ElementNumber)
 * SubFilterBank - Name (Substation.Name[done], Filterbank Number[done], subFilterbankTag)
-* Transformer - Name (Substation1.Voltage.Level, Substation2.Voltage.Level, Substation1.Location.Name, TransformerType, ElementNumber)
+* Transformer - Name (Substation1.Voltage.Level[done], Substation2.Voltage.Level[done], Substation1.Location.Name[done], TransformerType, ElementNumber)
 * Events to be triggered for name update - VoltageLevel.Level, Location.Name, Element1.Name, Element2.Name, Substation.Name, Line.Name
 * Events to be triggered for region update - State.RegionId, Location.StateId, Substation.LocationId
 
@@ -98,7 +98,6 @@ Grid Elements database service for managing and querying Grid Elements database
 ![db schema](assets/design/db_schema.png)
 
 ## TODOs
-* List out all the cached columns of all entities and implement domain events to update them
 * GridEntity tag db schema and domain layer done, app layer pending
 * Restrict on delete in all many-to-many relations
 * Create DB trigger type of notification when an element changes so that policies can be checked and caches can be updated with in a transaction.
